@@ -74,44 +74,25 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у
-			формі таблиці.</h1>
+		<h1>Задача №3. Дано вартість одиниці товару і кількість. Знайти загальну вартість та
+			ПДВ (5% від загальної вартості).</h1>
 
 		<script>
-			//1. Вводимо необхідні дані для змінних firstNumber і secondNumber
-			let firstNumber = parseFloat(prompt('Введіть перше число'))
-			let secondNumber = parseFloat(prompt('Введіть друге число'))
+			//1. Просвоєння в константу значення 5% ПДВ 
+			const VAT_VALUE = 5
 
-			//2. Обчислюємо вирази 
-			let numbersSum = firstNumber + secondNumber
-			let numbersDifferent = firstNumber - secondNumber
-			let numbersFraction = firstNumber / secondNumber
+			//2. Вводимо необхідні дані для змінних productUnitPrice і productQuantity
+			let productUnitPrice = parseFloat(prompt('Введіть ціну за одиницю', '1'))
+			let productQuantity = parseInt(prompt('Введіть кількість товару', '1'))
+
+			//3. Обчислюємо вирази 
+			let totalProductsPrice = productUnitPrice * productQuantity
+			let vatAmount = totalProductsPrice * VAT_VALUE / 100
 
 			//4. Виводимо результат обчислення виразів
 			document.write(`
-		<table>
-			<thead>
-				<tr>
-					<th colspan="2">Аргументи</th>
-					<th>Добуток</th>
-					<th>Різниця</th>
-					<th>Частка</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>Перше число</th>
-					<th>${firstNumber}</th>
-					<th rowspan="2">${numbersSum}</th>
-					<th rowspan="2">${numbersDifferent}</th>
-					<th rowspan="2">${numbersFraction}</th>
-				</tr>
-				<tr>
-					<th>Друге число</th>
-					<th>${secondNumber}</th>
-				</tr>
-			</tbody>
-		</table>
+			<p>Загальна ціна товару = ${totalProductsPrice}</p>
+			<p>В т.ч. сума ПДВ = ${vatAmount}</p>
 			`)
 		</script>
 	</div>
