@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>First task</title>
+	<title>Third task</title>
 	<style>
 		*,
 		*::before,
@@ -64,25 +64,19 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №3. Дано вартість одиниці товару і кількість. Знайти загальну вартість та
-			ПДВ (5% від загальної вартості).</h1>
+		<h1>Задача № 2. Дано рік народження (дата: 1 січня) та поточний рік. Знайти кількість років.</h1>
 
 		<script>
-			//1. Просвоєння в константу значення 5% ПДВ 
-			const VAT_VALUE = 5
+			//1.Вводимо необхідні дані для змінних userBirthYear і currentYear
+			let userBirthYear = parseInt(prompt('Введіть рік вашого народження'))
+			let currentYear = parseInt(prompt('Введіть поточний рік'))
 
-			//2. Вводимо необхідні дані для змінних productUnitPrice і productQuantity
-			let productUnitPrice = parseFloat(prompt('Введіть ціну за одиницю', '1'))
-			let productQuantity = parseInt(prompt('Введіть кількість товару', '1'))
+			//2. Обчислюємо вираз 
+			let userAge = currentYear - userBirthYear
 
-			//3. Обчислюємо вирази 
-			let totalProductsPrice = productUnitPrice * productQuantity
-			let vatAmount = totalProductsPrice * VAT_VALUE / 100
-
-			//4. Виводимо результат обчислення виразів
+			//. Виводимо результат обчислення виразів
 			document.write(`
-			<p>Загальна ціна товару = ${totalProductsPrice}</p>
-			<p>В т.ч. сума ПДВ = ${vatAmount}</p>
+			<p> Ваш вік складає ${userAge} років</p>
 			`)
 		</script>
 	</div>
