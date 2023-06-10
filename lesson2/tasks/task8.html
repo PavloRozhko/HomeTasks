@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eight task</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		/* li {
+			list-style: none;
+		} */
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		h1 {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+		}
+
+		body,
+		html {
+			height: 100%;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1;
+			background-color: #23272a;
+			color: #fff;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Задача 8. Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера
+			дня (від 0 до 6).</h1>
+
+		<script>
+			//1.Вводимо необхідні дані для змінних randomMonthNumber і randomDayNumber
+			let randomMonthNumber = parseInt(prompt('Введіть номер місяця від 1 до 12', '1'))
+			let randomDayNumber = parseInt(prompt('Введіть номер дня тижня від 0 до 6', '0'))
+
+			//2. Обчислюємо вираз 
+			let randomNumberSum = randomMonthNumber + randomDayNumber
+
+			//. Виводимо результат обчислення виразів
+			document.write(`
+			<p> Сума номерів місяця і дня тижня =  ${randomNumberSum}</p>
+			`)
+		</script>
+	</div>
+</body>
+</html>
