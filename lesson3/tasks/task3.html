@@ -87,15 +87,15 @@
 			//3. Розв'язок заадачі 
 			if (randomNumber === firstAttempt) {
 				alert('Число вгадане з першого разу')
-			} else {
+			} else if (randomNumber !== firstAttempt) {
 				secondAttempt = parseInt(prompt('Спробуйте ще раз'))
+				if (randomNumber === secondAttempt) {
+					alert('Ви вгадали число з другої спроби')
+				}
+				else {
+					alert('Ви програли!')
+				}
 			}
-			if (randomNumber === secondAttempt) {
-				alert('Ви вгадали число з другої спроби')
-			} else {
-				alert('Ви програли!')
-			}
-
 		</script>
 	</div>
 </body>
