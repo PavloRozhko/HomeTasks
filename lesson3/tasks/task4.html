@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fourth task (Lesson 3)</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+			color: #7289da;
+			transition: color 0.3s ease 0s;
+		}
+
+		a:hover {
+			color: #99aab5;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		h1 {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		body,
+		html {
+			height: 100%;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1;
+			background-color: #23272a;
+			color: #fff;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 20px;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом,
+			працівником,
+			пенсіонером).</h1>
+		<script>
+			//Крок 0. Позначення величин
+			// вік людини - humanAge
+			// вік дошкільнят - preschoolersAge, вік школярів - schoolersAge 
+			// вік студентів - studentAge , вік працівників - workerAge, вік пенсіонерів - retiremetAge
+			//1. Введення величин
+			let humanAge = parseInt(prompt('Введіть ваш вік'))
+
+			const preschoolerAge = 5
+			const schoolerAge = 17
+			const studentAge = 23
+			const workerAge = 59
+			const retiremetAge = 60
+
+			//2. Розв'язок заадачі 
+			if (humanAge <= preschoolerAge) alert('Ви дошкільня')
+			else if (humanAge > preschoolerAge && humanAge <= schoolerAge) alert('ви школяр')
+			else if (humanAge > schoolerAge && humanAge <= studentAge) alert('ви студент')
+			else if (humanAge > studentAge && humanAge <= workerAge) alert('ви працівник')
+			else if (humanAge >= retiremetAge) alert('ви пенсіонер')
+			else alert('Введено невірні дані')
+
+		</script>
+	</div>
+</body>
+</html>
