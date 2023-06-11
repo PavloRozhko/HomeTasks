@@ -69,28 +69,31 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1.З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини,
-			у якої кількість
-			цукерок є більшою, або вивести, що кількість однакова.</h1>
+		<h1>Задача № 2. З клавіатури вводиться ціна товару і кількість грошей.
+			Якщо грошей не вистачає, то відмовляємо у покупці, інакше, якщо
+			ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.</h1>
 		<script>
 			//Крок 0. Позначення величин
-			// Ім'я першої та дургої дитини firstChildName, secondChildName
-			// Кількість цукерок у кожної дитини firstChildSweetsQuantity, secondChildSweetsQuantity
+			// Ціна товару - goodsPrice
+			// Кількість грошей - moneyAmoun
+			// Вартість лотерейного квитка - lotteryTicketPrice
+			// Ріщниця ціни товару у суми гроешй - balance
 
 			//1. Введення величин
-			let firstChildName = prompt("Ввеідіть ім'я першої дитини")
-			let firstChildSweetsQuantity = parseInt(prompt("Введіть кількість цукерок першї дитини"))
+			const lotteryTicketPrice = 4
 
-			let secondChildName = prompt("Ввеідіть ім'я першої дитини")
-			let secondChildSweetsQuantity = parseInt(prompt("Введіть кількість цукерок першї дитини"))
+			let goodsPrice = parseFloat(prompt("Введіть ціну на товра", "0.00"))
+			let moneyAmoun = parseFloat(prompt("Введіть сумму грошей", "0.00"))
+
+			let balance = moneyAmoun - goodsPrice
 
 			//3. Розв'язок заадачі 
-			if (firstChildSweetsQuantity > secondChildSweetsQuantity)
-				document.write(`У ${firstChildName} цукерок більше!`)
-			else if (firstChildSweetsQuantity < secondChildSweetsQuantity)
-				document.write(`У ${secondChildName} цукерок більше!`)
-			else
-				document.write(`У ${firstChildName} та ${secondChildName} кількість цукерок однакова!`)
+			if (moneyAmoun >= goodsPrice) {
+				if (balance >= lotteryTicketPrice)
+					confirm("Бажаєте придбати лотетрейний квиток?")
+				document.write("Дякуємо за покупку!")
+			} else
+				alert(`Вибачте не вистачає коштві: ${balance}`)
 		</script>
 	</div>
 </body>
