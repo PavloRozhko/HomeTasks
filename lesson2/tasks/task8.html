@@ -76,9 +76,13 @@
 			дня (від 0 до 6).</h1>
 
 		<script>
+
 			//1.Вводимо необхідні дані для змінних randomMonthNumber і randomDayNumber
-			let randomMonthNumber = parseInt(prompt('Введіть номер місяця від 1 до 12', '1'))
-			let randomDayNumber = parseInt(prompt('Введіть номер дня тижня від 0 до 6', '0'))
+			let minMonthNumber = 1, maxMonthNumer = 12
+			let randomMonthNumber = Math.floor(Math.random() * (maxMonthNumer - minMonthNumber + 1) + minMonthNumber);
+
+			let minDayNumber = 0, maxDayNumber = 6
+			let randomDayNumber = Math.floor(Math.random() * (maxDayNumber - minDayNumber + 1) + minDayNumber);
 
 			//2. Обчислюємо вираз 
 			let randomNumberSum = randomMonthNumber + randomDayNumber
