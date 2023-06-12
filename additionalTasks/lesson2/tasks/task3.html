@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>3rd additional task</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		/* li {
+			list-style: none;
+		} */
+		a {
+			color: inherit;
+			text-decoration: none;
+			color: #7289da;
+			transition: color 0.3s ease 0s;
+		}
+
+		a:hover {
+			color: #99aab5;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		h1 {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		body,
+		html {
+			height: 100%;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1;
+			background-color: #23272a;
+			color: #fff;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 20px;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Задача №3. З клавіатури вводяться вартість одиниці та кількість одиниць двох товарів. Вивести на екран вартість
+			кожного з видів
+			товарів окремо і загальну вартість.</h1>
+		<script>
+			// крок 0 
+			// вартість одиниці двох товарів - firstGoodsPrice, secondGoodsPrice 
+			// кількість одиниць двох товарів - firstGoodsQuantity, secondGoodsQuantity
+			// вартість кожного з видів товарів окремо - firstGoodsCost, secondGoodsCost
+			// загальна вартість - totalGoodsCost
+			//1. Вводимо дані необхідні дані для змінних 
+			let firstGoodsPrice = parseFloat(prompt('Введіть ціну одиниці товару 1', '0.00'))
+			let firstGoodsQuantity = parseInt(prompt('Введіть кількість товару 1'))
+			let secondGoodsPrice = parseFloat(prompt('Введіть ціну одиниці товару 2', '0.00'))
+			let secondGoodsQuantity = parseInt(prompt('Введіть кількість товару 2'))
+			//2. Обчислюємо elementWidth
+
+			let firstGoodsCost = firstGoodsPrice * firstGoodsQuantity
+			let secondGoodsCost = secondGoodsPrice * secondGoodsQuantity
+
+			let totalGoodsCost = firstGoodsCost + secondGoodsCost
+
+			//3. Виводимо результат обчислення 
+			document.write(`
+			<p>вартість товару 1 складає ${firstGoodsCost.toFixed(2)} грн.</p>
+			<p>вартість товару 2 складає ${secondGoodsCost.toFixed(2)} грн.</p>
+			<p>загальна вартість товару складає ${totalGoodsCost.toFixed(2)} грн.</p>
+			`)
+		</script>
+	</div>
+</body>
+</html>
