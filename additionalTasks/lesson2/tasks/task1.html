@@ -72,33 +72,23 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №0.Обчислити значення виразів.</h1>
-		<ol>
-			<li>S<sub>1</sub>=a+12+b</li>
-			<li>S<sub>2</sub>=√(a+b/2a)</li>
-			<li>S<sub>3</sub>=∛(a+b)c</li>
-			<li>S<sub>4</sub>=sin(a/-b)</li>
-		</ol>
+		<h1>Задача №1. Дано ширину екрана та кількість елементів, які повинні бути відображені у рядку. Визначити ширину
+			елементів, які повинні
+			бути відображені у цьому рядку.</h1>
 		<script>
-			//1. Просвоєння значення змінній c
-			let c = 12
+			// крок 0 
+			// ширина екрана - screenWidth , кількість елементів - elementsNumber , ширина елементу - elementWidth
+			//1. Вводимо дані необхідні дані для змінних screenWidth і elementsNumber
+			let screenWidth = parseInt(prompt('Введіть ширину екрану'))
+			let elementsNumber = parseInt(prompt('Введіть кільксть елементів, які повинні бути відображені у рядку'))
 
-			//2. Вводимо дані необхідні дані для змінних a і b
-			let a = parseInt(prompt('Введіть ціле число', '1'))
-			let b = parseInt(prompt('Введіть ціле число', '1'))
+			//2. Обчислюємо elementWidth
 
-			//3. Обчислюємо вирази 
-			let totalSum = a + c + b
-			let squareRoot = Math.sqrt((a + b) / (2 * a))
-			let cubeRoot = Math.cbrt((a + b) * c)
-			let sine = Math.sin(a / -b)
+			let elementWidth = screenWidth / elementsNumber
 
-			//4. Виводимо результат обчислення виразів
+			//3. Виводимо результат обчислення 
 			document.write(`
-				S<sub>1</sub> = ${totalSum} <br>
-				S<sub>2</sub> = ${squareRoot} <br>
-				S<sub>3</sub> = ${cubeRoot} <br>
-				S<sub>4</sub> = ${sine} <br>
+			<p>Ширина лелекмента у рядку має склади ${elementWidth}px</p>
 			`)
 		</script>
 	</div>
