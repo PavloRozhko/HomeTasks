@@ -76,11 +76,37 @@
 			або правого краю) не більше ніж на 10.</h1>
 		<script>
 			//Крок 0. Позначення величин
+			let minNumber = 1, maxNumber = 100
+			let firstRandomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
+			let secondRandomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
+			console.log(firstRandomNumber);
+			console.log(secondRandomNumber);
+			let startIntervalNumber, finishIntervalNumber
+			if (firstRandomNumber < secondRandomNumber) {
+				startIntervalNumber = firstRandomNumber
+				finishIntervalNumber = secondRandomNumber
+			} else {
+				startIntervalNumber = secondRandomNumber
+				finishIntervalNumber = firstRandomNumber
+			}
+			console.log(startIntervalNumber);
+			console.log(finishIntervalNumber);
 
 			//1. Введення величин
-
+			let userNumber = parseInt(prompt('Введіть число від 1 до 100', '1'))
 
 			//2. Розв'язок заадачі 
+
+			if (startIntervalNumber > userNumber || finishIntervalNumber < userNumber) {
+				startIntervalNumber -= 10
+				finishIntervalNumber += 10
+				if (userNumber < startIntervalNumber || userNumber > finishIntervalNumber)
+					alert('Ви програли')
+				else
+					alert('Ви виграли')
+			} else {
+				alert('Ви виграли')
+			}
 
 		</script>
 	</div>
