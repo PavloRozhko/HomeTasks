@@ -92,7 +92,7 @@
 
 			//2. Обчислюємо вирази 
 			let numbersSum = firstNumber + secondNumber
-			let numbersDifferent = firstNumber - secondNumber
+			let numbersDifferent = firstNumber * secondNumber // був неуважний. Записав різницю (віднімання) замість добутку (множення)
 			let numbersFraction = firstNumber / secondNumber
 
 			//4. Виводимо результат обчислення виразів
@@ -101,8 +101,8 @@
 			<thead>
 				<tr>
 					<th colspan="2">Аргументи</th>
+					<th>Сума</th>
 					<th>Добуток</th>
-					<th>Різниця</th>
 					<th>Частка</th>
 				</tr>
 			</thead>
@@ -110,9 +110,9 @@
 				<tr>
 					<th>Перше число</th>
 					<th>${firstNumber}</th>
-					<th rowspan="2">${numbersSum}</th>
-					<th rowspan="2">${numbersDifferent}</th>
-					<th rowspan="2">${numbersFraction}</th>
+					<th rowspan="2">${numbersSum.toFixed(2)}</th>
+					<th rowspan="2">${numbersDifferent.toFixed(2)}</th>
+					<th rowspan="2">${numbersFraction.toFixed(2)}</th>
 				</tr>
 				<tr>
 					<th>Друге число</th>
