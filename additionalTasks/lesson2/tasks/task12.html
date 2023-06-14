@@ -77,9 +77,37 @@
 			у даній сумі.</h1>
 		<script>
 			// крок 0 позначення
+			// twoKopecksQuantity - кількість копійок номіналом 2 копійки
+			// fiveKopecksQuantity - кількість копійок номіналом 5 копійок
+			// twentyFiveKopecksQuantity - кількість копійок номіналом 25 копійок
+			// fiftyKopecksQuantity - кількість копійок номіналом 25 копійок
 			//1. Вводимо дані необхідні дані
+			let twoCoinssQuantity = parseInt(prompt('кількість копійок номіналом 2 копійки'))
+			let fiveCoinssQuantity = parseInt(prompt(' кількість копійок номіналом 5 копійок'))
+			let twentyFiveCoinsQuantity = parseInt(prompt('кількість копійок номіналом 25 копійок'))
+			let fiftyCoinsQuantity = parseInt(prompt('кількість копійок номіналом 50 копійок'))
+
+			const twoCoinsValue = 2
+			const fiveCoinsValue = 5
+			const twentyFiveCoinsValue = 25
+			const fiftyCoinsValue = 50
+
+			const coinsInHryvnia = 100
 			//2. Обчислюємо
+			// обчислення кількості копійок кожного номіналу
+			let twoCoinsAmount = twoCoinssQuantity * twoCoinsValue
+			let fiveCoinsAmount = fiveCoinssQuantity * fiveCoinsValue
+			let twentyFiveCoinsAmount = twentyFiveCoinsQuantity * twentyFiveCoinsValue
+			let fiftyCoinsAmount = fiftyCoinsQuantity * fiftyCoinsValue
+			// обчислення суми копійок
+			let totalCoinsAmount = twoCoinsAmount + fiveCoinsAmount + twentyFiveCoinsAmount + fiftyCoinsAmount
+			// обчислення залишку кількості копійок 
+			let amountOfCoins = totalCoinsAmount % coinsInHryvnia
+			// обчислення кількості цілих гривень
+			let amountOfHryvnias = Math.floor(totalCoinsAmount / coinsInHryvnia)
+
 			//3. Виводимо результат
+			alert(`У вас є ${amountOfHryvnias} грн ${amountOfCoins} коп`)
 		</script>
 	</div>
 </body>
