@@ -74,13 +74,25 @@
 			«п’ятикутинк», «шестикутник»).</h1>
 		<script>
 			//Крок 0. Позначення величин
-
+			// numberOfSides - кількість сторін багатокутника
 			//1. Введення величин
-
-
+			let numberOfSides = parseInt(prompt('введіть кількість сторін багатокутника'))
+			let result
 			//2. Розв'язок заадачі
-
+			switch (numberOfSides) {
+				case 3: result = "трикутник"
+					break
+				case 4: result = "чотирикутник"
+					break
+				case 5: result = "п’ятикутинк"
+					break
+				case 6: result = "шестикутник"
+					break
+				default: result = "не знаю такого багатокутника"
+					break;
+			}
 			//3 Вивід
+			alert(result)
 		</script>
 	</div>
 </body>
