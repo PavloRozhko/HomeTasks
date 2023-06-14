@@ -74,13 +74,28 @@
 			програми, яка може відкрити цей тип файлу.</h1>
 		<script>
 			//Крок 0. Позначення величин
-			// numberOfSides - кількість сторін багатокутника
+			// fileExtensionFirstLetter -перша літера розширення файлу
+
 			//1. Введення величин
-
+			let fileExtensionFirstLetter = prompt('Введіть перша літера розширення файлу («html», «doc», «jpeg», «mp3» або «xls»)')
+			let result
 			//2. Розв'язок заадачі
-
+			switch (fileExtensionFirstLetter.toLocaleLowerCase()) {
+				case 'h': result = 'Microsoft Edge'
+					break
+				case 'd': result = 'Microsoft Word'
+					break
+				case 'j': result = 'Microsoft Paint'
+					break
+				case 'm': result = 'Winamp'
+					break
+				case 'x': result = 'Microsoft Excel'
+					break
+				default: result = 'Невідоме розширення'
+					break
+			}
 			//3 Вивід
-
+			alert(result)
 		</script>
 	</div>
 </body>
