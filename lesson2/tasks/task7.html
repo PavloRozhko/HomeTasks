@@ -92,12 +92,13 @@
 			окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.</h1>
 		<script>
 			//1. Вводимо необхідні дані для змінних про вартість та кількість трьох товарів 
-			let firstGoodsPrice = parseFloat(prompt('Введіть вартість першого товрау', '0.00'))
-			let firstGoodsQuantity = parseInt(prompt('Введіть кількість першого товару', '0'))
-			let secondGoodsPrice = parseFloat(prompt('Введіть вартість другого товрау', '0.00'))
-			let secondGoodsQuantity = parseInt(prompt('Введіть кількість другого товару', '0'))
-			let thirdGoodsPrice = parseFloat(prompt('Введіть вартість третього товрау', '0.00'))
-			let thirdGoodsQuantity = parseInt(prompt('Введіть кількість третього товару', '0'))
+			let firstGoodsPrice = parseFloat(prompt('Введіть вартість першого товрау'))
+			// в кількості (усі змінні) товрау замінено з ParseInt на ParseFloat, раптом його кількість не ціла (рекомендація ментора)
+			let firstGoodsQuantity = parseFloat(prompt('Введіть кількість першого товару'))
+			let secondGoodsPrice = parseFloat(prompt('Введіть вартість другого товрау'))
+			let secondGoodsQuantity = parseFloat(prompt('Введіть кількість другого товару'))
+			let thirdGoodsPrice = parseFloat(prompt('Введіть вартість третього товрау'))
+			let thirdGoodsQuantity = parseFloat(prompt('Введіть кількість третього товару'))
 
 			//2. Обчислюємо вирази 
 			let firstGoodsCost = firstGoodsPrice * firstGoodsQuantity
@@ -121,27 +122,27 @@
 					<tbody>
 						<tr>
 							<td>Перший товар</td>
-							<td>${firstGoodsQuantity}</td>
-							<td>${firstGoodsPrice}</td>
-							<td>${firstGoodsCost}</td>
+							<td>${firstGoodsQuantity.toFixed(2)}</td>
+							<td>${firstGoodsPrice.toFixed(2)}</td>
+							<td>${firstGoodsCost.toFixed(2)}</td>
 						</tr>
 						<tr>
 							<td>Другий товар</td>
-							<td>${secondGoodsQuantity}</td>
-							<td>${secondGoodsPrice}</td>
-							<td>${secondGoodsCost}</td>
+							<td>${secondGoodsQuantity.toFixed(2)}</td>
+							<td>${secondGoodsPrice.toFixed(2)}</td>
+							<td>${secondGoodsCost.toFixed(2)}</td>
 						</tr>
 						<tr>
 							<td>Третій товар</td>
-							<td>${thirdGoodsQuantity}</td>
-							<td>${thirdGoodsPrice}</td>
-							<td>${thirdGoodsCost}</td>
+							<td>${thirdGoodsQuantity.toFixed(2)}</td>
+							<td>${thirdGoodsPrice.toFixed(2)}</td>
+							<td>${thirdGoodsCost.toFixed(2)}</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<th colspan="2">Загальна вартість товрау</th>
-							<th colspan="2">${totalGoodsCost}</th>
+							<th colspan="2">${totalGoodsCost.toFixed(2)}</th>
 						</tr>
 					</tfoot>
 				</table>
