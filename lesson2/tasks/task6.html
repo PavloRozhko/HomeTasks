@@ -76,6 +76,14 @@
 			годин і хвилин.</h1>
 
 		<script>
+			/*
+			Зауваження ментора.
+			Ок, але тут краще обчислити не просто скільки це годин і скільки це хвилин, а знайтискільки скільки пройшло повних годин і хвидин.
+			Наприклад: 3665 секунд - це 1 година : 1 хвилина.
+			Для обчислення повних хвилин викорисатити % (остачу від ділення)
+			Для заокруглення в меншу сторону Math.floor
+			*/
+			/*
 			//1. Просвоєння значення в констатни secondsNumberPerMinute та minutesNumberPerHour 
 			const secondsNumberPerMinute = 60
 			const minutesNumberPerHour = 60
@@ -92,6 +100,24 @@
 			<p>Від початку доби пройшло ${passedSecondsInMinute} хвилин</p>
 			<p>Від початку доби пройшло ${passedSecondsInHours} годин</p>
 			`)
+			*/
+			// New code
+			// 1.  Вводимо необхідні дані
+			let passedSecondsNumber = parseInt(prompt('Введіть кількість секунд, що пройшла від початку доби'))
+
+			const secondsNumberPerMinute = 60
+			const minutesNumberPerHour = 60
+			// 2. Обчислюємо вирази
+			// кількість цілих хвилин, що минула від початку доби
+			let passedTimeInMinutes = Math.floor(passedSecondsNumber / secondsNumberPerMinute)
+			// кількість цілих годин, що минула від початку доби
+			let passedSecondsInHours = Math.floor(passedTimeInMinutes / minutesNumberPerHour)
+			// кількість цілих хвилин (остача від ділення на 60)
+			// варіатн 1. 
+			// let passedSecondsInMinute = passedTimeInMinutes % minutesNumberPerHour
+			// Варіант 2. з віднятою 1 хвилиною і поврнутою в кінці оскільки рахуються від 0 до 59. Варіаньи працюють однаково
+			let passedSecondsInMinute = ((passedTimeInMinutes - 1) % minutesNumberPerHour) + 1
+			document.write(`<p>Від початку доби пройшло ${passedSecondsInHours} годин : ${passedSecondsInMinute} хвилин </p>`)
 		</script>
 	</div>
 </body>
