@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>5th additional task (Lesson 3)</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+			color: #7289da;
+			transition: color 0.3s ease 0s;
+		}
+
+		a:hover {
+			color: #99aab5;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: inherit;
+			font-size: inherit;
+		}
+
+		h1 {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		body,
+		html {
+			height: 100%;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1;
+			background-color: #23272a;
+			color: #fff;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 20px;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Задача №5. Морський бій. Модифікувати попередню задачу з можливістю після пострілу переміщення корабля у
+			випадковим чином вибрану сусідню
+			клітинку (якщо звичайно корабель не було потоплено за першим разом).</h1>
+		<script>
+			//Крок 0. Позначення величин
+			// finishSquaresNumber - кількість квадратів, shipPosition - позиція корабля, shotAttempt - спроба вистрілу
+			//1. Введення величин
+			// Визначення розміру поля для гри та позиції корабля
+			let startSqueareNumber = 1
+			let finishSquaresNumber = parseInt(prompt('Введіть кількість квадратів для гри в морській бій'))
+			let shipPosition = Math.floor(Math.random() * (finishSquaresNumber - startSqueareNumber + 1) + startSqueareNumber)
+			// Здійснення першого пострілу
+			let shotAttempt = parseInt(prompt(`Як гадаєте у якому квадраті знаходиться корабель (від 1 до ${finishSquaresNumber})`))
+			//2. Розв'язок заадачі
+			if (shotAttempt === shipPosition) {
+				alert('Корабель потоплено')
+			} else {
+				// присвоєння змінній shipOldPosition значення shipPosition перед його переміщенням
+				let shipOldPosition = shipPosition
+				// Переміщення корабля після невдалого пострілу
+				if (shipPosition === startSqueareNumber) {
+					let beginningRandomMove = Math.floor(Math.random() * (1 - 0 + 1) + 0)
+					shipPosition += beginningRandomMove
+				} else if (shipPosition === finishSquaresNumber) {
+					let finishRandomMove = Math.floor(Math.random() * (0 - -1 + 1) + -1)
+					shipPosition += finishRandomMove
+				} else {
+					let middleRandomMove = Math.floor(Math.random() * (1 - -1 + 1) + -1)
+					shipPosition += middleRandomMove
+				}
+				if (Math.abs(shotAttempt - shipOldPosition) === 1) {
+					alert('Корабель поранено')
+					shotAttempt = parseInt(prompt('Друга спроба'))
+					if (shotAttempt === shipPosition)
+						alert('Корабель потоплено')
+					else alert('Ви програли')
+				} else {
+					shotAttempt = parseInt(prompt('Друга спроба'))
+					if (shotAttempt === shipPosition)
+						alert('Корабель потоплено')
+					else alert('Ви програли')
+				}
+			}
+							// герація випадкових чисел для руху укорабля
+				// let min1 = 0, max1 = 1
+				// let beginningRandomMove = Math.floor(Math.random() * (max1 - min1 + 1) + min1)
+				// let beginningRandomMove = Math.floor(Math.random() * (1 - 0))
+				// let min2 = -1, max2 = 1
+				// let middleRandomMove = Math.floor(Math.random() * (max2 - min2 + 1) + min2)
+				// let middleRandomMove = Math.floor(Math.random() * (1 - -1 + 1) + -1)
+				// let min3 = -1, max3 = 0
+				// let finishRandomMove = Math.floor(Math.random() * (max3 - min3 + 1) + min3)
+				// let finishRandomMove = Math.floor(Math.random() * (0 - -1 + 1) + -1)
+				// if (Math.abs(shotAttempt - shipPosition) === 1) {
+				// 	alert('Корабель поранено')
+				// 	if (shipPosition === startSqueareNumber)
+				// 		shipPosition += beginningRandomMove
+				// 	else if (shipPosition === finishSquaresNumber)
+				// 		shipPosition -= finishRandomMove
+				// 	else
+				// 		shipPosition += middleRandomMove
+				// 	shotAttempt = parseInt(prompt('Друга спроба'))
+				// 	if (shotAttempt === shipPosition)
+				// 		alert('Корабель потоплено')
+				// 	else
+				// 		alert('Ви програли')
+				// } else {
+				// 	if (shipPosition === startSqueareNumber)
+				// 		shipPosition += beginningRandomMove
+				// 	else if (shipPosition === finishSquaresNumber)
+				// 		shipPosition -= finishRandomMove
+				// 	else
+				// 		shipPosition += middleRandomMove
+				// 	shotAttempt = parseInt(prompt('Друга спроба'))
+				// 	if (shotAttempt === shipPosition)
+				// 		alert('Корабель потоплено')
+				// 	else
+				// 		alert('Ви програли')
+				// }
+			// let shipDamage = Math.abs(shotAttempt - shipPosition)
+			// // герація випадкових чисел для руху укорабля
+			// let min1 = 0, max1 = 1
+			// let beginningRandomMove = Math.floor(Math.random() * (max1 - min1 + 1) + min1)
+			// let min2 = -1, max2 = 1
+			// let middleRandomMove = Math.floor(Math.random() * (max2 - min2 + 1) + min2)
+			// let min3 = -1, max3 = 0
+			// let finishRandomMove = Math.floor(Math.random() * (max3 - min3 + 1) + min3)
+
+			// if (shotAttempt === shipPosition)
+			// 	alert('Корабель потоплено')
+			// else if (shipDamage === 1) {
+			// 	alert('Корабель поранено')
+			// 	if (shipPosition === startSqueareNumber)
+			// 		shipPosition += beginningRandomMove
+			// 	else if (shipPosition === finishSquaresNumber)
+			// 		shipPosition -= finishRandomMove
+			// 	else
+			// 		shipPosition += middleRandomMove
+			// 	shotAttempt = parseInt(prompt('Друга спроба'))
+			// 	if (shotAttempt === shipPosition)
+			// 		alert('Корабель потоплено')
+			// 	else
+			// 		alert('Ви програли')
+			// } else {
+			// 	if (shipPosition === startSqueareNumber)
+			// 		shipPosition += beginningRandomMove
+			// 	else if (shipPosition === finishSquaresNumber)
+			// 		shipPosition -= finishRandomMove
+			// 	else
+			// 		shipPosition += middleRandomMove
+			// 	shotAttempt = parseInt(prompt('Друга спроба'))
+			// 	if (shotAttempt === shipPosition)
+			// 		alert('Корабель потоплено')
+			// 	else
+			// 		alert('Ви програли')
+			// }
+
+
+			// if (shotAttempt === shipPosition)
+			// 	alert('Корабель потоплено')
+			// else if (shipDamage === 1) {
+			// 	alert('Корабель поранено')
+			// 	if (shipPosition === 1) {
+			// 		shipPosition += 1
+			// 		console.log(shipPosition)
+			// 	} else if (shipPosition === maxSquaresNumber) {
+			// 		shipPosition -= 1
+			// 		console.log(shipPosition)
+			// 	} else {
+			// 		shipPosition += randomMove
+			// 		console.log(shipPosition)
+			// 	}
+			// 	shotAttempt = parseInt(prompt('Друга спроба'))
+			// 	if (shotAttempt === shipPosition)
+			// 		alert('you win')
+			// 	else alert('you lose')
+			// } else {
+			// 	shotAttempt = parseInt(prompt('Друга спроба'))
+			// 	if (shotAttempt === shipPosition)
+			// 		alert('you win')
+			// 	else alert('you lose')
+			// }
+
+			// if (shotAttempt !== shipPosition) {
+			// 	if (shipPosition === maxSquaresNumber) {
+			// 		shipPosition--
+			// 		console.log(shipPosition);
+			// 	} else if (shipPosition === 1) {
+			// 		shipPosition++
+			// 		console.log(shipPosition);
+			// 	} else {
+			// 		shipPosition = Math.floor(Math.random(Math.floor(maxSquaresNumber - shipPosition) * shipPosition)) + 1
+			// 		console.log(shipPosition);
+			// 	}
+			// }
+
+			/*
+			if (shotAttempt === shipPosition)
+				alert('Корабель потоплено')
+			else if (shipDamage === 1) {
+				alert('Корабель поранено')
+				shotAttempt = parseInt(prompt('Друга спроба'))
+				if (shotAttempt === shipPosition)
+					alert('you win')
+				else alert('you lose')
+			} else {
+				shotAttempt = parseInt(prompt('Друга спроба'))
+				if (shotAttempt === shipPosition)
+					alert('you win')
+				else alert('you lose')
+			}
+			*/
+
+		</script>
+	</div>
+</body>
+</html>
