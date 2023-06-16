@@ -74,17 +74,26 @@
 			ближче до загаданого комп’ютером числа.</h1>
 		<script>
 			//Крок 0. Позначення величин
-
-			let minNumber = 1, maxNumber = 100
-			let firstRandomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
-			let secondRandomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
-
+			// randomNumber - випадкове число
+			// firstPlayerAnswer, secondPlayerAnswer - відповідь гравця 1 та 2
 			//1. Введення величин
+			let minNumber = 1, maxNumber = 10
+			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
+			console.log(randomNumber)
+			let firstPlayerAnswer = parseInt(prompt('Введіть число від 1 до 10'))
+			let secondPlayerAnswer = parseInt(prompt('Введіть число від 1 до 10'))
+			console.log(firstPlayerAnswer)
+			console.log(secondPlayerAnswer)
 
+			const firstPlayerResult = Math.abs(randomNumber - firstPlayerAnswer)
+			const secondPlayerResult = Math.abs(randomNumber - secondPlayerAnswer)
 
-			//2. Розв'язок заадачі 
-
-
+			console.log(firstPlayerResult)
+			console.log(secondPlayerResult)
+			//2. Розв'язок заадачі
+			if (firstPlayerResult < secondPlayerResult)
+				alert('First player win')
+			else alert('second player win')
 
 		</script>
 	</div>
