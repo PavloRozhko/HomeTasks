@@ -83,10 +83,34 @@
 		<p>За два постріли спробувати потопити корабель.</p>
 		<script>
 			//Крок 0. Позначення величин
-			// randomNumber - випадкове число
-			// firstPlayerAnswer, secondPlayerAnswer - відповідь гравця 1 та 2
-			//0. Введення позначень
+			// maxSquaresNumber - кількість квадратів
+			// shipPosition позиція корабля
+			// shotAttempt - спроба вистрілу
 			//1. Введення величин
+			let maxSquaresNumber = parseInt(prompt('Введіть кількість квадратів для гри в морській бій'))
+			// console.log(maxSquaresNumber);
+
+			const shipPosition = Math.floor(Math.random() * maxSquaresNumber) + 1
+			// console.log(shipPosition);
+
+			let shotAttempt = parseInt(prompt(`Як гадаєте у якому квадраті знаходиться корабель (від 1 до ${maxSquaresNumber})`))
+
+			let shipDamage = Math.abs(shotAttempt - shipPosition)
+
+			if (shotAttempt === shipPosition)
+				alert('Корабель потоплено')
+			else if (shipDamage === 1) {
+				alert('Корабель поранено')
+				shotAttempt = parseInt(prompt('Друга спроба'))
+				if (shotAttempt === shipPosition)
+					alert('you win')
+				else alert('you lose')
+			} else {
+				shotAttempt = parseInt(prompt('Друга спроба'))
+				if (shotAttempt === shipPosition)
+					alert('you win')
+				else alert('you lose')
+			}
 			//2. Розв'язок заадачі
 		</script>
 	</div>
