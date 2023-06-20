@@ -88,7 +88,23 @@
 		<h1>Задача №11(10).Задача 10. Знайти суму всіх непарних чисел, що
 			знаходяться між заданими користувачем числами.</h1>
 		<script>
-
+			// Ввести числа firstNumber та secondNumber для визначення інтервалу
+			// зробити перевірку чи 2 число більше за 1
+			// оголосити змінну oddNumbersSum для додавання непарних чисел
+			// повторити цикл доки numberCounter буде <= secondNumber
+			//    - робимо перевірку на непарне число та додаємо його до значення змінної  oddNumbersSum
+			// виводимо суму непарних на аекран
+			let firstNumber = parseInt(prompt('Enter first number'))
+			let secondNumber = parseInt(prompt('Enter second number'))
+			if (firstNumber < secondNumber) {
+				let oddNumbersSum = 0
+				for (let numberCounter = firstNumber; numberCounter <= secondNumber; numberCounter++) {
+					if ((numberCounter % 2) === 1)
+						oddNumbersSum += numberCounter
+				}
+				alert(oddNumbersSum)
+			} else
+				alert('try one more time')
 		</script>
 	</div>
 </body>
