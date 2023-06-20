@@ -87,7 +87,23 @@
 	<div class="container">
 		<h1>Задача №5(2). Створити 10 елементів для введення цін продуктів.</h1>
 		<script>
-
+			// -----------------------Алгоритм
+			// productNumber - номер продукта
+			// вставляємо відкриваючий тег form з методом POST
+			// виводимо на екран 10 тегів input з тегами label
+			// виводимо на екран кнопку з текстом ввести
+			// вставляємо закриваючий тег form
+			document.write('<form action="#" method="post">')
+			for (let productNumber = 1; productNumber <= 10; productNumber++) {
+				document.write(`
+				<div>
+					<label for="product${productNumber}">Product #${productNumber}</label>
+					<input type="number" placeholder="Введіть ціну 0.00" step="0.01" id="product${productNumber}">
+				</div>
+			`)
+			}
+			document.write('<button>Enter</button>')
+			document.write('</form>')
 		</script>
 	</div>
 </body>
