@@ -71,7 +71,31 @@
 	<div class="container">
 		<h1>Задача №3(11). Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами.</h1>
 		<script>
-
+			// Ввести числа firstNumber та secondNumber для визначення інтервалу
+			// зробити перевірку чи 2 число більше за 1
+			// оголосити змінну oddNumbersSum для додавання непарних чисел
+			// оголосити oddNumbersCounter та присвоїти їй значення 0
+			// виконувати цикл поки numberCounter буде <= secondNumber
+			//    перевіряєм чи oddNumbersCounter < 5
+			//       робимо перевірку на непарне число та додаємо його до значення змінної  oddNumbersSum
+			//       додаємо до oddNumbersCounter 1
+			// виводимо суму 5 непарних чиел на аекран
+			let firstNumber = parseInt(prompt('Enter first number'))
+			let secondNumber = parseInt(prompt('Enter second number'))
+			if (firstNumber < secondNumber) {
+				let oddNumbersCounter = 0
+				let oddNumbersSum = 0
+				for (let numberCounter = firstNumber; numberCounter <= secondNumber; numberCounter++) {
+					if (oddNumbersCounter < 5) {
+						if ((numberCounter % 2) === 1) {
+							oddNumbersSum += numberCounter
+							oddNumbersCounter++
+						}
+					}
+				}
+				alert(oddNumbersSum)
+			} else
+				alert('try one more time')
 		</script>
 	</div>
 </body>
