@@ -93,20 +93,17 @@
 			// userRandomNumber - випадкові числа введені користувачем
 			// userRandomNumberAmount - кількість випадкових чисел які ввів користувач
 			// вивобимо відкриваючий тег <ul>
-			// вводимо випадквое число
-			// перевіряємо чи введена інформація користувачем це число
-			// якщо так, то userRandomNumberAmount збільшеємо на одиниці
-			// виводимо на екран тег <li> із введеним числом
-			// якщо ні, то ставимо директиву continue
+			// вводимо кількість випадкових чисел яку потрібно вивести
+			// виводимо на екран тег <li> із випадковими числами
 			// вивобимо закриваючий тег </ul>
-			// let userRandomNumberAmount = 0
+
+			let randomNumbersQuantity = parseInt(prompt('Enter quantity of random numbers'))
 			document.write('<ul>')
-			for (userRandomNumberAmount = 0; userRandomNumberAmount < 100; userRandomNumberAmount++) {
-				let userRandomNumber = parseInt(prompt("Введіть число"))
-				if (!isNaN(userRandomNumber))
-					document.write(`<li>${userRandomNumber}</li>`)
-				else
-					continue
+			for (i = 0; i < randomNumbersQuantity; i++) {
+				let min = 1
+				let max = 100
+				let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+				document.write(`<li>${randomNumber}</li>`)
 			}
 			document.write('</ul>')
 		</script>
