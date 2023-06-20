@@ -88,7 +88,18 @@
 		<h1>Задача №13(15).Користувача поступово вводить показники температури
 			протягом року. Знайти середню температуру.</h1>
 		<script>
-
+			const DAYS_PER_YEAR = 365
+			let averageYearTemperature
+			for (let dayNumber = 1; dayNumber <= DAYS_PER_YEAR; dayNumber++) {
+				let totalTemperature = 0
+				let dayTemperarure = parseInt(prompt(`Введіть температура за ${dayNumber} день`))
+				if (!isNaN(dayTemperarure)) {
+					totalTemperature += dayTemperarure
+				} else
+					continue
+				averageYearTemperature = totalTemperature / DAYS_PER_YEAR
+			}
+			alert(`Середня температура за рік складає ${averageYearTemperature.toFixed(2)} градуси`)
 		</script>
 	</div>
 </body>
