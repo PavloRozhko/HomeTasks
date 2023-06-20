@@ -76,7 +76,92 @@
 			третіх – 500, три четвертих зображення – 1000грн). Використати цикли і switch (для вибору зображення за номером).
 		</h1>
 		<script>
-
+			//Алгоритм
+			// запитуємо користувача чи  він хоче зіграти в автомат - message
+			//   перевірка - якщо  message === true - граємо
+			//     викнууємо цикл поки message === true
+			//       виконуємо підряд три цикли for
+			//          за допомогую switch та генератора випадковго числа визначаємо який малюнок присвоїти кожній з поизцій
+			//          присвоюємо змінній line малюнок із кожної плзиції
+			//          виводимо на екран результат line
+			//          порівнюємо отриманий рядок line із виграшними значеннями
+			//          виводимо повідомлення про винагороду
+			//          пропонуємо зіграти ще раз
+			let message = confirm('Зіграємо в рулетку?')
+			let award = 0
+			if (message === true) {
+				do {
+					let min = 1
+					let max = 4
+					let firstPisiton = '', secondPosition = '', thirdPosition = ''
+					for (let firstLine = 0; firstLine < 1; firstLine++) {
+						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+						let result
+						switch (randomNumber) {
+							case 1: result = '🍇'
+								break;
+							case 2: result = '🍉'
+								break
+							case 3: result = '🍊'
+								break
+							case 4: result = '🍋'
+								break
+						}
+						firstPisiton += result
+					}
+					for (let secondLine = 0; secondLine < 1; secondLine++) {
+						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+						let result
+						switch (randomNumber) {
+							case 1: result = '🍇'
+								break;
+							case 2: result = '🍉'
+								break
+							case 3: result = '🍊'
+								break
+							case 4: result = '🍋'
+								break
+						}
+						secondPosition += result
+					}
+					for (let secondLine = 0; secondLine < 1; secondLine++) {
+						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+						let result
+						switch (randomNumber) {
+							case 1: result = '🍇'
+								break;
+							case 2: result = '🍉'
+								break
+							case 3: result = '🍊'
+								break
+							case 4: result = '🍋'
+								break
+						}
+						thirdPosition += result
+					}
+					let line = firstPisiton + secondPosition + thirdPosition
+					alert(line)
+					if (line === '🍇🍇🍇') {
+						alert('Нагорода складає 100 грн')
+						award += 100
+					} else if (line === '🍉🍉🍉') {
+						alert('Нагорода складає 200 грн')
+						award += 200
+					} else if (line === '🍊🍊🍊') {
+						alert('Нагорода складає 500 грн')
+						award += 500
+					} else if (line === '🍋🍋🍋') {
+						alert('Нагорода складає 1000 грн')
+						award += 1000
+					} else {
+						alert('Нагороди немає')
+						award -= 50
+					}
+					message = alert(`Ваш баланс = ${award}`)
+					message = confirm('продовжуємо грати?')
+				} while (message === true);
+			}
+			alert(`Сума виграшу складає ${award}`)
 
 		</script>
 	</div>
