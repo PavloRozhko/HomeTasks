@@ -114,9 +114,7 @@
 			let passedSecondsInHours = Math.floor(passedTimeInMinutes / minutesNumberPerHour)
 			// кількість цілих хвилин (остача від ділення на 60)
 			// варіатн 1. 
-			// let passedSecondsInMinute = passedTimeInMinutes % minutesNumberPerHour
-			// Варіант 2. з віднятою 1 хвилиною і поврнутою в кінці оскільки рахуються від 0 до 59. Варіаньи працюють однаково
-			let passedSecondsInMinute = ((passedTimeInMinutes - 1) % minutesNumberPerHour) + 1
+			let passedSecondsInMinute = passedTimeInMinutes % minutesNumberPerHour
 			document.write(`<p>Від початку доби пройшло ${passedSecondsInHours} годин : ${passedSecondsInMinute} хвилин </p>`)
 		</script>
 	</div>
