@@ -87,7 +87,24 @@
 	<div class="container">
 		<h1>Задача №7(4).Вивести таблицю з 3 рядків і 7 стовпців.</h1>
 		<script>
+			//Задача 4. Вивести таблицю з 3 рядків і 7 стовпців
+			// Алгоритм
+			// вставляємо відкиваючий тег table
+			// розразовуємо за допомогою циклу for необзідну кілкьість рядків таблиці <tr>
+			// розразовуємо за допомогою циклу for необзідну кілкьість стовпчиків паблиці <td>
+			// вставляємо закриваючий тег table
 
+			document.write('<div class="container">')
+			document.write('<table>')
+			for (let tableRow = 0; tableRow < 3; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 1; tableColumn <= 7; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
+			document.write('</div>')
 
 		</script>
 	</div>
