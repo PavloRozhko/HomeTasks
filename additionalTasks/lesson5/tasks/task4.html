@@ -89,7 +89,26 @@
 			випадковими числами (1-100). Кількість випадкових чисел
 			вводиться користувачем.</h1>
 		<script>
-
+			// Алгоритм
+			// userRandomNumber - випадкові числа введені користувачем
+			// userRandomNumberAmount - кількість випадкових чисел які ввів користувач
+			// вивобимо відкриваючий тег <ul>
+			// вводимо випадквое число
+			// перевіряємо чи введена інформація користувачем це число
+			// якщо так, то userRandomNumberAmount збільшеємо на одиниці
+			// виводимо на екран тег <li> із введеним числом
+			// якщо ні, то ставимо директиву continue
+			// вивобимо закриваючий тег </ul>
+			// let userRandomNumberAmount = 0
+			document.write('<ul>')
+			for (userRandomNumberAmount = 0; userRandomNumberAmount < 100; userRandomNumberAmount++) {
+				let userRandomNumber = parseInt(prompt("Введіть число"))
+				if (!isNaN(userRandomNumber))
+					document.write(`<li>${userRandomNumber}</li>`)
+				else
+					continue
+			}
+			document.write('</ul>')
 		</script>
 	</div>
 </body>
