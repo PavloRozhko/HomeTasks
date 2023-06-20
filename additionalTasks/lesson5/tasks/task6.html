@@ -87,6 +87,21 @@
 	<div class="container">
 		<h1>Задача №6(3). Вивести таблицю з одним рядком і 7 стовпцями.</h1>
 		<script>
+			// Алгоритм
+			// вставляємо відкиваючий тег table
+			// розразовуємо за допомогою циклу for необзідну кілкьість рядків таблиці <tr>
+			// розразовуємо за допомогою циклу for необзідну кілкьість стовпчиків паблиці <td>
+			// вставляємо закриваючий тег table
+
+			document.write('<table>')
+			for (let tableRow = 0; tableRow < 1; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 1; tableColumn <= 7; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
 
 		</script>
 	</div>
