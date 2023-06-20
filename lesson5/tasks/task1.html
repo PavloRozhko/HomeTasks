@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>First task (Lesson 3)</title>
+	<title>First task (Lesson 5)</title>
 	<style>
 		*,
 		*::before,
@@ -59,6 +59,13 @@
 			font-size: 20px;
 		}
 
+		table,
+		tr,
+		td {
+			border: 1px solid #fff;
+			border-collapse: collapse;
+		}
+
 		.container {
 			max-width: 1100px;
 			margin: 0 auto;
@@ -69,28 +76,72 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1.З клавіатури вводяться імена двох дітей та кількість у них цукерок. Вивести не екран ім’я тієї дитини,
-			у якої кількість
-			цукерок є більшою, або вивести, що кількість однакова.</h1>
+		<h1>Задача №1(6). Вивести 3 таблиці (по 3 рядки і 3 стовпці у кожній).</h1>
 		<script>
-			//Крок 0. Позначення величин
-			// Ім'я першої та дургої дитини firstChildName, secondChildName
-			// Кількість цукерок у кожної дитини firstChildSweetsQuantity, secondChildSweetsQuantity
+			// Зразок таблиці
+			// 1 2 3	10 11 12	19 20 21
+			// 4 5 6	13 14 15	22 23 24
+			// 7 8 9	16 17 18	25 26 27
 
-			//1. Введення величин
-			let firstChildName = prompt("Ввеідіть ім'я першої дитини")
-			let firstChildSweetsQuantity = parseInt(prompt("Введіть кількість цукерок першї дитини"))
-
-			let secondChildName = prompt("Ввеідіть ім'я першої дитини")
-			let secondChildSweetsQuantity = parseInt(prompt("Введіть кількість цукерок першї дитини"))
-
-			//3. Розв'язок заадачі 
-			if (firstChildSweetsQuantity > secondChildSweetsQuantity)
-				document.write(`У ${firstChildName} цукерок більше!`)
-			else if (firstChildSweetsQuantity < secondChildSweetsQuantity)
-				document.write(`У ${secondChildName} цукерок більше!`)
-			else
-				document.write(`У ${firstChildName} та ${secondChildName} кількість цукерок однакова!`)
+			document.write('<div class="container">')
+			document.write('<table style="display: inline-block; margin:10px;">')
+			for (let tableRow = 0; tableRow < 1; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 1; tableColumn <= 3; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 4; tableColumn <= 6; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 7; tableColumn <= 9; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
+			document.write('<table style="display: inline-block;margin:10px;">')
+			for (let tableRow = 0; tableRow < 1; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 10; tableColumn <= 12; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 13; tableColumn <= 15; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 16; tableColumn <= 18; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
+			document.write('<table style="display: inline-block;margin:10px;">')
+			for (let tableRow = 0; tableRow < 1; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 19; tableColumn <= 21; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 22; tableColumn <= 24; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 25; tableColumn <= 27; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
+			document.write('</div>')
 		</script>
 	</div>
 </body>
