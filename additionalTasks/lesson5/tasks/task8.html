@@ -87,6 +87,35 @@
 	<div class="container">
 		<h1>Задача №8(5).Вивести таблицю.</h1>
 		<script>
+			//Задача 5. Вивести таблицю
+			// 123
+			// 456
+			// 789
+			// Алгоритм
+			// вставляємо відкиваючий тег table
+			// розразовуємо за допомогою циклу for необзідну кілкьість рядків таблиці <tr>
+			// розразовуємо за допомогою циклу for необзідну кілкьість стовпчиків паблиці <td>
+			// вставляємо закриваючий тег table
+
+			document.write('<table>')
+			for (let tableRow = 0; tableRow < 1; tableRow++) {
+				document.write('<tr>')
+				for (let tableColumn = 1; tableColumn <= 3; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 4; tableColumn <= 6; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+				document.write('<tr>')
+				for (let tableColumn = 7; tableColumn <= 9; tableColumn++) {
+					document.write(`<td>${tableColumn}</td>`)
+				}
+				document.write('</tr>')
+			}
+			document.write('</table>')
 
 		</script>
 	</div>
