@@ -15,6 +15,11 @@
 			border: none;
 		}
 
+		button {
+			padding: 10px;
+			cursor: pointer;
+		}
+
 		a {
 			color: inherit;
 			text-decoration: none;
@@ -72,13 +77,24 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.button-wraper:not(:last-child) {
+			margin-bottom: 5px;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
 		<h1>Задача №3(0).Вивести на екран 8 кнопок з написом “Hello”.</h1>
 		<script>
-
+			// helloButton - вітальна кнопка
+			for (let helloButton = 0; helloButton < 8; helloButton++) {
+				document.write(`
+			<div class="button-wraper">
+				<button>Hello</button>
+			</div>
+			`)
+			}
 		</script>
 	</div>
 </body>
