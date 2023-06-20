@@ -12,7 +12,7 @@
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
-			border: none;
+			/* border: none; */
 		}
 
 		button {
@@ -87,7 +87,38 @@
 	<div class="container">
 		<h1>Задача №9(7). Вивести на екран N абзаців (N вводиться користувачем).</h1>
 		<script>
+			// Алгоритм
+			// Вводимо кількість параграфів, яку хочемо вивести на екран - userParagraphsNumber
+			// оголошуємо змінну з пустим рядком для присвоєння результату - textResult
+			// Повторюємо цикл title поки він менший або дорівеює userParagraphsNumber
+			//       присвоюємо змінній textResult - рядок <h2>Заголовок ${title}</h2>
+			//       оголошення змінної paragraphs для підрахунку параграфів
+			//           Поки змінна paragraphs менша змінної title
+			//           збільшуємо paragraphs на 1
+			//           присвоюємо змінній textResult - рядок <p>Розділ ${title}, параграф ${paragraphs}</p>
+			//       додаємо умову продорвження if
+			//            якщо змінна userParagraphsNumber не = title
+			//               то присвоюємо textResult рядок <hr>
+			//            інакше виводимо на екран textResult
 
+			let userParagraphsNumber = parseInt(prompt('Enter number of paragraphs'))
+
+			let textResult = ''
+
+			for (let title = 1; title <= userParagraphsNumber; title++) {
+				textResult += (`<h2>Заголовок ${title}</h2>`)
+
+				let paragraphs = 0
+				while (paragraphs < title) {
+					paragraphs++
+					textResult += (`<p>Розділ ${title}, параграф ${paragraphs}</p>`)
+				}
+
+				if (userParagraphsNumber !== title)
+					textResult += ('<hr>')
+				else
+					document.write(`${textResult}`)
+			}
 
 		</script>
 	</div>
