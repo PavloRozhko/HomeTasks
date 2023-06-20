@@ -69,10 +69,32 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №4(12). Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К
+		<h1>Задача №5(13). Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К
 			снарядів користувач намагається потопити корабель.</h1>
 		<script>
+			// Ввести значення для розміру поля N*M
+			// Розсташувати випадковим чином на полі корабель
+			// ввести кількість спроб (снарядів) для потоплення корабля
+			//   повторення виконується поки кількість снарядів більша за і
+			//     якщо shipPosition === shotAttempt цикл переривається
 
+			const rowQuantity = parseInt(prompt('Кількість рядків'))
+			const columnQuantity = parseInt(prompt('Кількість стовбчиків'))
+			const filedSize = rowQuantity * columnQuantity
+			if (filedSize !== 0) {
+				const shipPosition = Math.floor(Math.random() * filedSize - 1 + 1) + 1
+				let shotsQuantity = parseInt(prompt('введіть кількість спроб'))
+				for (let i = 1; i <= shotsQuantity; i++) {
+					alert(`Спроба № ${i}`)
+					let shotAttempt = parseInt(prompt('Введіть номер поля для пострілу'))
+					if (shotAttempt === shipPosition) {
+						alert('Ви перемогли')
+						break
+					} else if (shotAttempt === shotsQuantity)
+						alert(`you lose. ship position was ${shipPosition}`)
+				}
+			} else
+				alert('try one more time')
 		</script>
 	</div>
 </body>
