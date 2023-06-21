@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Fifth task (Lesson 5)</title>
+	<title>5th task (Lesson 5)</title>
 	<style>
 		*,
 		*::before,
@@ -12,7 +12,12 @@
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
-			border: none;
+			/* border: none; */
+		}
+
+		button {
+			padding: 10px;
+			cursor: pointer;
 		}
 
 		a {
@@ -59,42 +64,53 @@
 			font-size: 20px;
 		}
 
+		table,
+		tr,
+		td {
+			border: 1px solid #fff;
+			border-collapse: collapse;
+		}
+
 		.container {
 			max-width: 1100px;
 			margin: 0 auto;
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.button-wraper:not(:last-child) {
+			margin-bottom: 5px;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №5(13). Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К
-			снарядів користувач намагається потопити корабель.</h1>
+		<h1>Задача №14(16). Користувач поступово вводить прибуток магазину за
+			кожен день протягом N тижнів. Знайти загальну величину прибутку та
+			вивести величину прибутку протягом кожного окремого тижня.</h1>
 		<script>
-			// Ввести значення для розміру поля N*M
-			// Розсташувати випадковим чином на полі корабель
-			// ввести кількість спроб (снарядів) для потоплення корабля
-			//   повторення виконується поки кількість снарядів більша за і
-			//     якщо shipPosition === shotAttempt цикл переривається
-
-			const rowQuantity = parseInt(prompt('Кількість рядків'))
-			const columnQuantity = parseInt(prompt('Кількість стовбчиків'))
-			const filedSize = rowQuantity * columnQuantity
-			if (filedSize !== 0) {
-				const shipPosition = Math.floor(Math.random() * filedSize - 1 + 1) + 1
-				let shotsQuantity = parseInt(prompt('введіть кількість спроб'))
-				for (let i = 1; i <= shotsQuantity; i++) {
-					alert(`Спроба № ${i}`)
-					let shotAttempt = parseInt(prompt('Введіть номер поля для пострілу'))
-					if (shotAttempt === shipPosition) {
-						alert('Ви перемогли')
-						break
-					} else if (shotAttempt === shotsQuantity)
-						alert(`you lose. ship position was ${shipPosition}`)
+			// Оголошення змінної для сукупного доходу магазину - totalShopIncome
+			// Вввести кількість тижнів для розрахунку
+			//    цикл тиває поки лічильник менше за кількість тижнів
+			//        оголошуємо змінну для доходу за тиждень
+			//        цикл триває від 1 до 7 (кількість днів у тижні)
+			//           вводимо суму доходу за день - incomePerDay
+			//           присвоюємо значення incomePerDay в змінну incomePerWeek
+			//         вивожимо на екран incomePerWeek
+			//         присвоюємо значення incomePerWeek в totalShopIncome
+			// виводимо totalShopIncome
+			let totalShopIncome = 0
+			let weeksNumber = parseInt(prompt('Enter number of weeks'))
+			for (let week = 1; week <= weeksNumber; week++) {
+				let incomePerWeek = 0
+				for (let day = 1; day <= 7; day++) {
+					let incomePerDay = parseFloat(prompt(`Enter income for ${day} day`))
+					incomePerWeek += incomePerDay
 				}
-			} else
-				alert('try one more time')
+				document.write(`<p>Income for ${week} week = ${incomePerWeek}</p>`)
+				totalShopIncome += incomePerWeek
+			}
+			document.write(`<p>Total shop income = ${totalShopIncome}</p>`)
 		</script>
 	</div>
 </body>
