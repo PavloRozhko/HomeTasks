@@ -71,15 +71,43 @@
 	<div class="container">
 		<h1>Задача №7. З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься.</h1>
 		<script>
+			// У switch значення не мають йти по порядку. Краще перерахувати всі випадки, для яких результат є однаковим
 			//Крок 0. Позначення величин
 			// номер місяця - monthNumber
 			//1. Введення величин
+			// Старий код
+			// let monthNumber = parseInt(prompt('Введіть номер місяця (від 1 до 12)'))
+			// let result
+			// //2. Розв'язок заадачі
+			// switch (monthNumber) {
+			// 	case 1:
+			// 	case 2: result = 'Зима'
+			// 		break;
+			// 	case 3:
+			// 	case 4:
+			// 	case 5: result = 'Весна'
+			// 		break;
+			// 	case 6:
+			// 	case 7:
+			// 	case 8: result = 'Літо'
+			// 		break;
+			// 	case 9:
+			// 	case 10:
+			// 	case 11: result = 'Осінь'
+			// 		break;
+			// 	case 12: result = 'Зима'
+			// 		break;
+			// 	default: result = 'Введено невірні або некоректні дані'
+			// 		break;
+			// }
+			// alert(result)
+			//---------------------------------------
 			let monthNumber = parseInt(prompt('Введіть номер місяця (від 1 до 12)'))
 			let result
-			//2. Розв'язок заадачі 
 			switch (monthNumber) {
 				case 1:
-				case 2: result = 'Зима'
+				case 2:
+				case 12: result = 'Зима'
 					break;
 				case 3:
 				case 4:
@@ -92,8 +120,6 @@
 				case 9:
 				case 10:
 				case 11: result = 'Осінь'
-					break;
-				case 12: result = 'Зима'
 					break;
 				default: result = 'Введено невірні або некоректні дані'
 					break;
