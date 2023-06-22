@@ -73,6 +73,8 @@
 			Якщо грошей не вистачає, то відмовляємо у покупці, інакше, якщо
 			ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.</h1>
 		<script>
+			// Завдання 2. Ок. Але краще проводити обчислення коли у цьому дійсно є потреба. Тобто, ви обчислюєте balance завжди (перед перевіркою). Але існує ймовірність, що у користувача буде недостатньо коштів і тоді це обчислення буде марним. Краще його проводити у тому випадку, коли ви впевнені, що у користувача жійсно вистачає коштів. 
+
 			//Крок 0. Позначення величин
 			// Ціна товару - goodsPrice
 			// Кількість грошей - moneyAmoun
@@ -80,20 +82,35 @@
 			// Ріщниця ціни товару у суми гроешй - balance
 
 			//1. Введення величин
+			// // ! Старий код
+			// const lotteryTicketPrice = 4
+
+			// let goodsPrice = parseFloat(prompt("Введіть ціну на товра", "0.00"))
+			// let moneyAmoun = parseFloat(prompt("Введіть сумму грошей", "0.00"))
+
+			// let balance = moneyAmoun - goodsPrice
+
+			// //3. Розв'язок заадачі 
+			// if (moneyAmoun >= goodsPrice) {
+			// 	if (balance >= lotteryTicketPrice)
+			// 		confirm("Бажаєте придбати лотетрейний квиток?")
+			// 	document.write("Дякуємо за покупку!")
+			// } else
+			// 	alert(`Вибачте не вистачає коштві: ${balance}`)
+			//-------------------------------------- 
+			// змінений код з урахуванням рекомендацій ментора
+			// прибрав змінну balamce і провів обчислення у другому операторі if
 			const lotteryTicketPrice = 4
 
 			let goodsPrice = parseFloat(prompt("Введіть ціну на товра", "0.00"))
 			let moneyAmoun = parseFloat(prompt("Введіть сумму грошей", "0.00"))
 
-			let balance = moneyAmoun - goodsPrice
-
-			//3. Розв'язок заадачі 
 			if (moneyAmoun >= goodsPrice) {
-				if (balance >= lotteryTicketPrice)
+				if (moneyAmoun - goodsPrice >= lotteryTicketPrice)
 					confirm("Бажаєте придбати лотетрейний квиток?")
-				document.write("Дякуємо за покупку!")
+				alert("Дякуємо за покупку!")
 			} else
-				alert(`Вибачте не вистачає коштві: ${balance}`)
+				alert('Вибачте, для операції недостатньо коштів.')
 		</script>
 	</div>
 </body>
