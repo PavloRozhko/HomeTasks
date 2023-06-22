@@ -72,27 +72,37 @@
 		<h1>Задача №4. З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем,
 			студентом, працівником, пенсіонером).</h1>
 		<script>
+			// Рекомендація ментора - спробуйте спростити щоб не використовувати надлишкові умови.
 			//Крок 0. Позначення величин
 			// вік людини - humanAge
 			// вік дошкільнят - preschoolersAge, вік школярів - schoolersAge 
 			// вік студентів - studentAge , вік працівників - workerAge, вік пенсіонерів - retiremetAge
 			//1. Введення величин
+			// Первісний код
+			// let humanAge = parseInt(prompt('Введіть ваш вік'))
+
+			// const preschoolerAge = 5
+			// const schoolerAge = 17
+			// const studentAge = 23
+			// const workerAge = 59
+			// const retiremetAge = 60
+
+			// //2. Розв'язок заадачі 
+			// if (humanAge <= preschoolerAge) alert('Ви дошкільня')
+			// else if (humanAge > preschoolerAge && humanAge <= schoolerAge) alert('ви школяр')
+			// else if (humanAge > schoolerAge && humanAge <= studentAge) alert('ви студент')
+			// else if (humanAge > studentAge && humanAge <= workerAge) alert('ви працівник')
+			// else if (humanAge >= retiremetAge) alert('ви пенсіонер')
+			// else alert('Введено невірні дані')
+			// -----------------------------------------------
+			// код після врахування рекомендацій
 			let humanAge = parseInt(prompt('Введіть ваш вік'))
-
-			const preschoolerAge = 5
-			const schoolerAge = 17
-			const studentAge = 23
-			const workerAge = 59
-			const retiremetAge = 60
-
 			//2. Розв'язок заадачі 
-			if (humanAge <= preschoolerAge) alert('Ви дошкільня')
-			else if (humanAge > preschoolerAge && humanAge <= schoolerAge) alert('ви школяр')
-			else if (humanAge > schoolerAge && humanAge <= studentAge) alert('ви студент')
-			else if (humanAge > studentAge && humanAge <= workerAge) alert('ви працівник')
-			else if (humanAge >= retiremetAge) alert('ви пенсіонер')
-			else alert('Введено невірні дані')
-
+			if (humanAge <= 7) alert('Ви дошкільня')
+			else if (humanAge <= 17) alert('ви школяр')
+			else if (humanAge <= 23) alert('ви студент')
+			else if (humanAge <= 59) alert('ви працівник')
+			else alert('ви пенсіонер')
 		</script>
 	</div>
 </body>
