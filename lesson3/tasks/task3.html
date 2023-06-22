@@ -71,24 +71,46 @@
 	<div class="container">
 		<h1>Задача № 3. Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.</h1>
 		<script>
+			// Рекомендація ментора. Якщо користувач не вгадав з першої спроби, то ви створює дроугу змінну для другої српоби. Це можна не робити, а повторно використати першу змінну. Також, умова if(randomNumber !== firstAttemot) є надлишковою, тому що кщо програма переходить в else, то точно не дорівнює. 
+
 			//Крок 0. Позначення величин
 			// випадкове число від 1 до 5 - randomNumber
 			// перша спроба - firstAttempt, друга спроба - secondAttempt
 
 			//1. Введення величин
-			let minNumber = 1, maxNumber = 5
-			let randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
+			// Первісне рішення
+			// let minNumber = 1, maxNumber = 5
+			// let randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
 
-			let firstAttempt, secondAttempt //можна оголосити одну змінну і використати її повторно при перевірці
+			// let firstAttempt, secondAttempt //можна оголосити одну змінну і використати її повторно при перевірці
 
-			firstAttempt = parseInt(prompt('Вгадайте випадкове чило від 1 до 5 (перша спроба)'))
+			// firstAttempt = parseInt(prompt('Вгадайте випадкове чило від 1 до 5 (перша спроба)'))
 
-			//3. Розв'язок заадачі 
-			if (randomNumber === firstAttempt) {
+			// //3. Розв'язок заадачі
+			// if (randomNumber === firstAttempt) {
+			// 	alert('Число вгадане з першого разу')
+			// } else if (randomNumber !== firstAttempt) {
+			// 	secondAttempt = parseInt(prompt('Спробуйте ще раз'))
+			// 	if (randomNumber === secondAttempt) {
+			// 		alert('Ви вгадали число з другої спроби')
+			// 	}
+			// 	else {
+			// 		alert('Ви програли!')
+			// 	}
+			// }
+			//--------------------------------------------
+			// Рішення з урахуванням рекомендацій ментора
+			const minNumber = 1, maxNumber = 5
+			const randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber)
+
+			let userAttempt = parseInt(prompt('Вгадайте випадкове чило від 1 до 5 (перша спроба)'))
+
+			//3. Розв'язок заадачі
+			if (randomNumber === userAttempt)
 				alert('Число вгадане з першого разу')
-			} else if (randomNumber !== firstAttempt) {
-				secondAttempt = parseInt(prompt('Спробуйте ще раз'))
-				if (randomNumber === secondAttempt) {
+			else {
+				userAttempt = parseInt(prompt('Спробуйте ще раз'))
+				if (randomNumber === userAttempt) {
 					alert('Ви вгадали число з другої спроби')
 				}
 				else {
