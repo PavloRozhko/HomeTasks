@@ -87,64 +87,76 @@
 			// 1 2 3	10 11 12	19 20 21
 			// 4 5 6	13 14 15	22 23 24
 			// 7 8 9	16 17 18	25 26 27
-			document.write('<table>')
-			for (let tableRow = 0; tableRow < 1; tableRow++) {
-				document.write('<tr>')
-				for (let tableColumn = 1; tableColumn <= 3; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
+			// document.write('<table>')
+			// for (let tableRow = 0; tableRow < 1; tableRow++) {
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 1; tableColumn <= 3; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 4; tableColumn <= 6; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 7; tableColumn <= 9; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// }
+			// document.write('</table>')
+			// document.write('<table>')
+			// for (let tableRow = 0; tableRow < 1; tableRow++) {
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 10; tableColumn <= 12; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 13; tableColumn <= 15; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 16; tableColumn <= 18; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// }
+			// document.write('</table>')
+			// document.write('<table>')
+			// for (let tableRow = 0; tableRow < 1; tableRow++) {
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 19; tableColumn <= 21; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 22; tableColumn <= 24; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// 	document.write('<tr>')
+			// 	for (let tableColumn = 25; tableColumn <= 27; tableColumn++) {
+			// 		document.write(`<td>${tableColumn}</td>`)
+			// 	}
+			// 	document.write('</tr>')
+			// }
+			// document.write('</table>')
+			let cellNum = 1
+			for (let table = 0; table < 3; table++) {
+				document.write('<table>')
+				for (let tableRow = 0; tableRow < 3; tableRow++) {
+					document.write('<tr>')
+					for (let tableCell = 1; tableCell <= 3; tableCell++) {
+						document.write(`<td>${cellNum}</td>`)
+						cellNum++
+					}
+					document.write('</tr>')
 				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 4; tableColumn <= 6; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 7; tableColumn <= 9; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
+				document.write('</table>')
 			}
-			document.write('</table>')
-			document.write('<table>')
-			for (let tableRow = 0; tableRow < 1; tableRow++) {
-				document.write('<tr>')
-				for (let tableColumn = 10; tableColumn <= 12; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 13; tableColumn <= 15; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 16; tableColumn <= 18; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-			}
-			document.write('</table>')
-			document.write('<table>')
-			for (let tableRow = 0; tableRow < 1; tableRow++) {
-				document.write('<tr>')
-				for (let tableColumn = 19; tableColumn <= 21; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 22; tableColumn <= 24; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-				document.write('<tr>')
-				for (let tableColumn = 25; tableColumn <= 27; tableColumn++) {
-					document.write(`<td>${tableColumn}</td>`)
-				}
-				document.write('</tr>')
-			}
-			document.write('</table>')
-
 		</script>
 	</div>
 </body>
