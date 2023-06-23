@@ -80,22 +80,37 @@
 			//       робимо перевірку на непарне число та додаємо його до значення змінної  oddNumbersSum
 			//       додаємо до oddNumbersCounter 1
 			// виводимо суму 5 непарних чиел на аекран
+			// let firstNumber = parseInt(prompt('Enter first number'))
+			// let secondNumber = parseInt(prompt('Enter second number'))
+			// if (firstNumber < secondNumber) {
+			// 	let oddNumbersCounter = 0
+			// 	let oddNumbersSum = 0
+			// 	for (let numberCounter = firstNumber; numberCounter <= secondNumber; numberCounter++) {
+			// 		if (oddNumbersCounter < 5) { // за ткої умови цикл продовжує робити перевірку поки numberCounter не буде <= secondNumber
+			// 			if ((numberCounter % 2) === 1) {
+			// 				oddNumbersSum += numberCounter
+			// 				oddNumbersCounter++
+			// 			}
+			// 		}
+			// 	}
+			// 	alert(oddNumbersSum)
+			// } else
+			// 	alert('try one more time')
 			let firstNumber = parseInt(prompt('Enter first number'))
 			let secondNumber = parseInt(prompt('Enter second number'))
 			if (firstNumber < secondNumber) {
 				let oddNumbersCounter = 0
 				let oddNumbersSum = 0
-				for (let numberCounter = firstNumber; numberCounter <= secondNumber; numberCounter++) {
-					if (oddNumbersCounter < 5) {
-						if ((numberCounter % 2) === 1) {
-							oddNumbersSum += numberCounter
-							oddNumbersCounter++
-						}
+				for (let numberCounter = firstNumber; numberCounter <= secondNumber && oddNumbersCounter < 5; numberCounter++) {
+					if ((numberCounter % 2) === 1) {
+						oddNumbersSum += numberCounter
+						oddNumbersCounter++
 					}
 				}
 				alert(oddNumbersSum)
 			} else
 				alert('try one more time')
+
 		</script>
 	</div>
 </body>
