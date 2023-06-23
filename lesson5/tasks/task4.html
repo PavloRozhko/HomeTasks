@@ -87,16 +87,92 @@
 			//          порівнюємо отриманий рядок line із виграшними значеннями
 			//          виводимо повідомлення про винагороду
 			//          пропонуємо зіграти ще раз
-			let message = confirm('Зіграємо в рулетку?')
+			// let message = confirm('Зіграємо на ігровому автоматі?')
+			// let award = 0
+			// if (message === true) {
+			// 	do {
+			// 		let min = 1
+			// 		let max = 4
+			// 		let firstPisiton = '', secondPosition = '', thirdPosition = ''
+			// 		for (let firstLine = 0; firstLine < 1; firstLine++) {
+			// 			let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+			// 			let result
+			// 			switch (randomNumber) {
+			// 				case 1: result = '🍇'
+			// 					break;
+			// 				case 2: result = '🍉'
+			// 					break
+			// 				case 3: result = '🍊'
+			// 					break
+			// 				case 4: result = '🍋'
+			// 					break
+			// 			}
+			// 			firstPisiton += result
+			// 		}
+			// 		for (let secondLine = 0; secondLine < 1; secondLine++) {
+			// 			let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+			// 			let result
+			// 			switch (randomNumber) {
+			// 				case 1: result = '🍇'
+			// 					break;
+			// 				case 2: result = '🍉'
+			// 					break
+			// 				case 3: result = '🍊'
+			// 					break
+			// 				case 4: result = '🍋'
+			// 					break
+			// 			}
+			// 			secondPosition += result
+			// 		}
+			// 		for (let secondLine = 0; secondLine < 1; secondLine++) {
+			// 			let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+			// 			let result
+			// 			switch (randomNumber) {
+			// 				case 1: result = '🍇'
+			// 					break;
+			// 				case 2: result = '🍉'
+			// 					break
+			// 				case 3: result = '🍊'
+			// 					break
+			// 				case 4: result = '🍋'
+			// 					break
+			// 			}
+			// 			thirdPosition += result
+			// 		}
+			// 		let line = firstPisiton + secondPosition + thirdPosition
+			// 		alert(line)
+			// 		if (line === '🍇🍇🍇') {
+			// 			alert('Нагорода складає 100 грн')
+			// 			award += 100
+			// 		} else if (line === '🍉🍉🍉') {
+			// 			alert('Нагорода складає 200 грн')
+			// 			award += 200
+			// 		} else if (line === '🍊🍊🍊') {
+			// 			alert('Нагорода складає 500 грн')
+			// 			award += 500
+			// 		} else if (line === '🍋🍋🍋') {
+			// 			alert('Нагорода складає 1000 грн')
+			// 			award += 1000
+			// 		} else {
+			// 			alert('Нагороди немає')
+			// 			award -= 50
+			// 		}
+			// 		message = alert(`Ваш баланс = ${award}`)
+			// 		message = confirm('продовжуємо грати?')
+			// 	} while (message === true);
+			// }
+			// alert(`Сума виграшу складає ${award}`)
+			// updated code
+			let message = confirm('Зіграємо на ігровому автоматі?')
 			let award = 0
 			if (message === true) {
 				do {
 					let min = 1
 					let max = 4
-					let firstPisiton = '', secondPosition = '', thirdPosition = ''
-					for (let firstLine = 0; firstLine < 1; firstLine++) {
-						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
+					let line = ''
+					for (let linePosition = 0; linePosition < 3; linePosition++) {
 						let result
+						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
 						switch (randomNumber) {
 							case 1: result = '🍇'
 								break;
@@ -107,39 +183,8 @@
 							case 4: result = '🍋'
 								break
 						}
-						firstPisiton += result
+						line += result
 					}
-					for (let secondLine = 0; secondLine < 1; secondLine++) {
-						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
-						let result
-						switch (randomNumber) {
-							case 1: result = '🍇'
-								break;
-							case 2: result = '🍉'
-								break
-							case 3: result = '🍊'
-								break
-							case 4: result = '🍋'
-								break
-						}
-						secondPosition += result
-					}
-					for (let secondLine = 0; secondLine < 1; secondLine++) {
-						let randomNumber = Math.floor(Math.random() * (max - min + 1) + min)
-						let result
-						switch (randomNumber) {
-							case 1: result = '🍇'
-								break;
-							case 2: result = '🍉'
-								break
-							case 3: result = '🍊'
-								break
-							case 4: result = '🍋'
-								break
-						}
-						thirdPosition += result
-					}
-					let line = firstPisiton + secondPosition + thirdPosition
 					alert(line)
 					if (line === '🍇🍇🍇') {
 						alert('Нагорода складає 100 грн')
@@ -162,7 +207,6 @@
 				} while (message === true);
 			}
 			alert(`Сума виграшу складає ${award}`)
-
 		</script>
 	</div>
 </body>
