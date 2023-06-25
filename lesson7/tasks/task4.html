@@ -81,9 +81,37 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №4. </h1>
+		<h1>Задача №4. Створити окремі функції, які для 4 чисел знаходять:суму, добуток, середнє арифметичне та мінімальне
+			значення.</h1>
 		<script>
-
+			// 	1) суму;
+			function getSum(a, b) {
+				return a + b
+			}
+			// 	2) добуток;
+			function getProduct(a, b) {
+				return a * b
+			}
+			// 	3) середнє арифметичне;
+			function getAverageNumber(a, b) {
+				return (a + b) / 2
+			}
+			// 	4) мінімальне значення.
+			function getMinNumber(a, b) {
+				let minNum
+				if (a < b)
+					minNum = a
+				else
+					minNum = b
+				return minNum
+			}
+			let firstNumber = parseInt(prompt('Enter first num'))
+			let secondNumber = parseInt(prompt('Enter second num'))
+			document.write(`<p>The first number is ${firstNumber}. The second number is ${secondNumber}.</p>`)
+			document.write(`<p>The sum of the numbers is ${getSum(firstNumber, secondNumber)}</p>`)
+			document.write(`<p>The product of the numbers is ${getProduct(firstNumber, secondNumber)}</p>`)
+			document.write(`<p>The arithmetic mean of the numbers is ${getAverageNumber(firstNumber, secondNumber)}.</p>`)
+			document.write(`<p>The minimum number of the two numbers is ${getMinNumber(firstNumber, secondNumber)}</p>.`)
 		</script>
 	</div>
 </body>
