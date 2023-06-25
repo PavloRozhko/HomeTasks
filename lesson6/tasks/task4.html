@@ -85,7 +85,18 @@
 			варіантів. В кінці
 			вивести кількість спроб користувача.</h1>
 		<script>
+			const firstRandNum = 1 + Math.floor(Math.random() * 10)
+			const secondRandNum = 1 + Math.floor(Math.random() * 10)
 
+			let attemptsNumber = 0
+			let userFirsNumber = 0
+			let userSecondNumber = 0
+			do {
+				userFirsNumber = parseInt(prompt('Enter your first number '))
+				userSecondNumber = parseInt(prompt('Enter your second number '))
+				attemptsNumber++
+			} while (userFirsNumber !== firstRandNum || userSecondNumber !== secondRandNum);
+			document.write(`Numbers of attempts are - ${attemptsNumber}. Random numbers were ${firstRandNum} and ${secondRandNum}`)
 		</script>
 	</div>
 </body>
