@@ -77,13 +77,36 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		img {
+			max-width: 100%;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №7. </h1>
+		<h1>Задача №8. Створити функцію, яка виводить банер (у функцію
+			передаються: зображення, заголовок та посилання, куди переходимо при
+			кліку на зображення (тег img повинен знаходитись у середині тега a)).
+		</h1>
 		<script>
-
+			function showBanner() {
+				document.write(`${getLink()}`)
+				document.write(`${getTitle()}`)
+			}
+			function getImage() {
+				let image = `./img/task8/img.png`
+				return image
+			}
+			function getLink() {
+				let link = `<a target="_blank" href=https://youtu.be/SC4xMk98Pdc"><img src="${getImage()}"></a>`
+				return link
+			}
+			function getTitle() {
+				let title = '<h1>Click on the image to claim your prize!</h1>'
+				return title
+			}
+			showBanner()
 		</script>
 	</div>
 </body>
