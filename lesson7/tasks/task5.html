@@ -81,9 +81,29 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №5. </h1>
+		<h1>Задача №5.творити окремі функції, які переводять: сантиметри у дюйми; кілограми у фунти; кілометри у милі.</h1>
 		<script>
-
+			//1) Сантиметри у дюйми;
+			function getInches(centimeters) {
+				const centimetersInInch = 0.3937008
+				return centimeters * centimetersInInch
+			}
+			const centimeters = parseInt(prompt('enter number of centimeters'))
+			//2) Кілограми у фунти;
+			function getPounds(kilogram) {
+				const kilogramsInPound = 2.2046
+				return kilogram * kilogramsInPound
+			}
+			const kilograms = parseInt(prompt('enter number of kilograms'))
+			//3) Кілометри у милі.
+			function getMiles(kilometer) {
+				const kilometersInMile = 0.62137
+				return kilometer * kilometersInMile
+			}
+			const kilometers = parseInt(prompt('enter number of kilometers'))
+			document.write(`<p>${centimeters} centimeters are ${getInches(centimeters).toFixed(2)} inches.</p>`)
+			document.write(`<p>${kilograms} kilograms are ${getPounds(kilograms).toFixed(2)} pounds.</p>`)
+			document.write(`<p>${kilometers} kilometers are ${getMiles(kilometers).toFixed(2)} miles.</p>`)
 		</script>
 	</div>
 </body>
