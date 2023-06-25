@@ -88,7 +88,7 @@
 			let totalSum = 0
 			let productPrice = parseFloat(prompt('Enter product price'))
 			let paidAmount = 0
-			while (productPrice >= totalSum || paidAmount === false) {
+			while (productPrice !== totalSum && !isNaN(paidAmount)) {
 				paidAmount = parseFloat(prompt('enter the amount of money'))
 				totalSum += paidAmount
 			}
