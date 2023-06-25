@@ -85,7 +85,15 @@
 			користувачу повторно ввести
 			його.</h1>
 		<script>
-
+			const userCorrectPass = 78
+			let userPass = 0
+			do {
+				userPass = parseInt(prompt('Enter the password'))
+				if (userPass === userCorrectPass)
+					alert('Succeeded attempt')
+				else
+					alert('try one more time')
+			} while (userPass !== userCorrectPass);
 		</script>
 	</div>
 </body>
