@@ -81,9 +81,27 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №3. </h1>
+		<h1>Задача №3. Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.</h1>
 		<script>
-
+			function getWorkingDay(dayNumber) {
+				let result
+				switch (dayNumber) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5: result = 'робочий день'
+						break
+					case 6:
+					case 7: result = 'вихідний день'
+						break
+					default: result = 'у тижні відсутній такий номер дня'
+						break
+				}
+				return result
+			}
+			const dayNumber = parseInt(prompt('Введіть день тижня'))
+			alert(getWorkingDay(dayNumber))
 		</script>
 	</div>
 </body>
