@@ -81,9 +81,30 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №7. </h1>
+		<h1>Задача №9. Дано покази температур (довільна кількість). Розробити
+			функцію, яка дозволить підрахувати кількість від’ємних показів
+			температури.</h1>
 		<script>
-
+			function getNumberOfTemperatureMeasurements(num) {
+				num = parseInt(prompt('enter the number of measurements'))
+				return num
+			}
+			function getNumberOfNegativeTemperatureValues() {
+				let negativeTemperatureValuesCounter = 0
+				let measurementsNumber = getNumberOfTemperatureMeasurements()
+				for (let temperature = 0; temperature < measurementsNumber; temperature++) {
+					let temperatureValue = parseInt(prompt('enter the temperature value'))
+					if (isNaN(temperatureValue))
+						continue
+					else if (Math.sign(temperatureValue) === -1 || Math.sign(temperatureValue) === -0)
+						negativeTemperatureValuesCounter++
+				}
+				return negativeTemperatureValuesCounter
+			}
+			function showQuantityOfNegativeTemperatureValues() {
+				document.write(`The number of negative vales of temperature is(are) ${getNumberOfNegativeTemperatureValues()}.`)
+			}
+			showQuantityOfNegativeTemperatureValues()
 		</script>
 	</div>
 </body>
