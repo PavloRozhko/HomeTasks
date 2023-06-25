@@ -85,7 +85,22 @@
 			за допомогою
 			циклів суму, яку він одержить.</h1>
 		<script>
-
+			// ввести суму депозиту - userAmountBankDeposit
+			let userAmountBankDeposit = parseFloat(prompt('Enter amount of your bank deposit'))
+			const annualDepositPercentage = 0.2 // 20% річних
+			const incomeTax = 0.05 // 5% податок на дохід
+			const depositPeriodInYears = 20 // період депозиту
+			let amountOfAccruedInterest = 0 // сума отримних відсотків (загальний дохід) 
+			let amountOfAccruedInterestPerYear = 0 // сума отриманих відсотків за рік
+			let incomeTaxAmount = 0 // сума податку на дохід
+			for (let i = 1; i <= depositPeriodInYears; i++) {
+				amountOfAccruedInterestPerYear = userAmountBankDeposit * annualDepositPercentage // отримуємо суму відсотків за рік
+				incomeTaxAmount = amountOfAccruedInterestPerYear * incomeTax // отримуємо суму податку на дохід
+				amountOfAccruedInterestPerYear -= incomeTaxAmount // віднімаємо від суми відсотків суму податку 
+				userAmountBankDeposit += amountOfAccruedInterestPerYear // додаємо до тіла депозиту суму отриманих відостків 
+				amountOfAccruedInterest += amountOfAccruedInterestPerYear // додаємо суму отриманих відсотків до сукупного доходу
+			}
+			document.write(`<p>The amount of accrued interest will be ${amountOfAccruedInterest.toFixed(2)} including income tax.</p>`)
 		</script>
 	</div>
 </body>
