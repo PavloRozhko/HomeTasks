@@ -84,6 +84,42 @@
 		<h1>Задача №4. Створити окремі функції, які для 4 чисел знаходять:суму, добуток, середнє арифметичне та мінімальне
 			значення.</h1>
 		<script>
+			// 	1) функція яка знаходить суму 4 чисел;
+			function getSum(a, b, c, d) {
+				return a + b + c + d
+			}
+			// 	2) функція яка знаходить добуток 4 чисел;
+			function getProduct(a, b, c, d) {
+				return a * b * c * d
+			}
+			// 	3) функція яка знахоить середнє арифметичне 4 чисел;
+			function getAverageNumber(a, b, c, d) {
+				return (a + b + c + d) / 4
+			}
+			// 	4) функція яка знаходить мінімальне значення з 4 чисел 
+			function getMinNumber(a, b, c, d) {
+				let minNum = a
+				if (b < a) minNum = b
+				if (c < b) minNum = c
+				if (d < c) minNum = d
+				return minNum
+			}
+
+			const firstNumber = 1 + Math.floor(Math.random() * 10)
+			const secondNumber = 1 + Math.floor(Math.random() * 10)
+			const thirdNumber = 1 + Math.floor(Math.random() * 10)
+			const fourthNumber = 1 + Math.floor(Math.random() * 10)
+
+			const sum = getSum(firstNumber, secondNumber, thirdNumber, fourthNumber)
+			const product = getProduct(firstNumber, secondNumber, thirdNumber, fourthNumber)
+			const average = getAverageNumber(firstNumber, secondNumber, thirdNumber, fourthNumber)
+			const minNum = getMinNumber(firstNumber, secondNumber, thirdNumber, fourthNumber)
+			document.write(`<p>The 4 random numbers are ${firstNumber}, ${secondNumber}, ${thirdNumber}, ${fourthNumber}.</p>`)
+			document.write(`<p>The sum of the 4 random numbers is ${sum}.</p>`)
+			document.write(`<p>The product of the 4 random numbers is ${product}.</p>`)
+			document.write(`<p>The arithmetic mean of the 4 random numbers is ${average}.</p>`)
+			document.write(`<p>The minimum number of the 4 random numbers is ${minNum}.</p>`)
+			/* old variant
 			// 	1) суму;
 			function getSum(a, b) {
 				return a + b
@@ -112,6 +148,7 @@
 			document.write(`<p>The product of the numbers is ${getProduct(firstNumber, secondNumber)}.</p>`)
 			document.write(`<p>The arithmetic mean of the numbers is ${getAverageNumber(firstNumber, secondNumber)}.</p>`)
 			document.write(`<p>The minimum number of the two numbers is ${getMinNumber(firstNumber, secondNumber)}.</p>`)
+			*/
 		</script>
 	</div>
 </body>
