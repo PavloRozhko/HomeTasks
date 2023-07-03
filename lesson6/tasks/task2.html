@@ -91,15 +91,14 @@
 			let numberOfBoxesOfApples = parseInt(prompt('enter the number of boxes of apples in the warehouse')) // кількість ящиків з яблуками на складі
 			let carsNumber = 0 // кількість автомобілів 
 			let numberOfBoxesToLoad = 0 // кількість ящиків на завантаження 
-			first: while (numberOfBoxesOfApples > 0) {
-				carsNumber++
-				numberOfBoxesToLoad = parseInt(prompt(`how many boxes to load in the ${carsNumber} car`))
+			while (numberOfBoxesOfApples > 0) {
+				numberOfBoxesToLoad = parseInt(prompt(`how many boxes to load in the ${carsNumber + 1} car`))
 				if (numberOfBoxesToLoad > numberOfBoxesOfApples) {
 					alert(`you don't have such number of boxes\nit's ramain ${numberOfBoxesOfApples}`)
-					carsNumber--
-					continue first
+					continue
 				}
 				numberOfBoxesOfApples -= numberOfBoxesToLoad
+				carsNumber++
 			}
 		</script>
 	</div>
