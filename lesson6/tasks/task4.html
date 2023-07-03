@@ -82,19 +82,46 @@
 <body>
 	<div class="container">
 		<h1>Задача №4. Комп’ютер загадує два випадкових числа від 1 до 10. Вгадати обидва числа шляхом введеня можливих
-			варіантів. В кінці
-			вивести кількість спроб користувача.</h1>
+			варіантів. В кінці вивести кількість спроб користувача.</h1>
 		<script>
 			const firstRandNum = 1 + Math.floor(Math.random() * 10)
 			const secondRandNum = 1 + Math.floor(Math.random() * 10)
+			/* first edition
+			// let attemptsNumber = 0
+			// let userFirsNumber = 0
+			// let userSecondNumber = 0
+			// do {
+			// 	userFirsNumber = parseInt(prompt('Enter your first number '))
+			// 	userSecondNumber = parseInt(prompt('Enter your second number '))
+			// 	attemptsNumber++
+			// } while (userFirsNumber !== firstRandNum || userSecondNumber !== secondRandNum);
+			// document.write(`Numbers of attempts are - ${attemptsNumber}. Random numbers were ${firstRandNum} and ${secondRandNum}`)
+			*/
 
 			let attemptsNumber = 0
 			let userFirsNumber = 0
 			let userSecondNumber = 0
 			do {
-				userFirsNumber = parseInt(prompt('Enter your first number '))
-				userSecondNumber = parseInt(prompt('Enter your second number '))
-				attemptsNumber++
+				let userAttempt = parseInt(prompt('Enter your number to guess first number'))
+				if (userAttempt === firstRandNum) {
+					alert('guessed first number')
+					attemptsNumber++
+					userFirsNumber = userAttempt
+					do {
+						userAttempt = parseInt(prompt('Enter your number to guess second number'))
+						if (userAttempt === secondRandNum) {
+							alert('guessed second number')
+							attemptsNumber++
+							userSecondNumber = userAttempt
+						} else {
+							alert('tried one more time')
+							attemptsNumber++
+						}
+					} while (userAttempt !== secondRandNum);
+				} else {
+					alert('tried one more time')
+					attemptsNumber++
+				}
 			} while (userFirsNumber !== firstRandNum || userSecondNumber !== secondRandNum);
 			document.write(`Numbers of attempts are - ${attemptsNumber}. Random numbers were ${firstRandNum} and ${secondRandNum}`)
 		</script>
