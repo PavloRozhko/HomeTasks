@@ -86,6 +86,21 @@
 			показів температури.
 			температури.</h1>
 		<script>
+			// changed solution according to the mentor's reccomendations 
+			function getAverageTemperature(...temperatures) {
+				let sum = 0
+				let tmpNumber = 0
+				for (let i = 0; i < temperatures.length; i++) {
+					if (temperatures[i] > 0) {
+						sum += temperatures[i]
+						tmpNumber++
+					}
+				}
+				return sum / tmpNumber
+			}
+			let result = getAverageTemperature(-2, 3, 5, -8, 4, -14, 21, 0, 9, 10, -15, -10, 1, 11, 13, 16, -20, 24, 11, 34, -30, -20)
+			console.log(Math.floor(result));
+			/*
 			function getNumberOfTemperatureMeasurements(num) {
 				num = parseInt(prompt('enter the number of measurements'))
 				return num
@@ -111,6 +126,7 @@
 				document.write(`The average temperature is ${getAveragePositiveTemperatureValues()} degree.`)
 			}
 			showAveragePositiveTemperatureValues()
+			*/
 		</script>
 	</div>
 </body>
