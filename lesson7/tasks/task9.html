@@ -85,6 +85,17 @@
 			функцію, яка дозволить підрахувати кількість від’ємних показів
 			температури.</h1>
 		<script>
+			// changed solution according to the mentor's reccomendations 
+			function getNumberOfNegativeTemperatureValues(...temperatures) {
+				let negativeTmpCounter = 0
+				for (let tmp = 0; tmp < temperatures.length; tmp++) {
+					if (temperatures[tmp] < 0) negativeTmpCounter++
+				}
+				return negativeTmpCounter
+			}
+			let result = getNumberOfNegativeTemperatureValues(-2, 3, 5, -8, 0, 9, 10, -15, -10, 16, -20, 24, 11, 34, -30, -20)
+			alert(result)
+			/* Old version
 			function getNumberOfTemperatureMeasurements(num) {
 				num = parseInt(prompt('enter the number of measurements'))
 				return num
@@ -105,6 +116,7 @@
 				document.write(`The number of negative vales of temperature is(are) ${getNumberOfNegativeTemperatureValues()}.`)
 			}
 			showQuantityOfNegativeTemperatureValues()
+			*/
 		</script>
 	</div>
 </body>
