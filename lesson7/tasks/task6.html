@@ -84,6 +84,24 @@
 		<h1>Задача №6. Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється
 			заданим фіксованим повідомленням).</h1>
 		<script>
+			// new variant of code according to the mentor's reccomendations
+			function createTable(rowNumber, columnNumber, message) {
+				document.write('<table>')
+				for (let rows = 0; rows < rowNumber; rows++) {
+					document.write('<tr>')
+					for (let columns = 0; columns < columnNumber; columns++) {
+						document.write(`<td>${message}</td>`)
+					}
+					document.write('</tr>')
+				}
+				document.write('</tr>')
+			}
+			let rowNumber = parseInt(prompt('Enter row number'))
+			let colNumber = parseInt(prompt('Enter col number'))
+			let textMessage = prompt('enter message')
+			createTable(rowNumber, colNumber, textMessage)
+
+			/* first variant of solution
 			function createTable(rowNumber, columnNumber, message) {
 				message = message ?? 'no entered text'
 				document.write('<table>')
@@ -103,12 +121,13 @@
 			function getColNumber(colNumber) {
 				colNumber = parseInt(prompt('Enter col number'))
 				return colNumber
-			}
+			} 
 			function getFixedText(message) {
 				message = prompt('Enter some text')
 				return message = message ?? ' text no enter ' // якщо в prompt натиснути ок, то стандартний текств не виводиться в таблицю
-			}
+			} // Ці функції не потрібні
 			createTable(getRowNumber(), getColNumber(), getFixedText())
+			*/
 		</script>
 	</div>
 </body>
