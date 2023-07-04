@@ -84,12 +84,28 @@
 	</style>
 </head>
 <body>
+
 	<div class="container">
 		<h1>Задача №8. Створити функцію, яка виводить банер (у функцію
 			передаються: зображення, заголовок та посилання, куди переходимо при
 			кліку на зображення (тег img повинен знаходитись у середині тега a)).
 		</h1>
 		<script>
+			// solution according to the mentor's reccomendations
+			function showBanner(img, linkPath, title) {
+				document.write(`
+				<a target="_blank" href="${linkPath}">
+					<img src="${img}" alt="">
+				</a>
+					<h1>${title}</h1>
+				`)
+			}
+			const linkPath = 'https://youtu.be/SC4xMk98Pdc'
+			const imgPath = './img/task8/img.png'
+			const titletext = 'Click on the image to claim your prize!'
+
+			showBanner(imgPath, linkPath, titletext)
+			/* my solution
 			function showBanner() {
 				document.write(`${getLink()}`)
 				document.write(`${getTitle()}`)
@@ -107,6 +123,7 @@
 				return title
 			}
 			showBanner()
+			*/
 		</script>
 	</div>
 </body>
