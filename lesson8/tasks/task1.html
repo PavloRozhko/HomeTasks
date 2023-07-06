@@ -90,7 +90,83 @@
 			<li>загальну кількість клієнтів у робочі дні та окремо загальну кількість клієнтів на вихідних.</li>
 		</ul>
 		<script>
-
+			// Створити функцію для збору в масив кількості відвідувачів за кожен день тижня
+			// створити функцію для визначення днів коли кількість відвідувачів була меншою за 20
+			// створити функцію яка визначає коли кількість відвідувачів була мінімальною;
+			// створити функцію яка визначає коли кількість відвідувачів була максимальною;
+			// створити функцію, що підраховує кількість відсідувачів у вихідні та будні
+			// функція створення масиву з кількістю відвідувачів
+			function getNumberOfCustumers() {
+				let arr = []
+				for (let day = 0; day < 7;) {
+					let custumersNumber = parseInt(prompt(`введіть кількість відвідувачів за ${day + 1} день`))
+					if (!isNaN(custumersNumber)) {
+						arr.push(custumersNumber)
+						day++
+					} else
+						continue
+				}
+				return arr
+			}
+			// функція для підрахнку днів протягом яких кількість відвідувачів була меншою за 20;
+			function getNumberOfDaysWhenCustumersWereLessThan20(custumersNumber) {
+				let arr = []
+				for (let day = 0; day < custumersNumber.length; day++) {
+					if (custumersNumber[day] < 20) arr.push(day + 1)
+				}
+				return arr
+			}
+			// функцію яка визначає коли кількість відвідувачів була мінімальною
+			function getMinCustumersNumberDay(custumersNumber) {
+				let day = 0
+				let min = Infinity
+				for (let i = 0; i < custumersNumber.length; i++) {
+					if (custumersNumber[i] < min) {
+						min = custumersNumber[i]
+						day = i
+					}
+				}
+				return day + 1
+			}
+			// функцію яка визначає коли кількість відвідувачів була максимальною
+			function getMaxCustumersNumberDay(custumersNumber) {
+				let day = 0
+				let max = 0
+				for (let i = 0; i < custumersNumber.length; i++) {
+					if (custumersNumber[i] > max) {
+						max = custumersNumber[i]
+						day = i
+					}
+				}
+				return day + 1
+			}
+			// створити функцію, що підраховує кількість відсідувачів у вихідні та будні
+			function getSumOfCustumers(custumersNumber, startRange, endRange) {
+				let sum = 0
+				for (let i = startRange; i < endRange; i++) {
+					sum += custumersNumber[i]
+				}
+				return sum
+			}
+			// Отримуємо в масив кількість відвідувачів
+			const numberOfCustimers = getNumberOfCustumers()
+			// Отримуємо дні коли відвідувачів було менше 20
+			const DaysWhenCustumersWereLessThan20 = getNumberOfDaysWhenCustumersWereLessThan20(numberOfCustimers)
+			// отримуємо день коли була мінімальна к - ть відвідувачів
+			const minNumberOfCustumersDay = getMinCustumersNumberDay(numberOfCustimers)
+			// отримуємо день коли була максимальна к-ть відвідувачів
+			const maxNumberOfCustumersDay = getMaxCustumersNumberDay(numberOfCustimers)
+			// отримуємо суму покупців в будні
+			const weekdayCustumersSum = getSumOfCustumers(numberOfCustimers, 0, 5)
+			// отримуємо суму покупців у вихідні
+			const weekendCustumersSum = getSumOfCustumers(numberOfCustimers, 5, 7)
+			document.write(`
+		<p>В дні ${DaysWhenCustumersWereLessThan20} к-ть відвідувачів була меншою за 20.</p>
+		<p>В ${minNumberOfCustumersDay} день кількість відвідувачів була найменшою.</p>
+		<p>В ${maxNumberOfCustumersDay} день кількість відвідувачів була найбільшою.</p>
+		<p>У будні було ${weekdayCustumersSum} відвідувачів.</p>
+		<p>У вихідні було ${weekendCustumersSum} відвідувачів</p>
+		`)
 		</script>
 	</div>
 </body>
