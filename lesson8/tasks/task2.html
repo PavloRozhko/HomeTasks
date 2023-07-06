@@ -89,7 +89,45 @@
 			<li>складаються з більше ніж 5 символів;</li>
 		</ul>
 		<script>
-
+			const carsLicensePlates = ['AA0001Aa', 'aA0002OA', 'KA0001Ia', 'BP003', 'BP008', 'ba0005bB', 'AP1236IA', '35314 MA', 'ca6111oC', 'PA001']
+			// фкнкція для пошуку номерів які починаються на букву «А»;
+			function getLicensePlateBeginsWithA(licensePlatesList) {
+				let counter = 0
+				for (let i = 0; i < licensePlatesList.length; i++) {
+					const licensePlate = [...licensePlatesList[i]]
+					const firstSymbol = licensePlate[0].toUpperCase()
+					if (firstSymbol === 'A') counter++
+				}
+				return counter
+			}
+			// фкнкція для пошуку співбадіння першої і останньої літери
+			function getLicensePlateWithMatchFirstAndLastSymbols(licensePlatesList) {
+				let counter = 0
+				for (let i = 0; i < licensePlatesList.length; i++) {
+					const licensePlate = [...licensePlatesList[i]]
+					const firstSymbol = licensePlate[0].toUpperCase()
+					const lastSymbol = licensePlate[licensePlate.length - 1].toUpperCase()
+					if (firstSymbol === lastSymbol) counter++
+				}
+				return counter
+			}
+			// фкнкція для пошуку номерів, що складаються з більше ніш 5 символів;
+			function getLicensePlateGreaterThan5Symbols(licensePlatesList) {
+				let counter = 0
+				for (let i = 0; i < licensePlatesList.length; i++) {
+					let number = licensePlatesList[i]
+					if (number.length > 5) counter++
+				}
+				return counter
+			}
+			const licensePlateBeginsWithA = getLicensePlateBeginsWithA(carsLicensePlates)
+			const licensePlateMatchLetters = getLicensePlateWithMatchFirstAndLastSymbols(carsLicensePlates)
+			const licensePlateGreaterThan5 = getLicensePlateGreaterThan5Symbols(carsLicensePlates)
+			document.write(`
+		<p>Кількість номерів, що починаються з літери "А" = ${licensePlateBeginsWithA}.</p>
+		<p>Кількість номерів в яких перша і остання літери співпадають = ${licensePlateMatchLetters}.</p>
+		<p>Кількість номерів, що складаються з більше ніш 5 символів = ${licensePlateGreaterThan5}.</p>
+		`)
 		</script>
 	</div>
 </body>
