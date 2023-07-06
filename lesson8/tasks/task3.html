@@ -89,7 +89,53 @@
 			<li>кількість оцінок, які нижче середнього.</li>
 		</ol>
 		<script>
+			const studentGrades = [2, 3, 5, 4, 4, 3, 4, 2, 5, 3, 4, 5, 4, 5, 2, 5, 4, 5, 4, 3, 4, 4]
+			// Знахлдження середнього балу
+			function getAverageGrade(gradesList) {
+				let gradeSum = gradesList[0]
+				for (let grade = 1; grade < gradesList.length; grade++) {
+					gradeSum += gradesList[grade]
+				}
+				return gradeSum / gradesList.length
+			}
+			// знаходження кількості поганих оцінок
+			function getBadGradeCount(gradesList) {
+				let counter = 0
+				for (let grade = 0; grade < gradesList.length; grade++) {
+					let studentGrade = gradesList[grade]
+					if (studentGrade <= 2) counter++
+				}
+				return counter
+			}
+			//знаходження кількості хороших оцінок
+			function getGoodGradeCount(gradesList) {
+				let counter = 0
+				for (let grade = 0; grade < gradesList.length; grade++) {
+					if (gradesList[grade] >= 4) counter++
+				}
+				return counter
+			}
+			//знаходження кількості оцінок < за середні оцінки
+			function getLessThanAverageGradesCount(averageGrade, gradesList) {
+				let counter = 0
+				for (let grade = 0; grade < gradesList.length; grade++) {
+					if (gradesList[grade] < averageGrade) counter++
+				}
+				return counter
+			}
+			const averageGrade = getAverageGrade(studentGrades)
 
+			const badGrade = getBadGradeCount(studentGrades)
+			const goodGrade = getGoodGradeCount(studentGrades)
+
+			const lessThanAverage = getLessThanAverageGradesCount(averageGrade, studentGrades)
+
+			document.write(`
+		<p>Середня оцінка учня = ${averageGrade.toFixed(2)}.</p>
+		<p>Кількість хороших оцінок (4 та 5) = ${goodGrade}.</p>
+		<p>Кількість поганих оцінок (2) = ${badGrade}.</p>
+		<p>Кількість оцінок нижче середнього балу = ${lessThanAverage}.</p>
+		`)
 		</script>
 	</div>
 </body>
