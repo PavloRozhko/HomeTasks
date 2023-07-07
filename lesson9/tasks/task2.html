@@ -81,9 +81,16 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №2. </p>
+		<h1>Задача №2. Дано масив елементів. Знайти добуток додатних елементів</p>
 			<script>
-
+				let arr = [-5, 5, -9, 7, 4, -4, 3, 0, 1, 8]
+				let prod = 1
+				for (const num of arr) {
+					if (num > 0) {
+						prod *= num
+					}
+				}
+				console.log(prod);
 			</script>
 	</div>
 </body>
