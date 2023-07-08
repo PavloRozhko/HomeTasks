@@ -81,9 +81,24 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №3. Інвестор вклав S тис.грн на 20 років під 20 % річних.Визначити за допомогою циклів суму, яку він
+			одержить(без
+			оподаткування). </h1>
+		<script>
+			let userAmountBankDeposit = parseFloat(prompt('Enter amount of your bank deposit'))
+			const annualDepositPercentage = 0.2
+			const depositPeriodInYears = 20
+			let amountOfAccruedInterest = 0
+			let amountOfAccruedInterestPerYear = 0
+			for (let i = 1; i <= depositPeriodInYears; i++) {
+				amountOfAccruedInterestPerYear = userAmountBankDeposit * annualDepositPercentage
+				userAmountBankDeposit += amountOfAccruedInterestPerYear
+				amountOfAccruedInterest += amountOfAccruedInterestPerYear
+				// amountOfAccruedInterest = userAmountBankDeposit * Math.pow((1 + annualDepositPercentage), depositPeriodInYears)//формула розрахунку % банківського вкладу без циклу
+			}
+			document.write(`<p>The amount of accrued interest will be ${amountOfAccruedInterest.toFixed(2)} without taxes.</p>`)
+			document.write(`<p>Total amount of bank deposit will be ${userAmountBankDeposit.toFixed(2)} without taxes.</p>`)
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>
