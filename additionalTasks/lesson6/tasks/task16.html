@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>16th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,21 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №16. З клавіатури вводяться поступово числа. Знайти два найменші числа. Ввід здійснюєтья до тих пір, поки
+			різниця між такими числами є більшою за 5.</h1>
 		<script>
+			let firstMinNumber = 0, secondMinNumber = 0
+			do {
+				let firstNumber = parseInt(prompt('Enter first number'))
+				let secondNumber = parseInt(prompt('Enter second number'))
+				if (firstNumber < secondNumber) {
+					firstMinNumber = firstNumber
+					secondMinNumber = secondNumber
+				} else {
+					firstMinNumber = secondNumber
+					secondMinNumber = firstNumber
+				}
+			} while ((secondMinNumber - firstMinNumber) > 5);
 		</script>
 	</div>
 </body>

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>17th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,15 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №17. Знайти суму всіх непарних чисел з діапазону, який вводить користувач з клавіатури.</h1>
 		<script>
+			const firstUserNumer = parseInt(prompt('Enter your first numer'))
+			const lastUserNumer = parseInt(prompt('Enter your last numer'))
+			let sum = 0
+			for (let counter = firstUserNumer; counter < lastUserNumer; counter++) {
+				(counter % 2 === 1) ? sum += counter : null
+			}
+			document.write(`sum = ${sum}`)
 		</script>
 	</div>
 </body>

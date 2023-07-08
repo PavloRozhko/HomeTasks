@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>21th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,13 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №21.Дано натуральні числа від 35 до 87. Надрукувати ті з них, які при діленні на 7 дають остачу 1, 2 або
+			5.</h1>
 		<script>
+			for (let i = 35; i <= 87; i++) {
+				if (i % 7 === 1 || i % 7 === 2 || i % 7 === 5)
+					document.write(`${i} <br>`)
+			}
 		</script>
 	</div>
 </body>

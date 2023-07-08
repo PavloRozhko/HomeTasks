@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>15th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,22 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №15. З клавіатури вводяться поступово числа. Знайти два найбільші числа. Ввід здійснюється до тих пір,
+			поки різниця між
+			такими числами є більшою за 5.</h1>
 		<script>
+			let firstMaxNumber = 0, secondMaxNumber = 0
+			do {
+				let firstNumber = parseInt(prompt('Enter first number'))
+				let secondNumber = parseInt(prompt('Enter second number'))
+				if (firstNumber > secondNumber) {
+					firstMaxNumber = firstNumber
+					secondMaxNumber = secondNumber
+				} else {
+					firstMaxNumber = secondNumber
+					secondMaxNumber = firstNumber
+				}
+			} while ((firstMaxNumber - secondMaxNumber) > 5);
 		</script>
 	</div>
 </body>

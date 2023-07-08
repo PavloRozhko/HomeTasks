@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>14th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,13 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №14. З клавіатури вводиться число.Знаходити суму цифр до тих пір.Поки сума не стане більшую за 20.</h1>
 		<script>
+			let someNumber = parseInt(prompt('Enter number'))
+			while (someNumber <= 20) {
+				someNumber += parseInt(prompt('Enter number'))
+			}
+			document.write(`${someNumber}`)
 		</script>
 	</div>
 </body>

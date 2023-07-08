@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>11th task (Lesson 6)</title>
+	<title>23th task (Lesson 6)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,12 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №11.</h1>
+		<h1>Задача №23. Надрукувати всі двоцифрові числа, які діляться на 4, але не діляться на 6.</h1>
 		<script>
+			for (let i = 10; i <= 99; i++) {
+				if (i % 4 === 0 && i % 6 !== 0)
+					document.write(`${i} <br>`)
+			}
 		</script>
 	</div>
 </body>
