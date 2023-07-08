@@ -81,9 +81,16 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №1. З клавіатури вводяться числа поки не буде введено 0. Знайти суму чисел.</h1>
+		<script>
+			let sum = 0
+			let userNumber = 0
+			do {
+				userNumber = parseInt(prompt('Enter number'))
+				sum += userNumber
+			} while (userNumber !== 0);
+			document.write(`Sum of user numbers = ${sum}.`)
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>
