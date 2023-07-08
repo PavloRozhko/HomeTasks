@@ -81,9 +81,16 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №4.З клавіатури вводиться початкове значення суми. Поки сума є меншою за 100 додавати до неї числа, які
+			вводяться з
+			клавіатури. </h1>
+		<script>
+			let maxNum = 0
+			do {
+				const userNumber = parseInt(prompt('Enter your number'))
+				maxNum += userNumber
+			} while (maxNum <= 100);
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

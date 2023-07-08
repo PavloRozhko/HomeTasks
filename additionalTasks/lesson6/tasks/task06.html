@@ -81,9 +81,18 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №6. З клавіатури вводяться два числа N i M (N менше M). Вивести на екран числа.</h1>
+		<script>
+			let firstNumber = parseInt(prompt('Enter first number'))
+			let secondNumber = parseInt(prompt('Enter second number'))
+			if (firstNumber < secondNumber) {
+				for (firstNumber; firstNumber < secondNumber; firstNumber++) {
+					secondNumber--
+					document.write(`<p>N${firstNumber}---M${secondNumber}</p>`)
+				}
+			} else
+				alert('Try one more time')
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

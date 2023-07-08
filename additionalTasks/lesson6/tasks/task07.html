@@ -81,9 +81,26 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №7. На екрані виводиться меню.</h1>
+		<ol>
+			<li>Сказати «Привіт».</li>
+			<li>Сказати «Зачекай».</li>
+			<li>Сказати «До побачення».</li>
+			<li>Вихід.</li>
+		</ol>
+		<script>
+			alert(`1. Сказати «Привіт».\n2. Сказати «Зачекай».\n3. Сказати «До побачення».\n4. Вихід.`)
+			let userAnswer = 0
+			do {
+				userAnswer = parseInt(prompt('Enter number of the menu option'))
+				if (userAnswer === 1)
+					alert('Привіт')
+				else if (userAnswer === 2)
+					alert('Зачекай')
+				else if (userAnswer === 3)
+					alert('До побачення')
+			} while (userAnswer !== 4);
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

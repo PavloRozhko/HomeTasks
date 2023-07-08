@@ -81,9 +81,17 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №2. З клавіатури вводитяться числа поки не буде введено 0. Знайти добуток чисел.</h1>
+		<script>
+			let product = 1
+			let userNumber = 0
+			do {
+				userNumber = parseInt(prompt('Enter number'))
+				if (userNumber !== 0)
+					product *= userNumber
+			} while (userNumber !== 0);
+			document.write(`product of user numbers = ${product}.`)
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

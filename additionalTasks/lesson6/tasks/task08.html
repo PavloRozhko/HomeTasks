@@ -81,9 +81,18 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №8. Комп’ютер загадує випадкове число від 1 до 10. Вгадати число шляхом введеня можливих варіантів. В
+			кінці вивести кількість спроб користувача.</h1>
+		<script>
+			const randNum = 1 + Math.floor(Math.random() * 10)
+			let attemptsNumber = 0
+			let userNumber = 0
+			do {
+				userNumber = parseInt(prompt('Try to guess random number from 1 to 10'))
+				attemptsNumber++
+			} while (userNumber !== randNum);
+			document.write(`you guessed a random number in ${attemptsNumber} tries`)
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>

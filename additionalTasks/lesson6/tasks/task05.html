@@ -81,9 +81,20 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №5. З клавіатури поступово вводяться числа. Знайти суму перших N() парних чисел.</h1>
+		<script>
+			// N = 10
+			const maxNumber = 10
+			let sum = 0
+			for (let evenNumber = 0; evenNumber < maxNumber;) {
+				const userNumber = parseInt(prompt('Enter your number'))
+				if (userNumber % 2 === 0) {
+					sum += userNumber
+					evenNumber++
+				}
+			}
+			document.write(`sum of first 10th even number is ${sum}`)
+		</script>
 	</div>
-	<script>
-	</script>
 </body>
 </html>
