@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>1st task (Lesson 8)</title>
+	<title>2nd task (Lesson 8)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,34 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №2. Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».</h1>
 		<script>
+			// функція для введення масиву
+
+			function inputStudentsNames(studentNames) {
+				let arr = []
+				for (let i = 0; i < studentNames; i++) {
+					let name = prompt(`Введіть ім'я ${i + 1}-го учня.`)
+					arr.push(name)
+				}
+				return arr
+			}
+			// функція для підрахунку кількості учнів з іменем "Іван" //name, ...names
+			function getStudentsNameQuantity(names) {
+				let nameCounter = 0
+				for (let i = 0; i < names.length; i++) {
+					if (names[i] === 'Іван') nameCounter++
+				}
+				return nameCounter
+			}
+			// введення кількості імен
+			let studentNumber = parseInt(prompt('Введіть кількість імен студентів'))
+			// введення імен
+			let studentsName = inputStudentsNames(studentNumber)
+			// Пошук кількості студентів з іменем Іван
+			let sameNameStudentsQuantity = getStudentsNameQuantity(studentsName)
+			// вивід інформації
+			document.write(`<p>кількість студентів з іменем Іван = ${sameNameStudentsQuantity}.</p>`)
 		</script>
 	</div>
 </body>

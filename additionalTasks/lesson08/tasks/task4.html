@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>1st task (Lesson 8)</title>
+	<title>4st task (Lesson 8)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,43 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №4. Задача 9. Морський бій.Користувач вводить кількість клітинок одновимірного масиву та кількість
+			одиночних
+			кораблів.Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці(якщо у клітинці 0, то
+			клітинка
+			пуста, якщо 1 – то це означає, що там є корабель).Користувач вводить номер клітинки, куди стріляє.Гра
+			продовжується до
+			тих пір, поки не будуть потоплені усі кораблі.</h1>
 		<script>
+			const cellNumber = parseInt(prompt('Enter cell number'))
+			const shipNumber = parseInt(prompt('Enter ship number'))
+			//функція для стврення поля гри
+			function getGameTable(cellNumber, shipNumber) {
+				let gameTable = new Array(cellNumber).fill(0)
+
+				for (let ship = 0; ship < shipNumber;) {
+					let randIndex = Math.floor(Math.random() * cellNumber) + 1
+					if (gameTable[randIndex] === 0) {
+						gameTable[randIndex] = 1
+						ship++
+					}
+				}
+				return gameTable
+			}
+			// функція гри
+			function playGame(gameTable, shipNumber) {
+				do {
+					let userIndex = parseInt(prompt('введіть номер клітинки'))
+					if (gameTable[userIndex] === 1) {
+						alert('попав')
+						shipNumber--
+					} else
+						alert('промазав')
+				} while (shipNumber > 0);
+			}
+			const gameTable = getGameTable(cellNumber, shipNumber)
+
+			playGame(gameTable, shipNumber)
 		</script>
 	</div>
 </body>

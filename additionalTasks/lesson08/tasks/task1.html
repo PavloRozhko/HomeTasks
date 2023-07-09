@@ -81,8 +81,72 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №1. Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він
+			відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча
+			би одна трійка)).</h1>
 		<script>
+			// Створити функцію для отримання оцінок в масив
+			// Створити функцію яка знаходить середній бал учня
+			// Створити функцію яка знаходить категоріб учня
+			// Наповнення масиву оцінками
+			function inputGrades(gradesNum) {
+				let arr = []
+				for (let i = 0; i < gradesNum; i++) {
+					let value = parseInt(prompt(`Введіть введіть оцінку з ${i + 1} предмету.`))
+					arr.push(value)
+				}
+				return arr
+			}
+			//функція для знаходження середнього балу
+			function getAverageGrade(gradesList) {
+				let sum = 0
+				let count = 0
+				for (let i = 0; i < gradesList.length; i++) {
+					sum += gradesList[i]
+					count++
+				}
+				return sum / count
+			}
+			//функція для знаходження мінімального знячення
+			function getMinGrade(gradesList) {
+				let min = gradesList[0]
+				for (let i = 1; i < gradesList.length; i++) {
+					if (gradesList[i] < min) min = gradesList[i]
+				}
+				return min
+			}
+			// функція для знаходження категорії учня
+			function getStudentCategoty(gradesList) {
+				let result
+				switch (getMinGrade(gradesList)) {
+					case 1:
+					case 2: result = 'двійочник'
+						break
+					case 3: result = 'трійочник'
+						break
+					case 4: result = 'хорошист'
+						break
+					case 5: result = 'відмінник'
+						break
+					default: result = 'невірна оцінка'
+						break
+				}
+				return result
+			}
+			// Розв'язок задачі
+			// введення кількості предметів
+			const numberOfSubjets = parseInt(prompt("введіть кількість предметів"))
+			// введення оцінок
+			const studentGrades = inputGrades(numberOfSubjets)
+			// отримання середнього балу
+			const averageGrade = getAverageGrade(studentGrades)
+			// отримання статусу учня
+			const studentCategoty = getStudentCategoty(studentGrades)
+			// вивід інфомрації на екран
+			document.write(`
+			<p>Середній бал по ${numberOfSubjets} предметах = ${averageGrade.toFixed(1)}.</p>
+			<p>Учень відноситься до категорії ${studentCategoty}.</p>
+			`)
 		</script>
 	</div>
 </body>

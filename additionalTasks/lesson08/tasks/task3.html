@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>1st task (Lesson 8)</title>
+	<title>3rd task (Lesson 8)</title>
 	<style>
 		*,
 		*::before,
@@ -81,8 +81,75 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1. </h1>
+		<h1>Задача №3. Дано послідовність платіжок протягом року.</h1>
+		<p>Знайти сумарну кількість грошей за:</p>
+		<ul>
+			<li>за весь рік;</li>
+			<li>у першій половині року;</li>
+			<li>у другій половині року;</li>
+			<li>за літо;</li>
+			<li>за ІІ квартал;</li>
+			<li>за парні місяці(з парними номерами);</li>
+			<li>за місяці, які є початковими у сезоні(весна, літо, осінь, зима).</li>
+		</ul>
 		<script>
+			const yearPayment = [100, 100, 100, 480, 100, 100, 80, 100, 100, 100, 100, 50] // 12
+			// function inputYearPayment() {
+			// 	let arr = []
+			// 	for (let i = 0; i < 12; i++) {
+			// 		let monthIncome = parseInt(prompt(`Введіть платіжку за місяць з номером ${i + 1}`))
+			// 		arr.push(monthIncome)
+			// 	}
+			// 	return arr
+			// }
+			// const yearPayment = inputYearPayment()
+
+			// сума за рік
+			let yearPaymentsSum = 0
+			yearPayment.forEach(element => {
+				yearPaymentsSum += element
+			});
+			// сума за перше півріччя
+			let firstHalfSum = 0
+			for (let i = 0; i < 6; i++) {
+				firstHalfSum += yearPayment[i]
+			}
+			// сума за друге півріччя
+			let secondHalfSum = 0
+			for (let i = 6; i < 12; i++) {
+				secondHalfSum += yearPayment[i]
+			}
+			// сума за літо
+			let summerPaymentSum = 0
+			for (let i = 5; i < 8; i++) {
+				summerPaymentSum += yearPayment[i]
+			}
+			// сума за другий квартал
+			let secondQuarterSum = 0
+			for (let i = 3; i < 6; i++) {
+				secondQuarterSum += yearPayment[i]
+			}
+			// за парні місяці(з парними номерами);
+			let evenMonthsSum = 0
+			for (let i = 0; i < 12; i++) {
+				if ((i + 1) % 2 === 0) {
+					evenMonthsSum += yearPayment[i]
+				}
+			}
+			// за місяці, які є початковими у сезоні(весна, літо, осінь, зима).
+			let seasonStartSum = 0
+			for (let i = 2; i < 12; i += 3) {
+				seasonStartSum += yearPayment[i]
+			}
+			document.write(`
+			<p>за весь рік = ${yearPaymentsSum}.</p>
+			<p>у першій половині року = ${firstHalfSum}.</p>
+			<p>у другій половині року = ${secondHalfSum}.</p>
+			<p>за літо = ${summerPaymentSum}.</p>
+			<p>за ІІ квартал = ${secondQuarterSum}.</p>
+			<p> за парні місяці(з парними номерами) = ${evenMonthsSum}.</p>
+			<p>за місяці, які є початковими у сезоні(весна, літо, осінь, зима) = ${seasonStartSum}.</p>
+			`)
 		</script>
 	</div>
 </body>
