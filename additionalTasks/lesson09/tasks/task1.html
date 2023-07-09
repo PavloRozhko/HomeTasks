@@ -81,8 +81,12 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1.</h1>
+		<h1>Задача №1. Користувач вводить кількість елементів.Створити масив, що складається з вказаної кількості елементів
+			заповнених нулями.</h1>
 		<script>
+			const userElem = parseInt(prompt('Введіть кількість елементів'))
+			const userArr = new Array(userElem).fill(0)
+			console.log(userArr);
 		</script>
 	</div>
 </body>

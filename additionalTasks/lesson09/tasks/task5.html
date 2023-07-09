@@ -81,8 +81,12 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №5.</h1>
+		<h1>Задача №5. Дано масив цін у грн.Податок складає 20 %.Сформувати масив, який буде містити величину сплаченого
+			податку у грн.</h1>
 		<script>
+			const pricesList = [150, 200, 188, 1500, 20, 964, 832, 44, 611, 23, 12, 99, 194]
+			const taxAmount = Array.from(pricesList, (el) => el * 0.2)
+			console.log(taxAmount);
 		</script>
 	</div>
 </body>
