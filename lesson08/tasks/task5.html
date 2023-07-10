@@ -86,11 +86,13 @@
 			відмовиться). Знаходити сумарний виграш.</h1>
 		<script>
 			const lotteryFieldNUmber = parseInt(prompt('введіть кількість клітинок лотерейного білета'))
+			const minAward = -500
+			const maxAward = 500
 			// функція заповнення лотерейного квитка
-			function getLotteryField(lotteryFieldNUmber) {
+			function getLotteryField(lotteryFieldNUmber, minAward, maxAward) {
 				let arr = []
 				for (let i = 0; i < lotteryFieldNUmber; i++) {
-					let winningAmount = Math.floor(Math.random() * (500 - -500 + 1) + -500)
+					let winningAmount = Math.floor(Math.random() * (maxAward - minAward + 1) + minAward)
 					arr.push(winningAmount)
 				}
 				return arr
@@ -108,7 +110,7 @@
 				return sum
 			}
 			// отримання поля для гри
-			const lotteryFiled = getLotteryField(lotteryFieldNUmber)
+			const lotteryFiled = getLotteryField(lotteryFieldNUmber, minAward, maxAward)
 			// Виклик функції
 			const award = playLottery(lotteryFiled)
 			alert(`ваш сукупний виграш склав ${award}`)
