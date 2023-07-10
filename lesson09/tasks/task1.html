@@ -85,8 +85,10 @@
 			друга заповнена 7-ками.</h1>
 	</div>
 	<script>
+		// Задача 1. Ок. Розв'язок правильний. Але Ви двічі обчислюєте  userElem / 2. Якщо Вам треба якесь обчислення використовувати декілька раз, то краще його зберігати у змінну, а потім її використовувати
 		const userElem = parseInt(prompt('Введіть кількість елементів'))
-		const userArr = new Array(userElem).fill(1, 0, userElem / 2).fill(7, userElem / 2)
+		const arrHalf = userElem / 2
+		const userArr = new Array(userElem).fill(1, 0, arrHalf).fill(7, arrHalf)
 		console.log(userArr);
 	</script>
 </body>
