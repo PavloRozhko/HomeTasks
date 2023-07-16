@@ -59,16 +59,8 @@
 			font-size: 20px;
 		}
 
-		table,
-		tr,
-		td {
-			border: 1px solid #fff;
-			border-collapse: collapse;
-		}
-
-		table {
-			display: inline-block;
-			margin: 10px;
+		p:not(:last-child) {
+			margin-bottom: 15px;
 		}
 
 		.container {
@@ -81,10 +73,102 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1.</h1>
+		<h1>Задача №1. Знайти суми елементів у вказаній області (масиви розділені на 4 рівні частини).</h1>
+		<script>
+			// функція генерації рандомного числа
+			function getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * max - min + 1)
+			}
+			// функція генерації одновимірного масиву з рандомними числами
+			function generateRandomArray(arrLength, min, max) {
+				let arr = []
+				for (let i = 0; i < arrLength; i++) {
+					let randomNum = getRandomValue(min, max)
+					arr.push(randomNum)
+				}
+				return arr
+			}
+			// Creating a two - dimensional array
+			function generateTwoDimensionalArray(rowsNumber, colsNumber, min, max) {
+				let arr = []
+				for (let i = 0; i < rowsNumber; i++) {
+					let randomArr = generateRandomArray(colsNumber, min, max)
+					arr.push(randomArr)
+				}
+				return arr
+			}
+			// розв'язки 
+			let someArr = generateTwoDimensionalArray(4, 4, 1, 10)
+			// 1) верхній лівий квадрат
+			let firstQuarterSum = 0
+			for (let row = 0; row < 2; row++) {
+				for (let column = 0; column < 2; column++) {
+					firstQuarterSum += someArr[row][column]
+				}
+			}
+			// 2) правий верхній квадрат
+			let secondQuarterSum = 0
+			for (let row = 0; row < 2; row++) {
+				for (let column = 2; column < 4; column++) {
+					secondQuarterSum += someArr[row][column]
+				}
+			}
+			// 3) лівий нижній квадрат
+			let thirdQuarterSum = 0
+			for (let row = 2; row < 4; row++) {
+				for (let column = 0; column < 2; column++) {
+					thirdQuarterSum += someArr[row][column]
+				}
+			}
+			// 4) правий нижній квадрат
+			let fourthQuarterSum = 0
+			for (let row = 2; row < 4; row++) {
+				for (let column = 2; column < 4; column++) {
+					fourthQuarterSum += someArr[row][column]
+				}
+			}
+			//5) Суму парних рядків
+			let evenRowSum = 0
+			for (let row = 1; row < 4; row += 2) {
+				for (let column = 0; column < 4; column++) {
+					evenRowSum += someArr[row][column]
+				}
+			}
+			// 6) Суму непарних стовпців
+			let oddColumnSum = 0
+			for (let row = 0; row < 4; row++) {
+				for (let column = 0; column < 4; column += 2) {
+					oddColumnSum += someArr[row][column]
+				}
+			}
+			//7) У парних рядках – непарні стовпці, у непарних – парні.
+			let someOddRowSum = 0
+			for (let row = 1; row < 4; row += 2) {
+				for (let column = 0; column < 4; column += 2) {
+					someOddRowSum += someArr[row][column]
+				}
+			}
+			let someEvenRowSum = 0
+			for (let row = 0; row < 4; row += 2) {
+				for (let column = 1; column < 4; column += 2) {
+					someEvenRowSum += someArr[row][column]
+				}
+			}
+			// візуалізація розв'язку 
+			// масив
+			for (let i = 0; i < someArr.length; i++) {
+				document.write(`<p>${someArr[i]}</p>`)
+			}
+			//----------------------------------------------------------------------------------
+			document.write(`<p>Сума значень верхнього лівого квадрату = ${firstQuarterSum}</p>`)
+			document.write(`<p>Сума значень верхнього правого квадрату = ${secondQuarterSum}</p>`)
+			document.write(`<p>Сума значень нижнього лівого квадрату = ${thirdQuarterSum}</p>`)
+			document.write(`<p>Сума значень нижнього правого квадрату = ${fourthQuarterSum}</p>`)
+			document.write(`<p>Сума парних рядків = ${evenRowSum}</p>`)
+			document.write(`<p>Сума непарних стовбців = ${oddColumnSum}</p>`)
+			document.write(`<p>Сума непарних стовбців у парних рядках = ${someOddRowSum}</p>`)
+			document.write(`<p>Сума парних стовбців у непарних рядках = ${someEvenRowSum}</p>`)
+		</script>
 	</div>
-	<script>
-
-	</script>
 </body>
 </html>
