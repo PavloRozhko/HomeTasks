@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>1st task (Lesson 11)</title>
+	<title>2nd task (Lesson 11)</title>
 	<style>
 		*,
 		*::before,
@@ -81,10 +81,83 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №1.</h1>
-	</div>
-	<script>
+		<h1>Задача №2. Дано інформацію про прибуток К магазинів протягом тижня.</h1>
+		<p>Знайти:</p>
+		<ol>
+			<li>загальний прибуток кожного масиву за тиждень;</li>
+			<li>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і
+				т.д.);</li>
+			<li>максимальний прибуток за середу;</li>
+			<li>сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200;</li>
+			<li>відсортувати кожен тиждень за зростанням.</li>
+		</ol>
 
-	</script>
+		<script>
+			// функція генерації рандомного числа
+			function getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * max - min + 1)
+			}
+			// функція генерації одновимірного масиву з рандомними числами
+			function generateRandomArray(arrLength, min, max) {
+				let arr = []
+				for (let i = 0; i < arrLength; i++) {
+					let randomNum = getRandomValue(min, max)
+					arr.push(randomNum)
+				}
+				return arr
+			}
+			// Creating a two - dimensional array
+			function generateTwoDimensionalArray(rowsNumber, colsNumber, min, max) {
+				let arr = []
+				for (let i = 0; i < rowsNumber; i++) {
+					let randomArr = generateRandomArray(colsNumber, min, max)
+					arr.push(randomArr)
+				}
+				return arr
+			}
+			//K = 5
+			const shposNumber = 5
+			const minIncome = 100
+			const maxIncome = 500
+			const daysNumber = 7
+			let shopsIncomes = generateTwoDimensionalArray(shposNumber, daysNumber, minIncome, maxIncome)
+			console.log(shopsIncomes)
+			//1) загальний прибуток кожного масиву за тиждень;
+			for (let shop = 0; shop < shopsIncomes.length; shop++) {
+				let shopIncomeSum = 0
+				for (let day = 0; day < shopsIncomes[shop].length; day++) {
+					shopIncomeSum += shopsIncomes[shop][day]
+				}
+				document.write(`<p>Сума ${shop + 1} масиву за тиждень = ${shopIncomeSum}</p>`)
+				console.log(shopIncomeSum)
+			}
+			// 2) загальний прибуток усіх магазинів по дням(загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+			for (let day = 0; day < 7; day++) {
+				let incomesSumPerDay = 0
+				for (let shop = 0; shop < 5; shop++) {
+					incomesSumPerDay += shopsIncomes[shop][day]
+				}
+				document.write(`<p>Сума усіх магазинів за ${day + 1} день = ${incomesSumPerDay}</p>`)
+				console.log(incomesSumPerDay)
+			}
+			// 5) максимальний прибуток за середу
+			let wednesdayMaxIncome = -Infinity
+			for (let shop = 0; shop < shopsIncomes.length; shop++) {
+				if (wednesdayMaxIncome < shopsIncomes[shop][2])
+					wednesdayMaxIncome = shopsIncomes[shop][2]
+			}
+			document.write(`<p>Максимальний прибуток за середу = ${wednesdayMaxIncome}</p>`)
+			console.log(wednesdayMaxIncome)
+			// 6) сформувати загальний список(одновимірний масив) зі значенням, які що більші за 200
+			let greaterThat200List = shopsIncomes.flat(Infinity).filter(income => income >= 200)
+			console.log(greaterThat200List)
+			//7) відсортувати кожен тиждень за зростанням
+			let sortIncomes = JSON.parse(JSON.stringify(shopsIncomes))
+			for (let shop = 0; shop < sortIncomes.length; shop++) {
+				sortIncomes[shop].sort((num1, num2) => num1 - num2)
+			}
+			console.log(sortIncomes)
+		</script>
+	</div>
 </body>
 </html>
