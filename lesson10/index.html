@@ -116,23 +116,41 @@
 			console.log(pricesGreaterThan1000);
 			//2) Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
 			let pricesIndexGreaterThan1000 = prices.reduce(
-				(indexes, price, index) =>
-					(price > 1000 ? [...indexes, index] : indexes),
-				[])
+				(indexes, price, index) => (price > 1000 ? [...indexes, index] : indexes),
+				[]
+			)
 			console.log(pricesIndexGreaterThan1000);
 			//3) Сформувати список з тих цін, які більші за попереднє значення
+			/* Old solution
 			let pricesGreaterThanPrevValue = []
 			prices.sort((price1, price2) => {
 				if (price1 > price2) pricesGreaterThanPrevValue.push(price1)
 			})
+			*/
+			// new solution 
+			let pricesGreaterThanPrevValue = prices.filter(
+				(price, index, arr) => index === 0 || arr[index - 1] < price
+			)
 			console.log(pricesGreaterThanPrevValue);
 			// 4) Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+			/* old solution
 			let maxPrice = prices.reduce((prevPrice, price) => price > prevPrice ? price : prevPrice)
 			let percentPrices = prices.map(price => Math.floor(price / maxPrice * 100) + '%')
-			console.log(percentPrices);
+			*/
+			// new solution
+			let maxPrice = prices.reduce((prevPrice, price) => price > prevPrice ? price : prevPrice)
+			let percentPrices = prices.map(price => Math.floor(price / maxPrice * 100))
+			console.log(`${percentPrices.join('%, ') + '%'}`);
 			// 5)Підрахувати кількість змін цін
+			/* old solution
 			let priceChanges = prices.reduce((prevPrice, price, index, arr) =>
 				arr[index + 1] !== price ? prevPrice + 1 : prevPrice,
+				0
+			)
+			*/
+			// new solution 
+			let priceChanges = prices.reduce((prevPrice, price, index, arr) =>
+				index === 0 || arr[index - 1] !== price ? prevPrice + 1 : prevPrice,
 				0
 			)
 			console.log(priceChanges);
