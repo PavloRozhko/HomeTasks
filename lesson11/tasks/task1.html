@@ -98,8 +98,8 @@
 				return arr
 			}
 			// розв'язки 
-			// функція для обчислення суми
-			function getSum(arr, rowStart, rowEnd, columnStart, columnEnd, step1 = 1, step2 = 1) {
+			// функція для обчислення суми в квадратах
+			function getQuarterSum(arr, rowStart, rowEnd, columnStart, columnEnd, step1 = 1, step2 = 1) {
 				let sum = 0
 				for (let row = rowStart; row < rowEnd; row += step1) {
 					for (let column = columnStart; column < columnEnd; column += step2) {
@@ -108,22 +108,33 @@
 				}
 				return sum
 			}
-			let someArr = generateTwoDimensionalArray(4, 4, 1, 10)
+			// функція для пошуку довільної суми 
+			function getSum(arr, rowStart = 0, columnStart = 0, rowStep = 1, columnStep = 1) {
+				let sum = 0
+				for (let row = rowStart; row < arr.length; row += rowStep) {
+					for (let column = columnStart; column < arr[row].length; column += columnStep) {
+						sum += arr[row][column]
+					}
+				}
+				return sum
+			}
+			// масив для пошуку рівних частин у квадратаї
+			let someArr = generateTwoDimensionalArray(10, 10, 1, 10)
 			// 1) верхній лівий квадрат
-			let firstQuarterSum = getSum(someArr, 0, 2, 0, 2)
+			let firstQuarterSum = getQuarterSum(someArr, 0, 2, 0, 2)
 			// 2) правий верхній квадрат
-			let secondQuarterSum = getSum(someArr, 0, 2, 2, 4)
+			let secondQuarterSum = getQuarterSum(someArr, 0, 2, 2, 4)
 			// 3) лівий нижній квадрат
-			let thirdQuarterSum = getSum(someArr, 2, 4, 0, 2)
+			let thirdQuarterSum = getQuarterSum(someArr, 2, 4, 0, 2)
 			// 4) правий нижній квадрат
-			let fourthQuarterSum = getSum(someArr, 2, 4, 2, 4)
+			let fourthQuarterSum = getQuarterSum(someArr, 2, 4, 2, 4)
+			// інший довільний масив 
 			//5) Суму парних рядків
-			let evenRowSum = getSum(someArr, 1, 4, 0, 4, 2)
+			let evenRowSum = getSum(someArr, 1, 0, 2)
 			// 6) Суму непарних стовпців
-			let oddColumnSum = getSum(someArr, 0, 4, 0, 4, 1, 2)
+			let oddColumnSum = getSum(someArr, 0, 0, 1, 2)
 			//7) У парних рядках – непарні стовпці, у непарних – парні.
-			let someOddRowSum = getSum(someArr, 1, 4, 0, 4, 2, 2)
-			let someEvenRowSum = getSum(someArr, 0, 4, 1, 4, 2, 2)
+			let someSum = getSum(someArr, 1, 0, 2, 2) + getSum(someArr, 0, 1, 2, 2)
 			// візуалізація розв'язку 
 			// масив
 			for (let i = 0; i < someArr.length; i++) {
@@ -136,8 +147,7 @@
 			document.write(`<p>Сума значень нижнього правого квадрату = ${fourthQuarterSum}</p>`)
 			document.write(`<p>Сума парних рядків = ${evenRowSum}</p>`)
 			document.write(`<p>Сума непарних стовбців = ${oddColumnSum}</p>`)
-			document.write(`<p>Сума непарних стовбців у парних рядках = ${someOddRowSum}</p>`)
-			document.write(`<p>Сума парних стовбців у непарних рядках = ${someEvenRowSum}</p>`)
+			document.write(`<p>Сума значень у парних рядках – непарні стовпці, у непарних – парні = ${someSum}</p>`)
 		</script>
 	</div>
 </body>
