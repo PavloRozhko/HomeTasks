@@ -98,62 +98,32 @@
 				return arr
 			}
 			// розв'язки 
+			// функція для обчислення суми
+			function getSum(arr, rowStart, rowEnd, columnStart, columnEnd, step1 = 1, step2 = 1) {
+				let sum = 0
+				for (let row = rowStart; row < rowEnd; row += step1) {
+					for (let column = columnStart; column < columnEnd; column += step2) {
+						sum += arr[row][column]
+					}
+				}
+				return sum
+			}
 			let someArr = generateTwoDimensionalArray(4, 4, 1, 10)
 			// 1) верхній лівий квадрат
-			let firstQuarterSum = 0
-			for (let row = 0; row < 2; row++) {
-				for (let column = 0; column < 2; column++) {
-					firstQuarterSum += someArr[row][column]
-				}
-			}
+			let firstQuarterSum = getSum(someArr, 0, 2, 0, 2)
 			// 2) правий верхній квадрат
-			let secondQuarterSum = 0
-			for (let row = 0; row < 2; row++) {
-				for (let column = 2; column < 4; column++) {
-					secondQuarterSum += someArr[row][column]
-				}
-			}
+			let secondQuarterSum = getSum(someArr, 0, 2, 2, 4)
 			// 3) лівий нижній квадрат
-			let thirdQuarterSum = 0
-			for (let row = 2; row < 4; row++) {
-				for (let column = 0; column < 2; column++) {
-					thirdQuarterSum += someArr[row][column]
-				}
-			}
+			let thirdQuarterSum = getSum(someArr, 2, 4, 0, 2)
 			// 4) правий нижній квадрат
-			let fourthQuarterSum = 0
-			for (let row = 2; row < 4; row++) {
-				for (let column = 2; column < 4; column++) {
-					fourthQuarterSum += someArr[row][column]
-				}
-			}
+			let fourthQuarterSum = getSum(someArr, 2, 4, 2, 4)
 			//5) Суму парних рядків
-			let evenRowSum = 0
-			for (let row = 1; row < 4; row += 2) {
-				for (let column = 0; column < 4; column++) {
-					evenRowSum += someArr[row][column]
-				}
-			}
+			let evenRowSum = getSum(someArr, 1, 4, 0, 4, 2)
 			// 6) Суму непарних стовпців
-			let oddColumnSum = 0
-			for (let row = 0; row < 4; row++) {
-				for (let column = 0; column < 4; column += 2) {
-					oddColumnSum += someArr[row][column]
-				}
-			}
+			let oddColumnSum = getSum(someArr, 0, 4, 0, 4, 1, 2)
 			//7) У парних рядках – непарні стовпці, у непарних – парні.
-			let someOddRowSum = 0
-			for (let row = 1; row < 4; row += 2) {
-				for (let column = 0; column < 4; column += 2) {
-					someOddRowSum += someArr[row][column]
-				}
-			}
-			let someEvenRowSum = 0
-			for (let row = 0; row < 4; row += 2) {
-				for (let column = 1; column < 4; column += 2) {
-					someEvenRowSum += someArr[row][column]
-				}
-			}
+			let someOddRowSum = getSum(someArr, 1, 4, 0, 4, 2, 2)
+			let someEvenRowSum = getSum(someArr, 0, 4, 1, 4, 2, 2)
 			// візуалізація розв'язку 
 			// масив
 			for (let i = 0; i < someArr.length; i++) {
