@@ -59,6 +59,8 @@
 			font-size: 20px;
 		}
 
+		div:not(:last-child),
+		li:not(:last-child),
 		p:not(:last-child) {
 			margin-bottom: 15px;
 		}
@@ -75,8 +77,138 @@
 	<div class="container">
 		<h1>Задача 1-3. Дано масив 30 випадкових цілих чисел. Підрахувати кількості обмінів під час сортування бульбашкою,
 			змішуванням та включеннями.</h1>
+		<div>
+			<p>Пояснення до рішення (хід вирішення задачі).</p>
+			<ol>
+				<li>Із зацікавленості до відмінності/подібності кількості змін одного й того ж масиву прийняв рішення об'єднати
+					розв'язок перших трьох задач в одни.</li>
+				<li>Створено масв із 30 випадкових чисел від 1 до 10000 за допомогоу функцій генерації випадкових чисел та
+					масиву.</li>
+				<li>Створено функції для сортування масиву: бульбашкою, змішуванням та включенням (пізніше до функцій додано
+					параметр counter).</li>
+				<li>Створено загальну функцію-ітератор (лічильник) для підрахунку кількості обмінів значеннями кожного з
+					методів.</li>
+				<li>Для підрахунку обмінів кожного із методів створено три окремі функції, кожна з яких:
+					<ul>
+						<li>приймає оригінальний масив;</li>
+						<li>створює лічильник для підрахунку кількості обмінів;</li>
+						<li>викликає відповідну функцію сортування в яку передаєтьяс копія оригінального масиву та лічильник;</li>
+						<li>повертає кількість змін у відсортованому масиві.</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
 		<script>
-
+			//------------Функція генерації рандомного числа
+			function getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * max - min + 1)
+			}
+			//------------Функція генерації одновимірного масиву з рандомними числами
+			function generateRandomArray(arrLength, min, max) {
+				let arr = []
+				for (let i = 0; i < arrLength; i++) {
+					let randomNum = getRandomValue(min, max)
+					arr.push(randomNum)
+				}
+				return arr
+			}
+			//------------Фкнуція підрахунку кількості обмінв (лічильник)
+			function createCounter(value) {
+				function counter() {
+					return ++value
+				}
+				return counter
+			}
+			//------------Функція сортування масиву бульбашкою
+			function bubbleSort(arr, counter) {
+				let swapped;
+				do {
+					swapped = false;
+					for (let i = 1; i < arr.length; i++) {
+						if (arr[i - 1] > arr[i]) {
+							let temp = arr[i - 1];
+							arr[i - 1] = arr[i];
+							arr[i] = temp;
+							swapped = true;
+							counter()
+						}
+					}
+				} while (swapped);
+				return arr
+			}
+			//------------Функція сортування масиву змішуванням
+			//------------Функція обміну елементів місцями до масиву змішуванням
+			function swap(arr, i, j) {
+				let temp = arr[i]
+				arr[i] = arr[j]
+				arr[j] = temp
+			}
+			function shakeSort(arr, counter) {
+				let leftIndex = 0
+				let rightIndex = arr.length - 1
+				while (leftIndex < rightIndex) {
+					for (let i = leftIndex; i < rightIndex; i++) {
+						if (arr[i] > arr[i + 1]) {
+							swap(arr, i, i + 1)
+							// shakeSortCount()
+							counter()
+						}
+					}
+					rightIndex--
+					for (let i = rightIndex; i > leftIndex; i--) {
+						if (arr[i] < arr[i - 1]) {
+							swap(arr, i, i - 1)
+							// shakeSortCount()
+							counter()
+						}
+					}
+					leftIndex++
+				}
+				return arr
+			}
+			//------------Функція сортування включенням
+			function insertSort(arr, counter) {
+				for (let j = 1; j < arr.length; j++) {
+					const currentElement = arr[j];
+					let i = j - 1
+					while (i >= 0 && arr[i] > currentElement) {
+						arr[i + 1] = arr[i]
+						i = i - 1
+					}
+					arr[i + 1] = currentElement
+					counter()
+				}
+				return arr
+			}
+			// Генерауємо масив із 30 випадково згенерованих чисел від 1 до 10000
+			const arrOf30RandomNumbers = generateRandomArray(30, 1, 10000)
+			//Підрахунок кількості змін бульбашкою 
+			function getBubbleSwapCout(arr) {
+				let counter = createCounter(0)
+				let sorted = bubbleSort([...arr], counter)
+				return counter
+			}
+			let bubbleSwapCount = getBubbleSwapCout(arrOf30RandomNumbers)
+			//----------------------------------------------------
+			//Підрахунок кількості змін змішуванням
+			function getShakeSwapCout(arr) {
+				let counter = createCounter(0)
+				let sorted = shakeSort([...arr], counter)
+				return counter
+			}
+			let shakeSwapCount = getShakeSwapCout(arrOf30RandomNumbers)
+			//---------------------------------------------------
+			// Підрахунок кількості змін включеннями
+			function getInserSwapCout(arr) {
+				let counter = createCounter(0)
+				let sorted = insertSort([...arr], counter)
+				return counter
+			}
+			let insertSwapCount = getInserSwapCout(arrOf30RandomNumbers)
+			// Вивід результату
+			document.write(`<p>Кількість обмінів 30 випадково згенерованих елементів від 1 до 10000 під час сортування бульшкою = ${bubbleSwapCount()}.</p>`)
+			document.write(`<p>Кількість обмінів 30 випадково згенерованих елементів від 1 до 10000 під час сортування змішуванням = ${shakeSwapCount()}.</p>`)
+			document.write(`<p>Кількість обмінів 30 випадково згенерованих елементів від 1 до 10000 під час сортування вкоюченнями = ${insertSwapCount()}.</p>`)
 		</script>
 	</div>
 </body>
