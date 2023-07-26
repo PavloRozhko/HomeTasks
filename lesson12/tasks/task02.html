@@ -73,8 +73,124 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача №.</h1>
+		<h1>Задача 4. Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних
+			таблиць за зразком. Тобто кожного разу після обміну елементів вивести поточний
+			стан масиву на екран.</h1>
 		<script>
+			// функція генерації рандомного числа
+			function getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * max - min + 1)
+			}
+			// функція генерації одновимірного масиву з рандомними числами
+			function generateRandomArray(arrLength, min, max) {
+				let arr = []
+				for (let i = 0; i < arrLength; i++) {
+					let randomNum = getRandomValue(min, max)
+					arr.push(randomNum)
+				}
+				return arr
+			}
+			// функція заміни елементів
+			function swap(arr, i, j) {
+				let temp = arr[i]
+				arr[i] = arr[j]
+				arr[j] = temp
+			}
+			// функція отримання поточної стадії сортування
+			// arr - з поточними значеннями сортування; arrStages - двовтмірний масив стадій сортування
+			function getStageOfSorting(arr, arrStages) {
+				let stage = [...arr] // реструктуризація масиву з поточними значеннями
+				arrStages.push(stage) // додавання масиву поточних значень в масив стадій
+				return arrStages
+			}
+			//Сортування включенняма
+			function getStagesOfInsertSort(arr) {
+				let sortingStages = [];
+				for (let j = 1; j < arr.length; j++) {
+					const currentElement = arr[j];
+					let i = j - 1
+					while (i >= 0 && arr[i] > currentElement) {
+						arr[i + 1] = arr[i]
+						i = i - 1
+						arr[i + 1] = currentElement
+						getStageOfSorting(arr, sortingStages)
+					}
+				}
+				return sortingStages
+			}
+			//Сортування змішуванням
+			function getStagesOfShakeSort(arr) {
+				let leftIndex = 0
+				let rightIndex = arr.length - 1
+				let sortingStages = [];
+				while (leftIndex < rightIndex) {
+					for (let i = leftIndex; i < rightIndex; i++) {
+						if (arr[i] > arr[i + 1]) {
+							swap(arr, i, i + 1)
+							getStageOfSorting(arr, sortingStages)
+						}
+					}
+					rightIndex--
+					for (let i = rightIndex; i > leftIndex; i--) {
+						if (arr[i] < arr[i - 1]) {
+							swap(arr, i, i - 1)
+							getStageOfSorting(arr, sortingStages)
+						}
+					}
+					leftIndex++
+				}
+				return sortingStages
+			}
+			//Сортування бульбашкою
+			function getStagesOfBubbleSort(arr) {
+				let swapped;
+				let sortingStages = [];
+				do {
+					swapped = false;
+					for (let i = 1; i < arr.length; i++) {
+						if (arr[i - 1] > arr[i]) {
+							swap(arr, i - 1, i)
+							getStageOfSorting(arr, sortingStages)
+							swapped = true;
+						}
+					}
+				} while (swapped);
+				return sortingStages
+			}
+			//-------------------------Розв'язок
+			let randomArray = generateRandomArray(5, 1, 9)
+			console.log(randomArray)
+			// Отримання масиву зі стадіями сортування бульбашкою
+			let bubbleSortingStages = getStagesOfBubbleSort([...randomArray])
+			console.log(bubbleSortingStages)
+			// Отримання масиву зі стадіями сортування змішуванням
+			let shakeSortingStages = getStagesOfShakeSort([...randomArray])
+			console.log(shakeSortingStages)
+			// Отримання масиву зі стадіями сортування включенням
+			let insertSortingStages = getStagesOfInsertSort([...randomArray])
+			console.log(insertSortingStages)
+			// виведення результату на екран
+			document.write(`<p>Оригінальний масив із 5 випадкових чисел від 1 до 9 - ${randomArray}</p>`)
+			document.write('<p>Стадії сортування бульбашкою.</p>')
+			document.write('<ol>')
+			for (const stage of bubbleSortingStages) {
+				document.write(`<li>${stage}</li>`)
+			}
+			document.write('</ol>')
+
+			document.write('<p>Стадії сортування змішуванням.</p>')
+			document.write('<ol>')
+			for (const stage of shakeSortingStages) {
+				document.write(`<li>${stage}</li>`)
+			}
+			document.write('</ol>')
+
+			document.write('<p>Стадії сортування включенням.</p>')
+			document.write('<ol>')
+			for (const stage of insertSortingStages) {
+				document.write(`<li>${stage}</li>`)
+			}
+			document.write('</ol>')
 		</script>
 	</div>
 </body>
