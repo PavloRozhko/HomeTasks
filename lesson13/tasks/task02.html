@@ -75,9 +75,30 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 1. Нехай X<sub>0</sub>=1, X<sub>i</sub>=X<sub>i-1</sub>+2i, де i=1,2,... Визначити X<sub>10</sub>.
+			Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів.</h1>
 		<script>
-
+			// Знаходження X10 (числової послідовності) рекурсивним алгоритмом
+			// Для знаходження послідовності у функцію передаються наступні значення 
+			//      num - шукане значеня (передається при виклику)
+			//      i - крок = 1, доки не досягне 10
+			//      х - перший член прогресії = 1
+			function numericalSequenceRec(num, i = 1, x = 1) {
+				if (i > num) return x
+				else return numericalSequenceRec(num, i + 1, x - 1 + (2 * i))
+			}
+			let x10_Rec = numericalSequenceRec(10)
+			console.log(x10_Rec)
+			//Знаходження X10 (числової послідовності) нерекурсивним алгоритмом
+			function numericalSequenceRecNoRec(num) {
+				let x = 1
+				for (let i = 1; i <= num; i++) {
+					x = x - 1 + (2 * i)
+				}
+				return x
+			}
+			let x10_NoRec = numericalSequenceRecNoRec(10)
+			console.log(x10_NoRec)
 		</script>
 	</div>
 </body>
