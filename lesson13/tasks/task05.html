@@ -75,8 +75,40 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 4. З використанням замикань розробити ітератор, тобто
+			функцію, що буде поступово за окремими викликами видавати по одну букву наперед заданого слова. З
+			використанням нього розробити гру «Прекладач». Виводимо для користувача опис цього слова і по одну букву
+			користувач вводить переклад цього слова. Підрахувати кількість вгаданих букв.</h1>
 		<script>
+			// функція, що виводить за окремими викликами по одній літері наперед заданого слова
+			function getWordLetters(word) {
+				let wordLetters = [...word].reverse() // перетворення рядка на масив літер та зміна порядку його елементів
+				function getWordLetter() {
+					let wordLetter = wordLetters.pop() // видалення з масиву останнього елемента
+					alert(wordLetter) // виведення видаленого елемента на екран
+					return wordLetter // повернення видаленого елемента
+				}
+				return getWordLetter
+			}
+
+			function translator(word, description) {
+				let taskInfo = alert(`Перекладіть на англійську мову слово: ${description}. Довжина слова ${word.length} літер.`)
+				let wordInLetters = getWordLetters(word) // передача слова у функцію виклику літер
+				let userLettersArr = []
+				let counter = 0
+				for (let letter = 0; letter < word.length; letter++) {
+					let userLetter = prompt(`Введіть ${letter + 1} літеру.`).toLocaleLowerCase()
+					let wordLetter = wordInLetters()
+					userLettersArr.push(userLetter)
+					userLetter === wordLetter ? counter++ : counter
+				}
+				return [userLettersArr, counter]
+			}
+
+			let wordForTranslate = 'apple'
+			let wordDescription = 'фрукт яким було отруєно Білосніжку'
+			let [userLettersArr, counter] = translator(wordForTranslate, wordDescription)
+			document.write(`Слово яке необхідно було перекласти ${wordForTranslate}.<br>Введені вам літери ${userLettersArr}, кількість правильно вгаданих літер ${counter}`)
 
 		</script>
 	</div>
