@@ -75,9 +75,39 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 5. Тренажер додавання. Кожні 10 секунд користувачу задають
+			випадковий приклад з додавання двох цифр і робиться перевірка.</h1>
 		<script>
+			// функція генерації рандомного числа від 1 до 100
+			function generateRandomNum(min = 1, max = 100) {
+				return Math.floor(Math.random() * max) + 1
+			}
+			//--- функція тренажер додавання
+			function additionSimulator() {
+				let x = generateRandomNum()  // отримання першого числа
+				let y = generateRandomNum() // отримання другого числа
+				alert(`Скільки буде ${x} + ${y}`)
+				let userAnser = parseInt(prompt('Ваша відповідь'))
+				let result = x + y // обчислення суми x,y
+				return userAnser === result ? alert('Правильно') : alert('Неправильно')
+			}
+			// функція таймера
+			// 1) варіант з setInterval
+			// let intervalId = setInterval(() => {
+			// 	additionSimulator()
+			// 	let message = confirm('Продовжуємо?')
+			// 	if (message === false) clearInterval(intervalId)
+			// }, 10000)
+			// 2) варіант з setTimeout
+			function simulatorInterval() {
+				setTimeout(() => {
+					additionSimulator()
+					let message = confirm('Продовжуємо?')
+					if (message) simulatorInterval()
+				}, 10000)
+			}
 
+			let checkKnowledge = simulatorInterval()
 		</script>
 	</div>
 </body>
