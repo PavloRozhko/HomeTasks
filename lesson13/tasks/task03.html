@@ -75,8 +75,33 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 2. Реалізувати бінарний пошук (розглядали на попередніх уроках) з використанням рекурсивного алгоритму.
+		</h1>
 		<script>
+			// Передаємо у функцію початкові значення та присвоюємо початкові значення початку і кінця (за замовчанням)
+			// первірка чи start не > за end (якщо так, то шукане число відчутнє)
+			// визначення середини
+			// перевірка чи шуканий елемент знаходиться по середині
+			// в іншому випадку рекурсивний виклик функції в залежності від порівняння шуканого числа з числом по середині
+			function includes_binarySearchRec(arr, searchElement, start = 0, end = arr.length - 1) {
+				if (start > end) {
+					return false
+				}
+				const middle = Math.floor((start + end) / 2)
+
+				if (arr[middle] === searchElement) return true
+				else if (arr[middle] < searchElement) return includes_binarySearchRec(arr, searchElement, start = middle + 1)
+				else return includes_binarySearchRec(arr, searchElement, start, end = middle - 1)
+			}
+
+			let arr = [1, 5, 8, 19, 24, 33, 43, 49, 51, 55, 59, 99, 115, 144, 151, 160, 177, 183, 199]
+
+			console.log(includes_binarySearchRec(arr, 60))
+			console.log(includes_binarySearchRec(arr, 43))
+			console.log(includes_binarySearchRec(arr, 150))
+			console.log(includes_binarySearchRec(arr, 183))
+			console.log(includes_binarySearchRec(arr, 199))
+			console.log(includes_binarySearchRec(arr, 200))
 
 		</script>
 	</div>
