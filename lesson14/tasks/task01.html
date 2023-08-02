@@ -75,8 +75,164 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 1. Описати масив об’єктів – сайтів розроблених компанією з такими властивостями:</h1>
+		<p>----- Властивості------</p>
+		<ol>
+			<li>назва компанії на час розробки(назву періодично змінюють)</li>
+			<li>власник компанії</li>
+			<li>споснсори(масив спонсорів)
+				<ul>
+					<li>прізвище спонсора</li>
+					<li>ім’я спонсора</li>
+					<li>сума вкладень спонсора</li>
+				</ul>
+			</li>
+			<li>рік випуску</li>
+			<li>вартість сайту</li>
+		</ol>
 		<script>
+			let developedSitesList = [
+				{
+					title: 'Soft Cell',
+					owner: 'Alan Walker',
+					sponsors: [
+						{ lastName: 'Yeter', firstName: 'Burak', investAmount: 5000, },
+						{ lastName: 'Perry', firstName: 'Mike', investAmount: 5000, },
+						{ lastName: 'Groove', firstName: 'Amada', investAmount: 9000, },
+					],
+					prodactionYear: 2015,
+					cost: 20000,
+				},
+				{
+					title: 'Lemon Jelly',
+					owner: 'James Blake',
+					sponsors: [
+						{ lastName: 'Yeter', firstName: 'Burak', investAmount: 100000, },
+						{ lastName: 'Slim', firstName: 'Fatboy', investAmount: 25000, },
+						{ lastName: 'Groove', firstName: 'Amada', investAmount: 10000, },
+					],
+					prodactionYear: 2020,
+					cost: 150000,
+				},
+				{
+					title: 'Three Days Grace',
+					owner: 'Marilyn Manson',
+					sponsors: [
+						{ lastName: 'Jax', firstName: 'Basement', investAmount: 50000, },
+						{ lastName: 'Slim', firstName: 'Fatboy', investAmount: 35000, },
+					],
+					prodactionYear: 2009,
+					cost: 90000,
+				},
+				{
+					title: 'Soft Cell',
+					owner: 'Alan Walker',
+					sponsors: [
+						{ lastName: 'Slim', firstName: 'Fatboy', investAmount: 20000, },
+						{ lastName: 'Jockii', firstName: 'Druce', investAmount: 100000, },
+					],
+					prodactionYear: 2007,
+					cost: 125000,
+				},
+				{
+					title: 'Black Mamba',
+					owner: 'Kobe Bryant',
+					sponsors: [
+						{ lastName: 'Smith', firstName: 'Andrew', investAmount: 40000, },
+						{ lastName: 'Einar', firstName: 'Selvik', investAmount: 50000, },
+						{ lastName: 'Shaquille', firstName: 'Rashaun', investAmount: 100000, },
+					],
+					prodactionYear: 2018,
+					cost: 200000,
+				},
+				{
+					title: 'Rohata Zhaba',
+					owner: 'Samwise Gamgee',
+					sponsors: [
+						{ lastName: 'Baggins', firstName: 'Frodo', investAmount: 15000, },
+						{ lastName: 'Took', firstName: 'Pippin', investAmount: 15000, },
+						{ lastName: 'Bombadil', firstName: 'Tom', investAmount: 15000, },
+						{ lastName: 'Turambar', firstName: 'Turin', investAmount: 15000, },
+						{ lastName: 'Gollum', firstName: 'Smeagol', investAmount: 15000, },
+					],
+					prodactionYear: 2005,
+					cost: 90000,
+				},
+			]
+			// Знайти:
+			// 1) загальну вартість усіх сайтів
+			const sitesCostSum = developedSitesList.reduce(
+				(prevSiteSum, sum) => prevSiteSum + sum.cost,
+				0
+			)
+			console.log(`загальну вартість усіх сайтів = ${sitesCostSum}`)
+			//2) кількість сайтів, що було зроблено між 2000 та 2009 рр.
+			const sitesNumberDevelopedBetweenYears = developedSitesList.reduce((prevPeriod, site) =>
+				(site.prodactionYear >= 2000 && site.prodactionYear <= 2009) ? prevPeriod + 1 : prevPeriod
+				, 0)
+			console.log(`кількість сайтів, що було зроблено між 2000 та 2009 рр. = ${sitesNumberDevelopedBetweenYears}`)
+			// 3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+			function getSitesWithGreaterThan100000Investments(sites) {
+				let counter = 0
+
+				for (let i = 0; i < sites.length; i++) {
+					let site = sites[i]
+					let sum = 0
+
+					for (let j = 0; j < site.sponsors.length; j++) {
+						sum += site.sponsors[j].investAmount
+					}
+
+					sum > 100000 ? counter++ : counter
+				}
+				return counter
+			}
+			let sitesNumWhereGreaterThan100000Invest = getSitesWithGreaterThan100000Investments(developedSitesList)
+			console.log(`кількість сайтів, де сума спонсорських вкладень була більшою за 100000 = ${sitesNumWhereGreaterThan100000Invest}`)
+			// 4) створити загальний список усіх спонсорів(поки можуть повторюватись, просто зібрати усі у масив)
+			function getSponsorsList(sites) {
+				let fullName = []
+				for (let i = 0; i < sites.length; i++) {
+					let site = sites[i].sponsors
+					for (let j = 0; j < site.length; j++) {
+						let firstName = site[j].firstName
+						let lastName = site[j].lastName
+						fullName.push({
+							firstName,
+							lastName,
+						})
+					}
+				}
+				return fullName
+			}
+
+			let sponsorsList = getSponsorsList(developedSitesList)
+			console.log(sponsorsList)
+			// 5) знайти рік, коли прибуток був найбільшимi
+			function getYearWithGreatestIncome(sites) {
+				let year
+				for (let i = 1; i < sites.length; i++) {
+					sites[i - 1].cost > sites[i].cost ?
+						year = sites[i - 1].prodactionYear : year = sites[i].prodactionYear
+				}
+				return year
+			}
+			const greatestIncomeYear = getYearWithGreatestIncome(developedSitesList)
+			console.log(`${greatestIncomeYear} рік, коли прибуток був найбільшимi`)
+			// 6) упорядкувати список за спаданням прибутку
+			let sortSites = JSON.parse(JSON.stringify(developedSitesList)).sort((income1, income2) =>
+				income2.cost - income1.cost
+			)
+			console.log(sortSites)
+			// 7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 100000 і більше 100000
+			let sitesListGreaterThan100K = developedSitesList.filter(site => {
+				if (site.cost > 100000) return JSON.parse(JSON.stringify(site))
+			})
+			let sitesListLessThan100K = developedSitesList.filter(site => {
+				if (site.cost < 100000) return JSON.parse(JSON.stringify(site))
+			})
+			console.log(sitesListGreaterThan100K)
+			console.log(sitesListLessThan100K)
 		</script>
 	</div>
 </body>
