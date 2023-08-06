@@ -75,9 +75,75 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.
+		</h1>
 		<script>
+			// ----- Властивості -------
+			// кількість квадратів (клітинок)
+			// кількість зайців
+			// кількість пострілів
+			// ігрове поле
+			// ----- Методи ----------
+			// Виведення ігрового поля
+			// Метод пострілу(задається позиція пострілу)
+			// гереація ігрового поля
+			// метод гри (користвувач задає позицію пострілу)
+			//         поки кілкьість пострілів не = 0 або не вибито усіх зайців
+			//             перевіряємо чи був вдалим постріл користувача
+			//                 якщо так, то одиницю в ігровому полі замінюємо 0
+			//                 повідомляємо користвувачу про результат пострілу
+			//                 зменшуємо на 1 кількість пострілів
 
+			// функція створення об’єкта «Тир»
+			function ShootingGallery(cellsNumber, rabbitsNumber, shotsNumber) {
+				this.cellsNumber = cellsNumber
+				this.rabbitsNumber = rabbitsNumber
+				this.shotsNumber = shotsNumber
+				this.gameField = this.generateGameField()
+			}
+			// генерація випадковго числа
+			ShootingGallery.prototype.getRandomNumber = function (minNum, maxNum) {
+				return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+			}
+			// генерація гірового поля
+			ShootingGallery.prototype.generateGameField = function (cellsNumber, rabbitsNumber) {
+				let gameField = new Array(this.cellsNumber).fill(0)
+				for (let gameCell = 0; gameCell < this.rabbitsNumber;) {
+					let randIndex = this.getRandomNumber(0, this.cellsNumber)
+					if (gameField[randIndex] === 0) {
+						gameField[randIndex] = 1
+						gameCell++
+					}
+				}
+				return gameField
+			}
+			// Виведення ігрового поля
+			ShootingGallery.prototype.showGameField = function () {
+				document.write(this.gameField)
+			}
+			// Метод пострілу(задається позиція пострілу)
+			ShootingGallery.prototype.getShotAttempt = function () {
+				let attempt = parseInt(prompt('Введіть позицію для пострілу'))
+				return attempt
+			}
+			// метод гри (користвувач задає позицію пострілу)
+			ShootingGallery.prototype.playGame = function () {
+				do {
+					let userPosition = this.getShotAttempt()
+					if (this.gameField[userPosition] === 1) {
+						this.gameField[userPosition] = 0
+						alert('Зайця вибито')
+						this.shotsNumber -= 1
+					} else {
+						alert('Мимо')
+						this.shotsNumber -= 1
+					}
+				} while (this.shotsNumber !== 0 && this.gameField.includes(1));
+			}
+
+			let shootingGallery_1 = new ShootingGallery(10, 3, 10)
+			console.log(shootingGallery_1);
+			shootingGallery_1.playGame()
 		</script>
 	</div>
 </body>
