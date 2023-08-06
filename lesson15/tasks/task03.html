@@ -77,7 +77,56 @@
 	<div class="container">
 		<h1></h1>
 		<script>
+			class Car {
+				constructor(model, tankSize, availableGas, seatsNumber, passengersNumber) {
+					this.model = model
+					this.tankSize = tankSize
+					this.availableGas = availableGas
+					this.seatsNumber = seatsNumber
+					this.passengersNumber = passengersNumber
+				}
+				//-- Методи
+				// Заправка на вказану кількість літрів
+				refuelingGas = function (gasAmount) {
+					if (this.tankSize < this.availableGas + gasAmount)
+						throw new Error('Забгато бензину')
+					this.availableGas += gasAmount
+				}
+				// Виведення кількості пасажирів
+				showPassengersNumber = function () {
+					console.log(this.passengersNumber)
+				}
+				// Додавання пасажирів
+				addPassengers = function (addedPassengers) {
+					if (this.seatsNumber < this.passengersNumber + addedPassengers)
+						throw new Error('Кількість пасажирів перевищує кількість місць для сидіння')
 
+					this.passengersNumber += addedPassengers
+				}
+				// Висадка пасажирів
+				removePassengers = function (removedPassengers) {
+					if (this.passengersNumber - removedPassengers < 0)
+						throw new Error('Введена некоректна кількість пасажирів')
+
+					this.passengersNumber -= removedPassengers
+				}
+
+			}
+			//-- новий об'єкт автомобіль 
+			let car1 = new Car('BMW', 50, 20, 4, 2)
+			//---- кількість бензину на яку хочемо заправити автомобіль
+			let gasAmount = parseInt(prompt('Введіть кількість бензину яку ви хочете заправити'))
+			car1.refuelingGas(gasAmount)   //--- заправка автомомбіля
+			console.log(car1.availableGas)  //--- кількість бензину після дозаправки
+			car1.showPassengersNumber()  //--- виведення в консоль кількості пасажирів
+			//--- додвання пасажирів
+			let addPassengers = parseInt(prompt('Введіть кількість пасажирів яких хочете додати'))
+			car1.addPassengers(addPassengers)
+			car1.showPassengersNumber()
+			//--- висадка пасажирів 
+			let removePassengers = parseInt(prompt('Введіть кількість пасажирів яких хочете висадиит'))
+			car1.removePassengers(removePassengers)
+			car1.showPassengersNumber()
 		</script>
 	</div>
 </body>
