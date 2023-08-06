@@ -75,9 +75,60 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 5. Розробити клас «Керівник танців»</h1>
 		<script>
+			// ----Поля
+			// Масив імен хлопців
+			// Масив імен дівчат
+			// ----Методи
+			// Метод випадкового вибору імені хлопця
+			// Метод випадкового вибору імені дівчини
+			// Метод виведення пари для танців
+			// Метод run, який ініціює через кожні 5 секунд виведення нової пари для танців
 
+			class HeadOfDances {
+				constructor(boysNames, girlsNames) {
+					this.boysNames = boysNames
+					this.girlsNames = girlsNames
+				}
+				// ----Методи
+				getRandomNumber(min, max) {
+					return min + Math.floor(Math.random() * (max - min + 1))
+				}
+
+				// Метод випадкового вибору імені хлопця
+				getRandomBoyName() {
+					let randomIndex = this.getRandomNumber(0, this.boysNames.length - 1)
+					let randomName = this.boysNames[randomIndex]
+					return randomName
+				}
+				// Метод випадкового вибору імені дівчини
+				getRandomGirlName() {
+					let randomIndex = this.getRandomNumber(0, this.girlsNames.length - 1)
+					let randomName = this.girlsNames[randomIndex]
+					return randomName
+				}
+				// Метод виведення пари для танців
+				getDancePair() {
+					// alert(`${getRandomGirlName()} - ${getRandomBoyName()}`)
+					return `${this.getRandomGirlName()}  - ${this.getRandomBoyName()} `
+				}
+				// Метод run, який ініціює через кожні 5 секунд виведення нової пари для танців
+				run() {
+					setTimeout(() => {
+						// this.getDancePair()
+						alert(this.getDancePair())
+						this.run()
+					}, 5000)
+				}
+			}
+
+			let boys = ['Щек', 'Цвітан', 'Хорив', 'Фауст', 'Устим', 'Тодось', 'Світлогор', 'Радомисл', 'Перемисл', 'Олелько',]
+			let girls = ['Аврора', 'Василина', 'Горпина', 'Одарка', 'Явдоха', 'Ждана', 'Зінаїда', 'Ісидора', 'Килина', 'Либідь',]
+
+			let dancePairs = new HeadOfDances(boys, girls)
+			console.log(dancePairs);
+			dancePairs.run()
 		</script>
 	</div>
 </body>
