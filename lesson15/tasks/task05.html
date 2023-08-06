@@ -59,6 +59,10 @@
 			font-size: 20px;
 		}
 
+		img {
+			max-width: 500px;
+		}
+
 		div:not(:last-child),
 		li:not(:last-child),
 		p:not(:last-child) {
@@ -75,8 +79,62 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 4. Розробити клас Baner</h1>
 		<script>
+			// Поля
+			//     Масив об’єктів ( графічних зображень та посилань на сайти)
+			//Методи
+			//    Метод випадкового вибору об’єкта (графічного зображення та посилання)
+			//    Метод виведення випадкового банера
+
+			class Baner {
+				constructor(basArr) {
+					this.baner = basArr
+				}
+
+				//------- Метод генерації випадкового чисал
+				getRandomNum(min, max) {
+					return min + Math.floor(Math.random() * (max - min + 1))
+				}
+				//------ Метод випадкового вибору об’єкта
+				getRandomObj() {
+					let randIndex = this.getRandomNum(0, this.baner.length - 1)
+					return this.baner[randIndex]
+				}
+				//------ Метод виведення випадкового банера
+				showBaner() {
+					let randomBaner = this.getRandomObj()
+					return `<a target="_blank" href="${randomBaner.link}"><img src="${randomBaner.imagSrc}" alt=""></a>`
+				}
+			}
+
+			let srcList = [
+				{
+					imagSrc: 'https://webmaestro.com.ua/img/blog/20181208171932_.jpg',
+					link: 'https://www.youtube.com/watch?v=vWIkbNOx3Rg',
+				},
+				{
+					imagSrc: 'https://webmaestro.com.ua/img/blog/20201016122530_.jpeg',
+					link: 'https://www.youtube.com/watch?v=hW8EB2WioKw',
+				},
+				{
+					imagSrc: 'https://st3.depositphotos.com/1471096/17110/i/450/depositphotos_171105922-stock-photo-skull-and-tiger-in-glasses.jpg',
+					link: 'https://www.youtube.com/watch?v=tXvPYgXoAVw',
+				},
+				{
+					imagSrc: 'https://planetarium-kharkov.org/files/images/spiral_galaxy_m81.jpg',
+					link: 'https://www.youtube.com/watch?v=FGUmtfYItjU',
+				},
+				{
+					imagSrc: 'https://web-promo.ua/wp-content/uploads/2021/10/greg-rakozy-ompaz-dn-9i-unsplash-1.jpg',
+					link: 'https://www.youtube.com/watch?v=LE5TvwIaIJo',
+				}
+			]
+
+			let banner = new Baner(srcList)
+			console.log(banner)
+			console.log(banner.getRandomObj())
+			document.write(banner.showBaner())
 
 		</script>
 	</div>
