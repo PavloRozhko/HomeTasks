@@ -75,8 +75,73 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 3. Розробити клас MultChecker для перевірки таблиці множення</h1>
 		<script>
+			// Поля
+			//     Число, яке перевіряємо(наприклад, перевірка частини таблиці множення на 7)
+			//     Кількість правильних відповідей
+			//     Кількість неправильних відповідей
+			// Методи
+			//     Генерування прикладу(метод випадковим чином визначає друге число, перше число фіксоване)
+			//     Перевірка правильності вказаної відповіді
+			//     render
+			class MultChecker {
+				constructor(number) {
+					this.checkNumber = number
+					this.correctAnswersNumber = 0
+					this.wrongAnswersNumber = 0
+				}
+				//------ функція генерації рандомного числа від 1 до 10
+				getRandomNumber(min = 1, max = 10) {
+					return min + Math.floor(Math.random() * (max - min + min))
+				}
+				//------ функція генерації прикладу
+				generateExample() {
+					let randomNum = this.getRandomNumber()
+					alert(`Скільки буде ${this.checkNumber} * ${randomNum}`)
+					let result = this.checkNumber * randomNum
+					return result
+				}
+				//------- функція перевірки відопвіді
+				checkUserAnswer() {
+					let result = this.generateExample()
+					let userAnswer = parseInt(prompt('Введіть вашу відповідь'))
+					if (userAnswer === result) {
+						alert('Correct')
+						this.correctAnswersNumber += 1
+					}
+					else {
+						alert('Wrong')
+						this.wrongAnswersNumber += 1
+					}
+				}
+				//--------функція виконання
+				render() {
+					do {
+						this.checkUserAnswer()
+					} while (confirm('Продовжуємо первірку?'));
+				}
+				//-------
+				toString() {
+					return `Перевірка множення на ${this.checkNumber}, правильних відповідей - ${this.correctAnswersNumber}, неправильних відповідей - ${this.wrongAnswersNumber}.`
+				}
+			}
+
+			let multiplicationBy3Check = new MultChecker(3)
+			let multiplicationBy5Check = new MultChecker(5)
+			let multiplicationBy6Check = new MultChecker(6)
+			let multiplicationBy9Check = new MultChecker(9)
+
+			multiplicationBy3Check.render()
+			multiplicationBy5Check.render()
+			// multiplicationBy6Check.render()
+			// multiplicationBy9Check.render()
+			console.log(multiplicationBy3Check);
+			document.write(multiplicationBy3Check + '<br>')
+			document.write(multiplicationBy5Check + '<br>')
+			// console.log(multiplicationBy5Check);
+			// console.log(multiplicationBy6Check);
+			// console.log(multiplicationBy9Check);
 
 		</script>
 	</div>
