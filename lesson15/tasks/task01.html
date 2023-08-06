@@ -75,9 +75,38 @@
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 0. Дано два об’єкта.Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження
+			суми, а у
+			іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+		</h1>
 		<script>
+			let object1 = {
+				array: [1, 5, 10, 14, 11, 19, 20, 25, 30, 4,],
+				getArrSum: function () {
+					let sum = 0
+					for (const num of this.array) {
+						sum += num
+					}
+					return sum
+				},
+			}
+			let object2 = {
+				array: [2, 5, 9, 10, 18, 16, 24, 30, 44, 50,],
+				getArrProduct: function (minValue, maxValue) {
+					let prod = 1
+					for (const num of this.array) {
+						if (num >= minValue && num <= maxValue)
+							prod *= num
+					}
+					return prod
+				}
+			}
 
+			console.log(object1.getArrSum())
+			console.log(object2.getArrProduct.apply(object1, [10, 20]))
+
+			console.log(object2.getArrProduct(10, 20))
+			console.log(object1.getArrSum.call(object2));
 		</script>
 	</div>
 </body>
