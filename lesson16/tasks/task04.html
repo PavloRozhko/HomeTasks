@@ -75,9 +75,123 @@
 </head>
 <body>
 	<div class="container">
-		<h1> </h1>
+		<h1>Задача. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання
+			кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та
+			мінімальної сум, які може видати банкомат, та метод зняття деякої суми. </h1>
 		<script>
+			//---- поля
+			//поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень
+			// ------ методи
+			// Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат
+			//метод зняття деякої суми.
+			class TBankomat {
+				constructor(banknotes5, banknotes10, banknotes20, banknotes50, banknotes100, banknotes200) {
+					this.banknotes200UAH = banknotes200
+					this.banknotes100UAH = banknotes100
+					this.banknotes50UAH = banknotes50
+					this.banknotes20UAH = banknotes20
+					this.banknotes10UAH = banknotes10
+					this.banknotes5UAH = banknotes5
+				}
+				// Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат
+				getBanknoteDenomination(fieldName) {
+					let result
+					switch (fieldName) {
+						case 'banknotes200UAH': result = 200
+							break
+						case 'banknotes100UAH': result = 100
+							break
+						case 'banknotes50UAH': result = 50
+							break
+						case 'banknotes20UAH': result = 20
+							break
+						case 'banknotes10UAH': result = 10
+							break
+						case 'banknotes5UAH': result = 5
+							break
+					}
+					return result
+				}
 
+				getMaxAmountWhichATMCanBeIssued() {
+					let maxAmount = 0
+					for (const banknote in this) {
+						let banknoteDenominate = this.getBanknoteDenomination(banknote)
+
+						maxAmount += banknoteDenominate * this[banknote]
+					}
+					return maxAmount
+				}
+
+				getMinAmountWhichATMCanBeIssued() {
+					let availableBanknotes = []
+					for (const banknote in this) {
+						if (this[banknote] !== 0) {
+							let banknoteDenominate = this.getBanknoteDenomination(banknote)
+							availableBanknotes.push(banknoteDenominate)
+						}
+					}
+
+					let minAmount = Math.min(...availableBanknotes)
+
+					return minAmount
+				}
+				//метод зняття деякої суми
+				//---------Перевірка чи сума для зняття не більша за загальну суму, що є в банкоматі
+				checkMoneyAmountToWithdraw(sumToWithdraw) {
+					if (sumToWithdraw > this.getMaxAmountWhichATMCanBeIssued())
+						throw new Error('There is not enough money to withdraw')
+					else
+						return true
+				}
+				//--------Комбінування банкнот для знімання певної суми
+				combinationOfDenominations(sumToWithdraw) {
+					if (this.checkMoneyAmountToWithdraw(sumToWithdraw)) {
+						let withdrawCount = 0
+						while (withdrawCount !== sumToWithdraw) {
+							for (const banknote in this) {
+								if (this[banknote] !== 0) {
+									let banknoteDenominate = this.getBanknoteDenomination(banknote)
+									withdrawCount += banknoteDenominate
+									if (withdrawCount <= sumToWithdraw) {
+										this[banknote] -= 1
+										break
+									} else if (withdrawCount > sumToWithdraw) {
+										withdrawCount -= banknoteDenominate
+									}
+								}
+							}
+						}
+						return withdrawCount
+					}
+				}
+				// зняття певної суми
+				withdrawMoney(sumToWithdraw) {
+					this.combinationOfDenominations(sumToWithdraw)
+				}
+				//-----
+				toString() {
+					return `Max amount to withdraw ${this.getMaxAmountWhichATMCanBeIssued()}  - Min amount to withdraw ${this.getMinAmountWhichATMCanBeIssued()}`
+				}
+			}
+
+			let atm_1 = new TBankomat(25, 30, 35, 40, 45, 50)
+			document.write(atm_1 + '<br>')
+
+			atm_1.withdrawMoney(555)
+			document.write(atm_1 + ' - після зняття 555<br>')
+
+			atm_1.withdrawMoney(55)
+			document.write(atm_1 + ' - після зняття 55<br>')
+
+			atm_1.withdrawMoney(1555)
+			document.write(atm_1 + ' - після зняття 1555<br>')
+
+			atm_1.withdrawMoney(5465)
+			document.write(atm_1 + ' - після зняття 5465<br>')
+
+			atm_1.withdrawMoney(15)
+			document.write(atm_1 + ' - після зняття 15<br>')
 		</script>
 	</div>
 </body>
