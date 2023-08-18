@@ -75,8 +75,240 @@
 </head>
 <body>
 	<div class="container">
-		<h1> </h1>
+		<h1>Задача 3. Об’єкт “Фірма” (використати члени-класи).</h1>
 		<script>
+			//---- поля
+			// назва фірми;
+			// дата заснування(рік, місяць);
+			// послуги(назва послуги, вартість, термін виконання);
+			// адреси філіалів(країна, місто, вулиця, номер будинку);
+			//------ методи
+			// визначення кількості років існування фірми;
+			// виведення всіх філіалів фірми у вказаному місті;
+			// виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+			// клас фрма
+			class Firm {
+				#title
+				static minTitleName = 3
+				constructor(title, foundationDate, servicesData, affiliatesData) {
+					this.Title = title
+					this.foundationDate = foundationDate
+					this.services = servicesData
+					this.affiliateAddresses = affiliatesData
+				}
+				get Title() {
+					return this.#title
+				}
+				set Title(newValue) {
+					if (newValue.length < Firm.minTitleName)
+						throw new Error('Name too short')
+					this.#title = newValue
+				}
+
+				toString() {
+					return `${this.Title}, ${this.foundationDate}`
+				}
+
+				// визначення кількості років існування фірми
+				getExistenceYearsNumber() {
+					let existenceYearsNumber = FoundationDate.currnetYear - this.foundationDate.Year
+					return existenceYearsNumber
+				}
+				//виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу
+				printServicesCanBePerformedForSpecifiedAmountAndPeriod(moneyAmoun, timePeriod) {
+					for (const service of this.services) {
+						if (service.ServiceCost === moneyAmoun && service.ServiceTerm === timePeriod)
+							document.write(`${service.ServiceTitle} - ${service.ServiceCost}$ - ${service.ServiceTerm} months <br>`)
+					}
+				}
+				// виведення всіх філіалів фірми у вказаному місті
+				getBranchesInTheCity(cityName) {
+					let affiliateAddreses = this.affiliateAddresses.filter(address => address.City === cityName)
+					return affiliateAddreses
+				}
+				printBranchesAddresses(cityName) {
+					let addreses = this.getBranchesInTheCity(cityName)
+					for (const address of addreses) {
+						document.write(`${address.Country} - ${address.City} - ${address.Street} - ${address.HouseNumber} <br>`)
+					}
+				}
+			}
+			// член-клас дата заснування
+			class FoundationDate {
+				#month
+				#year
+				static minMonth = 1
+				static maxMonth = 12
+				static currentMonth = 8
+				static currnetYear = 2023
+				constructor(month, year) {
+					this.Year = year
+					this.Month = month
+				}
+				get Month() {
+					return this.#month
+				}
+				get Year() {
+					return this.#year
+				}
+				set Month(newValue) {
+
+					if (newValue < FoundationDate.minMonth || newValue > FoundationDate.maxMonth)
+						throw new Error('Введено некоректне значення місяця')
+
+					if (this.Year === FoundationDate.currnetYear || newValue > FoundationDate.currentMonth)
+						throw new Error('Введено некоректне значення місяця поточного року')
+
+					this.#month = newValue
+				}
+				set Year(newValue) {
+					if (newValue < 0 || newValue > FoundationDate.currnetYear)
+						throw new Error('Введено некоректне значення року')
+
+					this.#year = newValue
+				}
+				toString() {
+					return `${this.Month} month ${this.Year} year`
+				}
+			}
+			// член-клас сервіси
+			class Service {
+				static minServiceNameLenght = 3
+				static minServiceCost = 1
+				static minServiceTerm = 0
+				#serviceTitle
+				#serviceCost
+				#serviceTerm
+				constructor({ serviceTitle, serviceCost, serviceTerm }) {
+					this.ServiceTitle = serviceTitle
+					this.ServiceCost = serviceCost
+					this.ServiceTerm = serviceTerm
+				}
+
+				set ServiceTitle(newValue) {
+					if (newValue.lenght <= Service.minServiceNameLenght)
+						throw new Error('Назва послуги повинна бути більша за 3 символи')
+
+					this.#serviceTitle = newValue
+				}
+				set ServiceCost(newValue) {
+					if (newValue <= Service.minServiceCost)
+						throw new Error('Введено некоректне значення вартості послуги')
+
+					this.#serviceCost = newValue
+				}
+				set ServiceTerm(newValue) {
+					if (newValue <= Service.minServiceTerm)
+						throw new Error('Введено некоректне значення термінів надання послуги')
+
+					this.#serviceTerm = newValue
+				}
+				get ServiceTitle() {
+					return this.#serviceTitle
+				}
+
+				get ServiceCost() {
+					return this.#serviceCost
+				}
+
+				get ServiceTerm() {
+					return this.#serviceTerm
+				}
+
+				getFullServieInfo() {
+					return `${this.ServiceTitle} - ${this.ServiceCost}$ - ${this.ServiceTerm}months`
+				}
+				toString() {
+					let services = ''
+
+					services += this.getFullServieInfo()
+
+					return services
+				}
+			}
+			// член-клас філії
+			class Affiliate {
+				static minCountryNameLenght = 3
+				static minCityNameLenght = 3
+				static minStreetNameLenght = 3
+				static minHouseNumberLenght = 1
+				#country
+				#city
+				#street
+				#houseNumber
+				constructor({ country, city, street, houseNumber }) {
+					this.Country = country
+					this.City = city
+					this.Street = street
+					this.HouseNumber = houseNumber
+				}
+				get Country() {
+					return this.#country
+				}
+				set Country(newValue) {
+					if (newValue.lenght < Affiliate.minCountryNameLenght)
+						throw new Error('Введено занадто кротка назва країни')
+
+					this.#country = newValue
+				}
+				get City() {
+					return this.#city
+				}
+				set City(newValue) {
+					if (newValue.lenght < Affiliate.minCityNameLenght)
+						throw new Error('Введено занадто кротка назва міста')
+
+					this.#city = newValue
+				}
+				get Street() {
+					return this.#street
+				}
+				set Street(newValue) {
+					if (newValue.lenght < Affiliate.minStreetNameLenght)
+						throw new Error('Введено занадто кротка назва вулиці')
+
+					this.#street = newValue
+				}
+				get HouseNumber() {
+					return this.#houseNumber
+				}
+				set HouseNumber(newValue) {
+					if (newValue.lenght < Affiliate.minStreetNameLenght)
+						throw new Error('Введено занадто кроткий номер будинку')
+
+					this.#houseNumber = newValue
+				}
+
+				getFullAffiliateAddress() {
+					return `${this.Country}, ${this.City}, ${this.Srteet}, ${this.HouseNumber}`
+				}
+
+				toString() {
+					let affiliates = ''
+
+					affiliates += this.getFullAffiliateAddress()
+
+					return affiliates
+				}
+			}
+
+			const firm_1_services = [
+				new Service({ serviceTitle: 'Production', serviceCost: 500, serviceTerm: 3 }),
+				new Service({ serviceTitle: 'Satisfaction', serviceCost: 800, serviceTerm: 5 }),
+				new Service({ serviceTitle: 'Introduction', serviceCost: 100, serviceTerm: 1 }),
+			]
+			const firm_1_Affiliates = [
+				new Affiliate({ country: 'Ukraine', city: 'Boryspil', street: 'Kyivska', houseNumber: '5' }),
+				new Affiliate({ country: 'Canada', city: 'Ottawa', street: 'John Lennon', houseNumber: '5B' }),
+				new Affiliate({ country: 'Canada', city: 'Ottawa', street: 'Highway', houseNumber: '99' }),
+				new Affiliate({ country: 'Portugal', city: 'Lisbon', street: 'O.Castru', houseNumber: '51C' }),
+			]
+
+			const firm_1 = new Firm('P&G', new FoundationDate(1, 1944), firm_1_services, firm_1_Affiliates)
+
+			console.log(firm_1.getExistenceYearsNumber());
+			firm_1.printServicesCanBePerformedForSpecifiedAmountAndPeriod(500, 3)
+			firm_1.printBranchesAddresses('Ottawa')
 
 		</script>
 	</div>
