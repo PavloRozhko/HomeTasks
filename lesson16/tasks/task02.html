@@ -75,9 +75,82 @@
 </head>
 <body>
 	<div class="container">
-		<h1> </h1>
+		<h1>Задача 2. Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового
+			еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та
+			визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі. </h1>
 		<script>
+			//Характеристики
+			// Сума у вигляді доларового еквівалетну
+			// Курс долара
+			// Методи
+			// Реалізувати методи додавання / вилучення грошової маси у гривні
+			class TMoney {
+				#dollarEquivalentAmount
+				#dollarExchangeRate
+				constructor(amountInUAH, dollarExchangeRate = 37) {
+					this.DollarExchangeRate = dollarExchangeRate
+					this.DollarAmount = this.getDollarExchange(amountInUAH)
+				}
+				get DollarAmount() {
+					return this.#dollarEquivalentAmount
+				}
+				set DollarAmount(newValue) {
+					if (isNaN(newValue))
+						throw new Error('Invalid data')
 
+					this.#dollarEquivalentAmount = newValue
+				}
+				get DollarExchangeRate() {
+					return this.#dollarExchangeRate
+				}
+				set DollarExchangeRate(newValue) {
+					if (isNaN(newValue))
+						throw new Error('Invalid data')
+
+					this.#dollarExchangeRate = newValue
+				}
+				//--------методи обміну
+				getDollarExchange(amount) {
+					let exchange = amount / this.#dollarExchangeRate
+					return exchange
+				}
+				//-------методи додавання
+				addAmount(amount) {
+					let amountToAdd = this.getDollarExchange(amount)
+					if (amountToAdd < 0)
+						throw new Error('Sum should be greater than 0')
+
+					this.DollarAmount += amountToAdd
+				}
+				//------методи вилучення
+				subtractAmount(amount) {
+					let amountToSubtract = this.getDollarExchange(amount)
+					if (amountToSubtract < 0)
+						throw new Error('Sum should be greater than 0')
+
+					if (this.DollarAmount < amountToSubtract)
+						throw new Error('Not enough money to subtract')
+
+					this.DollarAmount -= amountToSubtract
+				}
+				//курсу долара, при якому сума у гривнях збільшиться на 100
+				getExchangeRateWhichIncreaseAmountInHryvniasBy100() {
+					return ((this.DollarAmount * this.DollarExchangeRate) + 100) / this.DollarAmount
+				}
+				//--------
+				toString() {
+					return `Current balance in UAH = ${(this.DollarAmount * this.DollarExchangeRate).toFixed(2)}`
+				}
+			}
+
+			let money_1 = new TMoney(3700)
+			document.write(money_1 + '<br>')
+			money_1.addAmount(800)
+			document.write(money_1 + ' після додавання 800 грн<br>')
+			money_1.subtractAmount(500)
+			document.write(money_1 + ' після віднімання 500 грн<br>')
+
+			console.log(money_1.getExchangeRateWhichIncreaseAmountInHryvniasBy100())
 		</script>
 	</div>
 </body>
