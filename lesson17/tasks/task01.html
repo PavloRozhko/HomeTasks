@@ -75,8 +75,31 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача 1.</h1>
+		<h1>Задача 1. Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних,
+			кількості від’ємних, кількість входжень деякого числа(статичні методи).</h1>
 		<script>
+			// Задача 1. Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа(статичні методи)
+			// знаходження кількості додатних
+			// кількості від’ємних
+			// кількість входжень деякого числа
+
+			class ArrayPerformer {
+				static getCountPositivesNumbersInArray(array) {
+					return array.reduce((prevPositive, number) => number > 0 ? prevPositive += 1 : prevPositive, 0)
+				}
+				static getCountNegativeNumbersInArray(array) {
+					return array.reduce((prevNegative, number) => number < 0 ? prevNegative += 1 : prevNegative, 0)
+				}
+				static getCountOfOccurrencesNumber(array, occurrencesNumber) {
+					return array.reduce((prevOccurrence, number) => number === occurrencesNumber ? prevOccurrence += 1 : prevOccurrence, 0)
+				}
+			}
+
+			let someArr = [1, 2, 3, -1, 2, -6, -9, 15, 14, 11, 1, 2]
+
+			console.log(ArrayPerformer.getCountPositivesNumbersInArray(someArr))
+			console.log(ArrayPerformer.getCountNegativeNumbersInArray(someArr))
+			console.log(ArrayPerformer.getCountOfOccurrencesNumber(someArr, 2))
 		</script>
 	</div>
 </body>
