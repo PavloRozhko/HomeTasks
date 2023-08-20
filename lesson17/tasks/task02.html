@@ -75,8 +75,33 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача 2.</h1>
+		<h1>Задача 2. Створити службове авто(водій, марка, номер).Створити клас таким чином, щоб можна було створити тільки
+			один екземпляр цього класу.</h1>
 		<script>
+			class CompanyCar {
+				static #companyCarRef
+				constructor(driver, brand, carPlate) {
+					if (CompanyCar.#companyCarRef)
+						return CompanyCar.#companyCarRef
+
+					this.driver = driver
+					this.brand = brand
+					this.carPlate = carPlate
+
+					CompanyCar.#companyCarRef = this
+				}
+				toString() {
+					return `${this.brand} ${this.carPlate} - ${this.driver}`
+				}
+			}
+
+			let car_1 = new CompanyCar('Mykola', 'Lanos', 'CA0001BA')
+			document.write(car_1 + '<br>')
+
+			CompanyCar.companyCarRef = null
+
+			let car_2 = new CompanyCar('Serhii', 'BMW', 'AA0001AA')
+			document.write(car_2 + '<br>')
 		</script>
 	</div>
 </body>
