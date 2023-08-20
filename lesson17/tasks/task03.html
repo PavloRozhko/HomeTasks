@@ -75,8 +75,67 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача 3.</h1>
+		<h1>Задача 3.Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про
+			якусь подію(це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так,
+			щоб неможна було зробити одночасно декілька об’єктів - нагадувачів.Методи зупинки таймера, метод зміни
+			повідомлення без зупинки таймера.</h1>
 		<script>
+			// Поля
+			//--- повідомлення
+			//--- інтервал
+			// Методи
+			// програма нагадує про якусь подію(це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було
+			// неможна було зробити одночасно декілька об’єктів - нагадувачі
+			// Методи зупинки таймера
+			//  метод зміни повідомлення без зупинки таймера
+
+			class Reminder {
+				static reminderRef
+				constructor(message, reminderInterval) {
+					if (Reminder.reminderRef)
+						return Reminder.reminderRef
+
+					this.message = message
+					this.reminderInterval = reminderInterval
+
+					Reminder.reminderRef = this
+				}
+				// лічильник
+				createCounter(value) {
+					function counter() {
+						return ++value
+					}
+					return counter
+				}
+				//зупинка таймера
+				stopInterval(intervalID) {
+					clearInterval(intervalID)
+				}
+				//зміна повідомлення
+				changeMessage(newMessage) {
+					this.message = newMessage
+				}
+				// запуск нагадування
+				run() {
+					let counter = this.createCounter(0)
+					let intervalID = setInterval(() => {
+						let message = confirm(`${this.message} - ${counter()}`)
+
+						if (!message)
+							this.stopInterval(intervalID)
+
+					}, this.reminderInterval)
+				}
+			}
+
+			let reminder_1 = new Reminder('time to learn JS', 2000)
+
+			reminder_1.run()
+
+			setInterval(() => {
+				reminder_1.changeMessage('time to read')
+			}, 10000)
+
 		</script>
 	</div>
 </body>
