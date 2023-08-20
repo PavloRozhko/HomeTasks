@@ -75,8 +75,126 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Задача 4.</h1>
+		<h1>Задача 4. Особиста бібліотека.Картотека домашньої бібліотеки: дані книги(автори(піб, рік народження, короткий
+			опис), назва книги, жанр, видавництво(назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки
+			організувати додавання / вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.</h1>
 		<script>
+			// Поля
+			// клас книга
+			//---- назва
+			//---- жанр
+			// клас Автор
+			//---- піб
+			//---- рік народження
+			//---- короткий опис
+			// клас Видавництво
+			//---- назва
+			//---- реєстраційний номер
+			//---- рік заснування
+			// клас бібліотека
+
+			class Book {
+				constructor(initData) {
+					this.bookTitle = initData.bookTitle
+					this.genre = initData.genre
+					this.author = new Author(initData)
+					this.publisher = new Publisher(initData)
+				}
+				toString() {
+					return `'${this.bookTitle}', genre: ${this.genre}, author: ${this.author}`
+				}
+			}
+
+			class Author {
+				constructor({ firstName, surname, yearOfBirth, description }) {
+					this.firstName = firstName
+					this.surname = surname
+					this.yearOfBirth = yearOfBirth
+					this.description = description
+				}
+
+				get FullName() {
+					return `${this.firstName} ${this.surname}`
+				}
+
+				toString() {
+					return `${this.FullName} (${this.yearOfBirth}), ${this.description}`
+				}
+			}
+
+			class Publisher {
+				constructor({ publisherTitle, registrationNumber, yearOfFoundation }) {
+					this.publisherTitle = publisherTitle
+					this.registrationNumber = registrationNumber
+					this.yearOfFoundation = yearOfFoundation
+				}
+
+				toString() {
+					return `Publishing by ${this.publisherTitle}`
+				}
+			}
+
+			class Library {
+				constructor(title, initBooksList) {
+					this.title = title
+					this.booksList = JSON.parse(JSON.stringify(initBooksList))
+				}
+				//---- додавання книги в бібліотеку
+				addBook(newBook) {
+					this.booksList.push(JSON.parse(JSON.stringify(newBook)))
+				}
+				//---- вилучення книги з бібліотеки
+				removeBook(removedBookTitle) {
+					this.booksList = this.booksList.filter((book) => book.bookTitle !== removedBookTitle)
+				}
+				//---- вибір книг за назвою
+				filterByBookTitle(searchdeBookTitle) {
+					return this.booksList.filter((book) => book.bookTitle === searchdeBookTitle)
+				}
+				//---- вибір книг за автором
+				filterByAuthorSurname(authorSurname) {
+					return this.booksList.filter((book) => book.author.surname === authorSurname)
+				}
+				//----вибір книг за видавництвом
+				filterByPublisher(publisherTitle) {
+					return this.booksList.filter((book) => book.publisher.publisherTitle === publisherTitle)
+				}
+				//------
+				toString() {
+					let string = ''
+					for (const book of this.booksList) {
+						string += `${book.bookTitle}, ${book.genre} <br>`
+					}
+					return string
+				}
+			}
+
+			let booksList = [
+				new Book({ bookTitle: 'Thus Spoke Zarathustra', genre: 'philosophy', firstName: 'Friedrich', surname: 'Nietzsche', yearOfBirth: 1844, description: 'German philosopher, prose poet, cultural critic, philologist, and composer, whose work has exerted a profound influence on contemporary philosophy.', publisherTitle: 'Folio', registrationNumber: 'ABC123', yearOfFoundation: 1991 }),
+				new Book({ bookTitle: 'Human, All Too Human', genre: 'philosophy', firstName: 'Friedrich', surname: 'Nietzsche', yearOfBirth: 1844, description: 'German philosopher, prose poet, cultural critic, philologist, and composer, whose work has exerted a profound influence on contemporary philosophy.', publisherTitle: 'Folio', registrationNumber: 'ABC123', yearOfFoundation: 1991 }),
+				new Book({ bookTitle: 'The Art of Loving', genre: 'psychology', firstName: 'Erich', surname: 'Fromm', yearOfBirth: 1900, description: 'German-American social psychologist, psychoanalyst, sociologist, humanistic philosopher, and democratic socialist.', publisherTitle: 'ababagalamaga', registrationNumber: '123ABC', yearOfFoundation: 1994 }),
+				new Book({ bookTitle: 'The Hobbit', genre: 'fiction', firstName: 'John', surname: 'Tolkien', yearOfBirth: 1892, description: 'An English writer and philologist.', publisherTitle: 'ababagalamaga', registrationNumber: '123ABC', yearOfFoundation: 1994 }),
+				new Book({ bookTitle: 'The Devil and the Good Lord', genre: 'philosophy', firstName: 'Jean-Paul', surname: 'Sartre', yearOfBirth: 1905, description: 'French philosopher, playwright, novelist, screenwriter, political activist, biographer, and literary critic, considered a leading figure in 20th-century French philosophy and Marxism.', publisherTitle: 'ababagalamaga', registrationNumber: '123ABC', yearOfFoundation: 1994 }),
+			]
+
+			let myLib = new Library('My lib', booksList)
+
+			myLib.addBook(
+				new Book({ bookTitle: 'The Sound and the Fury', genre: 'novel', firstName: 'William', surname: 'Faulkner', yearOfBirth: 1987, description: 'American writer known for his novels and short stories set in the fictional Yoknapatawpha County, based on Lafayette County, Mississippi, where Faulkner spent most of his life. ', publisherTitle: 'ababagalamaga', registrationNumber: '123ABC', yearOfFoundation: 1994 })
+			)
+
+			console.log(myLib)
+
+			myLib.removeBook('The Hobbit')
+			console.log(myLib)
+
+			console.log(myLib.filterByBookTitle('The Art of Loving'))
+			console.log(myLib)
+
+			console.log(myLib.filterByAuthorSurname('Faulkner'))
+			console.log(myLib.filterByPublisher('ababagalamaga'))
+
+			document.write(myLib)
 		</script>
 	</div>
 </body>
