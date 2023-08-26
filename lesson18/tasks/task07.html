@@ -15,17 +15,6 @@
 			border: none;
 		}
 
-		a {
-			color: inherit;
-			text-decoration: none;
-			color: #7289da;
-			transition: color 0.3s ease 0s;
-		}
-
-		a:hover {
-			color: #99aab5;
-		}
-
 		h1,
 		h2,
 		h3,
@@ -59,23 +48,231 @@
 			font-size: 20px;
 		}
 
-		div:not(:last-child),
-		li:not(:last-child),
-		p:not(:last-child) {
-			margin-bottom: 15px;
+		.task-container {
+			max-width: 1250px;
+			margin: 0 auto;
+			overflow: hidden;
 		}
 
-		.container {
-			max-width: 1100px;
-			margin: 0 auto;
-			padding-left: 15px;
-			padding-right: 15px;
+		.trip {
+			display: flex;
+			flex-direction: column;
+			row-gap: 15px;
+		}
+
+		.trip-stage {
+			border: 2px solid #fff;
+			padding: 15px;
+			border-radius: 15px;
+		}
+
+		.trip-options {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			column-gap: 20px;
+		}
+
+		.trip-guides,
+		.trip-food {
+			display: flex;
+			column-gap: 10px;
+		}
+
+		.trip-title {
+			margin-bottom: 20px;
+		}
+
+		button {
+			padding: 10px;
 		}
 	</style>
+	<script>
+		function getTransportationCost(transopors) {
+			let cost = 0
+			for (const transport of transopors) {
+				cost += parseFloat(transport.value)
+			}
+			return cost
+		}
+
+		function getFoodCost(foods) {
+			let cost = 0
+			for (const food of foods) {
+				if (food.checked)
+					cost += parseFloat(food.value)
+			}
+			return cost
+		}
+
+		function getGuidesCost(guides) {
+			let cost = 0
+			for (const guide of guides) {
+				if (guide.checked)
+					cost += parseFloat(guide.value)
+			}
+			return cost
+		}
+
+		function getTotalTripCost(trnsportationCost, foodCost, guidesCost) {
+			let totalCost = trnsportationCost + foodCost + guidesCost
+			return totalCost
+		}
+
+		function initData() {
+			const transport = document.getElementsByClassName('trip-transport-select')
+			const trnsportationCost = getTransportationCost(transport)
+
+			const foodOptions = document.getElementsByName('food')
+			const foodCost = getFoodCost(foodOptions)
+
+			const guides = document.getElementsByClassName('guide')
+			const guidesCost = getGuidesCost(guides)
+
+			const totalCost = getTotalTripCost(trnsportationCost, foodCost, guidesCost)
+			printTotalCost(totalCost)
+		}
+		function printTotalCost(cost) {
+			const tripContainer = document.getElementById('trip-result')
+			tripContainer.innerText = `Загальна вартість подорожі складе ${cost}$.`
+		}
+
+		window.onload = function () {
+			document.getElementById('trip-button').onclick = initData
+		}
+	</script>
 </head>
 <body>
-	<div class="container">
-		<h1></h1>
+	<div class="task-container">
+		<h1>Задача 7. Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту
+			(авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х
+			гідів(використати - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.</h1>
+		<div class="trip">
+			<div class="trip-stage">
+				<h2 class="trip-title">Перший етап подорожі.</h2>
+				<div class="trip-options">
+					<div class="trip-transport">
+						<select class="trip-transport-select">
+							<option value="1250">авто (ціна 1250)</option>
+							<option value="900">автобус (ціна 900)</option>
+							<option value="1500">літак (ціна 1500)</option>
+						</select>
+					</div>
+					<div class="trip-food">
+						<div class="food-option">
+							<label for="italian" title="ціна 150">Італійська кухня</label>
+							<input name="food" value="150" type="checkbox" id="italian">
+						</div>
+						<div class="food-option">
+							<label for="chinese" title="ціна 135">Китайська кухня </label>
+							<input name="food" value="135" type="checkbox" id="chinese">
+						</div>
+						<div class="food-option">
+							<label for="american" title="ціна 145">Американське меню </label>
+							<input name="food" value="145" type="checkbox" id="american">
+						</div>
+					</div>
+					<div class="trip-guides">
+						<div class="trip-guide">
+							<label for="guid-1" title="ціна 200">Петро Порубаний</label>
+							<input class="guide" value="200" type="radio" name="guide-1" id="guide-1">
+						</div>
+						<div class="trip-guide">
+							<label for="guide-2" title="ціна 300">Оришко Бабай</label>
+							<input class="guide" value="300" type="radio" name="guide-1" id="guide-2">
+						</div>
+						<div class="trip-guide">
+							<label for="guide-3" title="ціна 250">Горпина Чучупака</label>
+							<input class="guide" value="250" type="radio" name="guide-1" id="guide-3">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="trip-stage">
+				<h2 class="trip-title">Другий етап подорожі.</h2>
+				<div class="trip-options">
+					<div class="trip-transport">
+						<select class="trip-transport-select">
+							<option value="750">авто (ціна 750)</option>
+							<option value="500">автобус (ціна 500)</option>
+							<option value="1000">літак (ціна 1000)</option>
+						</select>
+					</div>
+					<div class="trip-food">
+						<div class="food-option">
+							<label for="georgian" title="ціна 200">Грузинська кухня</label>
+							<input name="food" value="200" type="checkbox" id="georgian">
+						</div>
+						<div class="food-option">
+							<label for="japanese" title="ціна 250">Японська кухня</label>
+							<input name="food" value="250" type="checkbox" id="japanese">
+						</div>
+						<div class="food-option">
+							<label for="mexican" title="ціна 130">Мексиканська кухня</label>
+							<input name="food" value="130" type="checkbox" id="mexican">
+						</div>
+					</div>
+					<div class="trip-guides">
+						<div class="trip-guide">
+							<label for="guid-4" title="ціна 180">Федір Убогий</label>
+							<input class="guide" value="180" type="radio" name="guide-2" id="guide-4">
+						</div>
+						<div class="trip-guide">
+							<label for="guide-5" title="ціна 190">Андрій Бляхер</label>
+							<input class="guide" value="190" type="radio" name="guide-2" id="guide-5">
+						</div>
+						<div class="trip-guide">
+							<label for="guide-6" title="ціна 275">Семен Какаєв</label>
+							<input class="guide" value="275" type="radio" name="guide-2" id="guide-6">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="trip-stage">
+				<h2 class="trip-title">Третій етап подорожі</h2>
+				<div class="trip-options">
+					<div class="trip-transport">
+						<select class="trip-transport-select">
+							<option value="1500">авто (ціна 1500)</option>
+							<option value="1275">автобус (ціна 1275)</option>
+							<option value="2000">літак (ціна 2000)</option>
+						</select>
+					</div>
+					<div class="trip-food">
+						<div class="food-option">
+							<label for="thai" title="ціна 150">Тайська кухня</label>
+							<input name="food" value="150" type="checkbox" id="thai">
+						</div>
+						<div class="food-option">
+							<label for="ukrainian" title="ціна 200">Українська кухня</label>
+							<input name="food" value="200" type="checkbox" id="ukrainian">
+						</div>
+						<div class="food-option">
+							<label for="british" title="ціна 250">Британська кухня</label>
+							<input name="food" value="250" type="checkbox" id="british">
+						</div>
+					</div>
+					<div class="trip-guides">
+						<div class="trip-guide">
+							<label for="guid-7" title="ціна 99">Максим Неборак</label>
+							<input class="guide" value="99" type="radio" name="guide-3" id="guide-7">
+						</div>
+						<div class="trip-guide" title="ціна 200">
+							<label for="guide-8">Ганна Бобошко</label>
+							<input class="guide" value="200" type="radio" name="guide-3" id="guide-8">
+						</div>
+						<div class="trip-guide" title="ціна 150">
+							<label for="guide-9">Агрипина Папина</label>
+							<input class="guide" value="150" type="radio" name="guide-3" id="guide-9">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="trip-action">
+				<button id="trip-button">Підрахувати вартість</button>
+			</div>
+			<div id="trip-result"></div>
+		</div>
 	</div>
 </body>
 </html>
