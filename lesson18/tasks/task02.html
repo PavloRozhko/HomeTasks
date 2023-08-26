@@ -71,11 +71,55 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.converter-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.converter-button {
+			border-bottom: 2px solid #000;
+			padding-bottom: 10px;
+		}
 	</style>
+	<script>
+		function converter() {
+			const rateEUR = 40
+			const rateUSD = 37
+			const amountUAH = parseFloat(document.getElementById('hryvnias').value)
+			const cnvertToEUR = amountUAH / rateEUR
+			const cnvertToUSD = amountUAH / rateUSD
+			document.getElementById('euros').value = cnvertToEUR.toFixed(2)
+			document.getElementById('dollars').value = cnvertToUSD.toFixed(2)
+		}
+		window.onload = function () {
+			document.getElementById('convert-btn').onclick = converter
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)</h1>
+		<div class="converter">
+			<div class="converter-wrapper">
+				<div class="hryvnias-amount">
+					<label for="hryvnias">Сума в гривнях</label>
+					<input type="number" value="0" id="hryvnias">
+				</div>
+				<div class="converter-button">
+					<button id="convert-btn">Конвертувати</button>
+				</div>
+				<div class="euro-amount">
+					<label for="euros">Сума в євро</label>
+					<input type="number" value="0" id="euros">
+				</div>
+				<div class="dollar-amount">
+					<label for="dollars">Сума в доларах</label>
+					<input type="number" value="0" id="dollars">
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
