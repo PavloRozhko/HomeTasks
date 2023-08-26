@@ -71,11 +71,72 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.calculator-wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 10px;
+		}
 	</style>
+	<script>
+		function getSum() {
+			const firstNumber = parseFloat(document.getElementById('first').value)
+			const secondNumber = parseFloat(document.getElementById('second').value)
+			const sum = firstNumber + secondNumber
+			document.getElementById('result').value = sum
+		}
+		function getDifference() {
+			const firstNumber = parseFloat(document.getElementById('first').value)
+			const secondNumber = parseFloat(document.getElementById('second').value)
+			const diff = firstNumber - secondNumber
+			document.getElementById('result').value = diff
+		}
+		function getProduct() {
+			const firstNumber = parseFloat(document.getElementById('first').value)
+			const secondNumber = parseFloat(document.getElementById('second').value)
+			const prod = firstNumber * secondNumber
+			document.getElementById('result').value = prod
+		}
+		function getPart() {
+			const firstNumber = parseFloat(document.getElementById('first').value)
+			const secondNumber = parseFloat(document.getElementById('second').value)
+			const part = firstNumber / secondNumber
+			document.getElementById('result').value = part
+		}
+		window.onload = function () {
+			document.getElementById('addition').onclick = getSum
+			document.getElementById('subtraction').onclick = getDifference
+			document.getElementById('multiplication').onclick = getProduct
+			document.getElementById('division').onclick = getPart
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 1. Розробити калькулятор.</h1>
+		<div class="calculator">
+			<div class="calculator-wrapper">
+				<div class="clac-input">
+					<label for="first">Перше число</label>
+					<input type="number" value="0" id="first">
+				</div>
+				<div class="clac-input">
+					<label for="second">Друге число</label>
+					<input type="number" value="0" id="second">
+				</div>
+				<div class="calc-buttons">
+					<button id="addition">Додати</button>
+					<button id="subtraction">Відняти</button>
+					<button id="multiplication">Помножити</button>
+					<button id="division">Поділити</button>
+				</div>
+				<div class="calc-result">
+					<label for="result">Результат</label>
+					<input type="number" value="" id="result">
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
