@@ -72,10 +72,32 @@
 			padding-right: 15px;
 		}
 	</style>
+	<script>
+		function getUserAge() {
+			const userBirthYear = parseFloat(document.getElementById('birth-year').value)
+			const currentYear = 2023
+			const userAge = currentYear - userBirthYear
+			document.getElementById('result').innerText = `Вам ${userAge} повних років`
+		}
+		window.onload = function () {
+			document.getElementById('birth-year').onchange = getUserAge
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 3. Користувач задає рік народження. Визначити кількість років користувача.</h1>
+		<div class="user-age">
+			<div class="user-age-wrapper">
+				<div class="user-age-input">
+					<label for="birth-year">Введіть рік вашого народження</label>
+					<input type="number" value="" id="birth-year">
+				</div>
+				<div class="user-age-result">
+					<span id="result"></span>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
