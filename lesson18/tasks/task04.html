@@ -72,10 +72,43 @@
 			padding-right: 15px;
 		}
 	</style>
+	<script>
+		const wishList = [
+			'новий автомобіль',
+			'новий будинок',
+			'навколосвітня подорож',
+			'новий велосипед',
+			'нові кросівки',
+			'нова кавоварка',
+			'необмежений запас ковбаси',
+			'нова яхта'
+		]
+		function getRandomNumber(min, max) {
+			const randomNumber = min + Math.floor(Math.random() * (max - min + 1))
+			return randomNumber
+		}
+		function getRandomWish(wishList) {
+			const randomNumber = getRandomNumber(0, wishList.length - 1)
+			const randomWish = wishList[randomNumber]
+			return randomWish
+		}
+		window.onload = function () {
+			for (let i = 0; i < 3; i++) {
+				const newDiv = document.createElement('div')
+				const wish = getRandomWish(wishList)
+				newDiv.innerText = wish
+				const container = document.getElementById('myContainer')
+				container.append(newDiv)
+			}
+		}
+	</script>
 </head>
 <body>
-	<div class="container">
-		<h1></h1>
+	<div id="myContainer" class="container">
+		<h1>
+			<h1>Задача 4. Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином
+				вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку).</h1>
+		</h1>
 	</div>
 </body>
 </html>
