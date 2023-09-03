@@ -54,14 +54,51 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.red {
+			color: red;
+			font-weight: 700;
+		}
 	</style>
 	<script>
+		class CreateElement {
+			constructor(tagName, text) {
+				this.element = tagName
+				this.text = text
+			}
+			static onElClick(event) {
+				const targetEl = event.target
+				if (targetEl.tagName === 'DIV') {
+					let targetDiv = targetEl
+					while (targetDiv.nextElementSibling) {
+						targetDiv = targetDiv.nextElementSibling
+						targetDiv.className = 'red'
+					}
+				}
+			}
+			render(containerSelector) {
+				const newElement = document.createElement(this.element)
+				newElement.innerText = this.text
 
+				if (containerSelector)
+					document.querySelector(containerSelector).append(newElement)
+			}
+		}
+		window.onload = function () {
+			for (let i = 0; i < 10; i++) {
+				new CreateElement('div', 'Hello!').render('.task-container')
+			}
+
+			const divContainer = document.querySelector('.task-container')
+			divContainer.addEventListener('click', CreateElement.onElClick)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 1. Дано 10 рядків тексту «Hello!!» у окремих div. При кліку на якийсь із них усі наступні повинні бути
+			зафарбовані у червоний колір.</h1>
+		<div class="task-container"></div>
 	</div>
 </body>
 </html>
