@@ -54,14 +54,127 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		table {
+			border: 2px solid purple;
+			margin: 0 auto;
+		}
+
+		td {
+			border: 2px solid saddlebrown;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+		}
+
+		.task-title {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+		}
+
+		.rabbit-img {
+			max-width: 80%;
+		}
+
+		.checked {
+			background-color: red;
+			transition: background-color 0.2s ease 0s;
+		}
+
+		.win {
+			background-color: green;
+			transition: background-color 0.2s ease 0s;
+		}
 	</style>
 	<script>
+		class Table {
+			constructor(rowsNum = 5, columnsNum = 5) {
+				this.rowsNum = rowsNum
+				this.columnsNum = columnsNum
+			}
+			createTable() {
+				const table = document.createElement('table')
+				for (let tr = 0; tr < this.rowsNum; tr++) {
+					const trEl = document.createElement('tr')
+					for (let td = 0; td < this.columnsNum; td++) {
+						const tdEl = document.createElement('td')
+						trEl.append(tdEl)
+					}
+					table.append(trEl)
+				}
+				return table
+			}
+		}
+		class Hunting {
+			constructor(rows, columns) {
+				this.gameField = new Table(rows, columns)
+			}
+			static getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			static setRabbitPosition() {
+				const cellList = document.querySelectorAll('td')
+				for (const cell of cellList) {
+					cell.setAttribute('rabbit', '0')
+				}
+				let rabbitPosin = Hunting.getRandomValue(0, cellList.length - 1)
+				cellList[rabbitPosin].setAttribute('rabbit', '1')
+			}
+			static setTrap(event) {
+				if (event.target.tagName === 'TD') {
+					const td = event.target
+					td.classList.add('checked')
+					this.td = td
+				}
+			}
+			static huntRabbit(event) {
+				const targetEl = event.target
+				if (targetEl.closest('.checked')) {
+					Hunting.setRabbitPosition()
+					const isTrapped = targetEl.getAttribute('rabbit')
+					if (isTrapped === '1') {
+						setTimeout(() => {
+							targetEl.classList.remove('checked')
+							targetEl.classList.add('win')
+							alert('Перемога!')
+						}, 1000)
+					}
+					else {
+						setTimeout(() => {
+							targetEl.classList.remove('checked')
+						}, 1000)
+					}
+				}
+			}
 
+			render(containerSelector) {
+				const gameFiled = this.gameField.createTable()
+				this.gameField = gameFiled
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(gameFiled)
+
+				Hunting.setRabbitPosition()
+			}
+		}
+		window.onload = function () {
+			let test = new Hunting(5, 5)
+			test.render('.hunting-container')
+
+			const gameField = document.querySelector('table')
+			gameField.addEventListener('click', Hunting.setTrap)
+			gameField.addEventListener('click', Hunting.huntRabbit)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача. У таблиці випадковим чином розташовуємо зайця. Користувач розміщує пастку. Заєць
+			робить хід у випадковому напрямку. Якщо заєць потрапив у пастку, то гру закінчено. Інакше пастка зникає з
+			попередньої позиції і користувач має можливість поставити пастку у іншій клітинці клікнувши на неї.</h1>
+		<div class="hunting-container"></div>
 	</div>
 </body>
 </html>
