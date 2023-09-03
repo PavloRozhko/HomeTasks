@@ -54,14 +54,86 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.ol-wrapper>ol:not(:last-child) {
+			margin-bottom: 15px;
+		}
+
+		.red {
+			color: red;
+			transition: color 0.3s ease 0s;
+		}
+
+		.green {
+			color: green;
+			transition: color 0.3s ease 0s;
+		}
+
+		#btn {
+			background-color: tomato;
+			padding: 15px 30px;
+			transition: background-color 0.3s ease 0s;
+		}
+
+		#btn:hover {
+			background-color: thistle;
+		}
+
+		#btn:active {
+			background-color: violet;
+		}
 	</style>
 	<script>
+		class CreateElement {
+			constructor(tagName, nestedTag) {
+				this.element = tagName
+				this.nestedElement = nestedTag
+			}
+			static changeColor() {
+				const olList = document.getElementsByTagName('ol')
+				for (const ol of olList) {
+					let liQuantity = ol.children.length
+					if (liQuantity % 2 === 0)
+						ol.className = 'green'
+					else
+						ol.className = 'red'
+				}
+			}
 
+			getRandomNumber(min = 1, max = 10) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+
+			render(containerSelector) {
+				const newElement = document.createElement(this.element)
+
+				const nestedElementNumber = this.getRandomNumber()
+				for (let i = 0; i < nestedElementNumber; i++) {
+					const newNestedElement = document.createElement(this.nestedElement)
+					newNestedElement.innerText = this.getRandomNumber(1, 100)
+					newElement.append(newNestedElement)
+				}
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(newElement)
+			}
+		}
+
+		window.onload = function () {
+			for (let i = 0; i < 5; i++) {
+				new CreateElement('ol', 'li').render('.ol-wrapper')
+			}
+			document.getElementById('btn').onclick = CreateElement.changeColor
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами(кількість елементів у
+			списку випадкова від 1 до 10, елементи випадкові – від 1 до 100).При натисненні на кнопку нумеровані списки з
+			парною кількістю елементів зафарбувати у зелений колір, інші у червоний.</h1>
+		<div class="ol-wrapper"></div>
+		<button id="btn">click</button>
 	</div>
 </body>
 </html>
