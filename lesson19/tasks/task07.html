@@ -25,14 +25,6 @@
 			font-size: inherit;
 		}
 
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
 		body,
 		html {
 			height: 100%;
@@ -41,27 +33,116 @@
 		body {
 			font-family: Arial, Helvetica, sans-serif;
 			line-height: 1;
-			background-color: #23272a;
-			color: #fff;
 			padding-top: 10px;
 			padding-bottom: 10px;
 			font-size: 20px;
+			background-color: #23272a;
 		}
 
 		.container {
-			max-width: 1100px;
+			max-width: 100%;
 			margin: 0 auto;
 			padding-left: 15px;
 			padding-right: 15px;
+			position: relative;
+			height: 100%;
+		}
+
+		.task-title {
+			position: fixed;
+			top: 0;
+			left: 0;
+			font-size: 24px;
+			line-height: 1;
+			text-align: center;
+			font-weight: 600;
+			opacity: 0.3;
+			color: #fff;
+		}
+
+		.snowflake-container {
+			/* overflow: hidden; */
+			position: relative;
+			width: 100%;
+			min-height: 100%;
+		}
+
+		.snow-image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 50px;
 		}
 	</style>
 	<script>
+		class Snowflake {
+			constructor(imgPath, interval, maxTop) {
+				this.imgPath = imgPath
+				this.interval = interval
+				this.maxTop = maxTop
+			}
+			getRandomValue(min = 1, max = 50) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			setRandomTopPosition() {
+				this.img.style.left = this.getRandomValue(1, 100) + '%'
+				this.img.style.top = 0 + 'px'
+			}
+			setRandomSpeed() {
+				let currentPosition = parseInt(this.img.style.top)
+				let step = this.getRandomValue()
+				this.img.style.top = currentPosition + step + 'px'
+			}
+			setRandomSize() {
+				this.img.style.width = this.getRandomValue(20, 50) + 'px'
+			}
+			render(containerSelector) {
+				const img = document.createElement('img')
+				img.setAttribute('src', this.imgPath)
+				img.className = 'snow-image'
+				this.img = img
+				this.setRandomTopPosition()
+				this.setRandomSize()
 
+				setInterval(() => {
+					this.setRandomSpeed()
+					let currentPosition = parseInt(this.img.style.top)
+					if (currentPosition >= this.maxTop)
+						this.img.style.top = 0
+				}, this.interval)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(img)
+
+				return img
+			}
+		}
+		window.onload = function () {
+			const containerHeigh = document.querySelector('.snowflake-container').clientHeight
+			for (let i = 0; i < 7; i++) {
+				let s_1 = new Snowflake('https://www.svgrepo.com/show/398358/snowflake.svg', 1000, containerHeigh)
+				let s_2 = new Snowflake('https://www.svgrepo.com/show/400746/snowflake.svg', 1500, containerHeigh)
+				let s_3 = new Snowflake('https://www.svgrepo.com/show/402713/snowflake.svg', 500, containerHeigh)
+				let s_4 = new Snowflake('https://www.svgrepo.com/show/277764/snowflake-christmas.svg', 1750, containerHeigh)
+				let s_5 = new Snowflake('https://www.svgrepo.com/show/231986/snowflake-cold.svg', 1250, containerHeigh)
+				let s_6 = new Snowflake('https://www.svgrepo.com/show/234624/snowflake-cold.svg', 1250, containerHeigh)
+				s_1.render('.snowflake-container')
+				s_2.render('.snowflake-container')
+				s_3.render('.snowflake-container')
+				s_4.render('.snowflake-container')
+				s_5.render('.snowflake-container')
+				s_6.render('.snowflake-container')
+			}
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1 class="task-title">Задача 7. Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану (top =0) і
+			з випадковою швидкістю рухається вниз (у setInterval викликати метод, у якому додавати крок до top). Як тільки
+			сніжинка досягає нижньої частини екрану (top>maxTop) вона знову повинна з’явитись у верхній частині екрану
+			(top=0).</h1>
+		<div class="snowflake-container"></div>
 	</div>
 </body>
 </html>
