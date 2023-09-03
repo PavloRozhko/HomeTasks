@@ -54,14 +54,158 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.athlets-list {
+			display: flex;
+			column-gap: 15px;
+			justify-content: space-evenly;
+			padding: 20px;
+			border: 2px solid #fff;
+			border-radius: 10px;
+		}
+
+		.list-title {
+			font-size: 24px;
+			font-weight: 700;
+			margin-bottom: 25px;
+		}
+
+		.selected-list,
+		.non-selected-list {
+			flex: 0 1 50%;
+			padding: 15px;
+			border-radius: 10px;
+			border: 2px solid;
+		}
+
+		.non-selected-list {
+			border-color: red;
+		}
+
+		.selected-list {
+			border-color: green;
+		}
+
+		.selected-list .athelt-info {
+			background-color: green;
+		}
+
+		.non-selected-list .athelt-info {
+			background-color: red;
+		}
+
+		.athelt-info {
+			border: 2px solid #fff;
+			border-radius: 10px;
+			padding: 15px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.athelt-info:not(:last-child) {
+			margin-bottom: 15px;
+		}
+
+		.selected-list .arrow,
+		.non-selected-list .arrow {
+			height: 30px;
+			width: 45px;
+			cursor: pointer;
+		}
+
+		.selected-list .arrow {
+			background: url('https://cdn-icons-png.flaticon.com/128/10009/10009038.png') center /100% no-repeat;
+		}
+
+		.non-selected-list .arrow {
+			background: url('https://cdn-icons-png.flaticon.com/128/11020/11020112.png') center / 100% no-repeat;
+		}
 	</style>
 	<script>
+		class Athlet {
+			constructor({ firstName, lastName }) {
+				this.firstName = firstName
+				this.lastName = lastName
+			}
+			static selectAthlet(event) {
+				const targetEl = event.target
+				if (targetEl.className === 'arrow') {
+					const athlete = targetEl.closest('.athelt-info')
 
+					const listContainer = athlete.closest('[class*=-list]')
+					if (listContainer.className === 'non-selected-list')
+						listContainer.nextElementSibling.append(athlete)
+					else listContainer.previousElementSibling.append(athlete)
+				}
+			}
+			render(containerSelector) {
+				const athletContainer = document.createElement('div')
+				athletContainer.className = 'athelt-info'
+
+				const atheltName = document.createElement('div')
+				atheltName.innerText = `${this.firstName} ${this.lastName}`
+				athletContainer.append(atheltName)
+
+				const arrow = document.createElement('div')
+				arrow.className = 'arrow'
+				athletContainer.append(arrow)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(athletContainer)
+
+				return athletContainer
+			}
+		}
+		const athletsList = [
+			{
+				firstName: 'John',
+				lastName: 'Doe',
+			},
+			{
+				firstName: 'Sarah',
+				lastName: 'Conor',
+			},
+			{
+				firstName: 'Stepan',
+				lastName: 'Bandera',
+			},
+			{
+				firstName: 'John',
+				lastName: 'Deer',
+			},
+			{
+				firstName: 'Petro',
+				lastName: 'Porubanyi',
+			},
+			{
+				firstName: 'Wednesday',
+				lastName: 'Adams',
+			},
+		]
+		window.onload = function () {
+			for (const athlete of athletsList) {
+				new Athlet(athlete).render('.non-selected-list')
+			}
+			const athletsContainer = document.querySelector('.athlets-list')
+			athletsContainer.addEventListener('click', Athlet.selectAthlet)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 6. Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому
+			є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на
+			зелену стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен
+			переміщається у загальний список.</h1>
+		<div class="athlets-list">
+			<div class="non-selected-list">
+				<h2 class="list-title">Загальний список</h2>
+			</div>
+			<div class="selected-list">
+				<h2 class="list-title">Обрані спортсмени</h2>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
