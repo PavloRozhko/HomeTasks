@@ -25,14 +25,6 @@
 			font-size: inherit;
 		}
 
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
 		body,
 		html {
 			height: 100%;
@@ -48,20 +40,95 @@
 			font-size: 20px;
 		}
 
+
 		.container {
-			max-width: 1100px;
+			position: relative;
+			max-width: 100%;
 			margin: 0 auto;
 			padding-left: 15px;
 			padding-right: 15px;
+			height: 100%;
+		}
+
+		.task-title {
+			position: fixed;
+			top: 0;
+			left: 0;
+			font-size: 24px;
+			line-height: 1;
+			text-align: center;
+			font-weight: 600;
+			opacity: 0.3;
+			color: #fff;
+		}
+
+		.cockroach-container {
+			overflow: hidden;
+			position: relative;
+			width: 100%;
+			min-height: 100%;
+		}
+
+		.cockroach-image {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 150px;
 		}
 	</style>
 	<script>
+		class Cockroach {
+			constructor(imgPath, changeImgPath, interval) {
+				this.imgPath = imgPath
+				this.changeImgPath = changeImgPath
+				this.interval = interval
+			}
+			getRandomValue(min = 1, max = 100) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			getRandomPosition() {
+				this.img.style.left = this.getRandomValue() + '%'
+				this.img.style.top = this.getRandomValue() + '%'
+			}
+			stop() {
+				clearInterval(this.intevalId)
+				this.img.setAttribute('src', this.changeImgPath)
+			}
+			render(containerSelector) {
+				const img = document.createElement('img')
+				img.setAttribute('src', this.imgPath)
+				img.className = 'cockroach-image'
+				this.img = img
+				this.img.onclick = this.stop.bind(this)
+				this.img.style.left = 50 + '%'
+				this.img.style.top = 50 + '%'
 
+				this.intevalId = setInterval(() => {
+					this.getRandomPosition()
+				}, this.interval)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(img)
+
+				return img
+			}
+		}
+		window.onload = function () {
+			for (let i = 0; i < 10; i++) {
+				let c = new Cockroach('https://pngfre.com/wp-content/uploads/cockroach-11-1024x570.png',
+					'https://purepng.com/public/uploads/large/purepng.com-cockroachinsect-pest-cockroachanimals-821523994006wgc4a.png',
+					1500)
+				c.render('.cockroach-container')
+			}
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1 class="task-title">Задача 8. Ловля тараканів. Зображення тараканів з’являються в центрі контейнера і випадковим
+			чином «розбігаються» у випадкових напрямках. При кліку на зображенні таракана його рух припиняється і виводиться
+			зображення сплячого таракана.</h1>
+		<div class="cockroach-container"></div>
 	</div>
 </body>
 </html>
