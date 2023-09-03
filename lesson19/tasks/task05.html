@@ -54,14 +54,185 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.cards {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			row-gap: 10px;
+			column-gap: 15px;
+			justify-items: center;
+		}
+
+		.card {
+			display: flex;
+			flex-direction: column;
+			row-gap: 25px;
+			border: 1px solid #e6e0e0;
+			border-radius: 10px;
+			padding: 15px;
+			cursor: pointer;
+			background-color: #fffafa;
+		}
+
+		.selected {
+			border: 3px solid #22b14c;
+		}
+
+		.card-label>span {
+			padding: 5px 10px;
+			border-radius: 40px;
+			font-size: 18px;
+			text-transform: uppercase;
+			color: #fff;
+		}
+
+		.promotion {
+			background-color: #f84147;
+		}
+
+		.top-sell {
+			background-color: #ffa900;
+		}
+
+		.card-image {
+			text-align: center;
+		}
+
+		.card-image img {
+			max-width: 100%;
+		}
+
+		.card-link {
+			color: #4f443a;
+			text-decoration: none;
+			transition: all 0.3s ease 0s;
+		}
+
+		.card-link:hover {
+			color: #76614c;
+			text-decoration: underline;
+		}
+
+		.card-price {
+			color: #f8616f;
+			font-size: 26px;
+			font-weight: 700;
+		}
 	</style>
 	<script>
+		class Card {
+			static promotion = 'Акція'
+			static topSell = 'Топ продажів'
+			constructor({ label, imgSrc, title, link, price }) {
+				this.label = label
+				this.imgSrc = imgSrc
+				this.title = title
+				this.link = link
+				this.price = price
+			}
+			createLabel() {
+				const label = document.createElement('div')
+				label.className = 'card-label'
+				const span = document.createElement('span')
+				span.innerText = this.label
 
+				if (this.label.toUpperCase() === Card.promotion.toUpperCase())
+					span.className = 'promotion'
+				else
+					span.className = 'top-sell'
+
+				label.append(span)
+
+				return label
+			}
+			createImage() {
+				const imgContainer = document.createElement('div')
+				imgContainer.className = 'card-image'
+
+				const image = document.createElement('img')
+				image.setAttribute('src', this.imgSrc)
+				imgContainer.append(image)
+
+				return imgContainer
+			}
+			render(cardsContainerSelector) {
+				const mainContainer = document.createElement('div')
+				mainContainer.className = 'card'
+
+				const cardLabelContainer = this.createLabel()
+				mainContainer.append(cardLabelContainer)
+
+				const cardImgeContainer = this.createImage()
+				mainContainer.append(cardImgeContainer)
+
+				const cardLink = document.createElement('a')
+				cardLink.className = 'card-link'
+				cardLink.innerText = this.title
+				cardLink.setAttribute('href', this.link)
+				mainContainer.append(cardLink)
+
+				const cardPrice = document.createElement('div')
+				cardPrice.className = 'card-price'
+				cardPrice.innerText = this.price
+				mainContainer.append(cardPrice)
+
+				if (cardsContainerSelector)
+					document.querySelector(cardsContainerSelector).append(mainContainer)
+
+				return mainContainer
+			}
+		}
+		let cards = [
+			{
+				label: 'Топ продажів',
+				imgSrc: 'https://i.citrus.world/imgcache/size_800/uploads/shop/1/8/182db4dc9d4595756ac4fea94588357c.jpg',
+				title: 'Ноутбук Acer Aspire 7 A715-42G-R3EZ',
+				link: '#',
+				price: '30 999 ₴',
+			},
+			{
+				label: 'Топ продажів',
+				imgSrc: 'https://i.citrus.world/imgcache/size_800/uploads/shop/c/c/ccd7c46db1fac9ac07a8f34578a8edec.jpg',
+				title: 'Ноутбук ASUS Laptop X515EA-BQ2066',
+				link: '#',
+				price: '19 999 ₴',
+			},
+			{
+				label: 'Акція',
+				imgSrc: 'https://i.citrus.world/imgcache/size_800/uploads/shop/d/d/dd71cb568ad03a9b239bc43beff0721a.jpg',
+				title: 'Ноутбук Lenovo IdeaPad 1 15ADA7',
+				link: '#',
+				price: '13 999 ₴',
+			},
+			{
+				label: 'Топ продажів',
+				imgSrc: 'https://i.citrus.world/imgcache/size_800/uploads/shop/c/4/c48c6ff2b1a3d5557c91c4192b92cbec.jpg',
+				title: 'Ноутбук Apple Macbook Air 13" M1',
+				link: '#',
+				price: '39 999 ₴',
+			},
+		]
+		window.onload = function () {
+			for (const card of cards) {
+				new Card(card).render('.cards')
+			}
+
+			const cardsContaier = document.querySelector('.cards')
+
+			cardsContaier.onclick = function (event) {
+				const target = event.target.closest('.card')
+				if (target) {
+					target.classList.toggle('selected')
+				}
+			}
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 5. Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку(при кліку
+			робити toogle з класом вибраного елемента).</h1>
+		<div class="cards"></div>
 	</div>
 </body>
 </html>
