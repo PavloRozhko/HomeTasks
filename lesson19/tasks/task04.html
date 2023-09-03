@@ -54,14 +54,115 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.table-title {
+			margin-bottom: 10px;
+		}
+
+		.table-wrapper:not(:last-child) {
+			margin-bottom: 15px;
+		}
+
+		.red {
+			border: 3px solid red;
+		}
+
+		table {
+			border: 1px solid #fff;
+			text-align: center;
+		}
+
+		td {
+			width: 30px;
+			height: 30px;
+			border: 1px solid #fff;
+		}
 	</style>
 	<script>
+		class Table {
+			constructor(rowNumber, colNumber, tableNum) {
+				this.rowNumber = rowNumber
+				this.colNumber = colNumber
+				this.tableNum = tableNum
+			}
+			static clickCounter(event) {
+				const targetEl = event.target
+				const parentTable = targetEl.closest('table')
+				if (!parentTable.hasAttribute('click-count')) {
+					parentTable.setAttribute('click-count', '1')
+					const clickNum = parseInt(parentTable.getAttribute('click-count'))
+					const tableTitle = parentTable.previousElementSibling
+					const titleSpan = tableTitle.firstElementChild
+					titleSpan.innerText = clickNum
+				} else {
+					const clickNum = parseInt(parentTable.getAttribute('click-count')) + 1
+					parentTable.setAttribute('click-count', clickNum)
+					const tableTitle = parentTable.previousElementSibling
+					const titleSpan = tableTitle.firstElementChild
+					titleSpan.innerText = clickNum
+				}
+			}
+			static changeColor(event) {
+				const targetEl = event.target
+				if (targetEl.tagName === 'TD') {
+					const parentTable = targetEl.closest('table')
+					parentTable.classList.add('red')
+				}
+			}
+			getRandomNumber(min = 1, max = 10) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			render(containerSelector) {
+				const tableWrapper = document.createElement('div')
+				tableWrapper.className = 'table-wrapper'
 
+				const tableTitle = document.createElement('h2')
+				tableTitle.className = 'table-title'
+				tableTitle.innerText = `Таблиця № ${this.tableNum}. Кількість кліків - `
+
+				const titleSpan = document.createElement('span')
+				titleSpan.className = 'counter'
+				titleSpan.innerText = '0'
+				tableTitle.append(titleSpan)
+
+				tableWrapper.append(tableTitle)
+
+				const table = document.createElement('table')
+				for (let tr = 0; tr < this.rowNumber; tr++) {
+					const trElem = document.createElement('tr')
+					for (let td = 0; td < this.colNumber; td++) {
+						const tdElem = document.createElement('td')
+						tdElem.innerText = this.getRandomNumber()
+						trElem.append(tdElem)
+					}
+					table.append(trElem)
+				}
+				tableWrapper.append(table)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(tableWrapper)
+
+				return tableWrapper
+			}
+		}
+		window.onload = function () {
+			for (let i = 0; i < 3; i++) {
+				new Table(3, 3, i + 1).render('.tables-container')
+			}
+
+			const tableContainer = document.querySelector('.tables-container')
+
+			tableContainer.addEventListener('click', Table.clickCounter)
+			tableContainer.addEventListener('click', Table.changeColor)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то
+			до відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля
+			назви таблиці з використанням відповідно доданого для цього атрибута).</h1>
+		<div class="tables-container"></div>
 	</div>
 </body>
 </html>
