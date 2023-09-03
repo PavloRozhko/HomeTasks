@@ -54,14 +54,69 @@
 			padding-left: 15px;
 			padding-right: 15px;
 		}
+
+		.input-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+		}
+
+		.input-wrapper input {
+			width: 25%;
+			height: 20px;
+			outline: 2px solid #fff;
+		}
 	</style>
 	<script>
+		class CreateElement {
+			constructor(tagName) {
+				this.element = tagName
+			}
+			static onInputChange(event) {
+				const thisInput = event.target
+				let thisInputValue = parseInt(thisInput.value)
 
+				let targetInput = thisInput
+
+				if (isNaN(thisInputValue)) {
+					return
+				} else {
+					while (targetInput.previousElementSibling) {
+						targetInput.previousElementSibling.value = thisInputValue -= 1
+						targetInput = targetInput.previousElementSibling
+					}
+					while (targetInput.nextElementSibling) {
+						targetInput.nextElementSibling.value = thisInputValue += 1
+						targetInput = targetInput.nextElementSibling
+					}
+				}
+			}
+			render(containerSelector) {
+				const newElement = document.createElement(this.element)
+				newElement.setAttribute('type', 'number')
+				newElement.setAttribute('name', 'input')
+				newElement.setAttribute('value', '0')
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(newElement)
+			}
+		}
+		window.onload = function () {
+			for (let input = 0; input < 5; input++) {
+				new CreateElement('input').render('.input-wrapper')
+			}
+
+			const inputContainer = document.querySelector('.input-wrapper')
+			inputContainer.addEventListener('input', CreateElement.onInputChange)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h1>Задача 2. Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші
+			(усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний)), усі наступні на 1
+			більше (кожен наступне на 1 більше за попереднього).</h1>
+		<div class="input-wrapper"></div>
 	</div>
 </body>
 </html>
