@@ -15,24 +15,6 @@
 			border: none;
 		}
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			font-weight: inherit;
-			font-size: inherit;
-		}
-
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
 		body,
 		html {
 			height: 100%;
@@ -47,15 +29,135 @@
 			padding-bottom: 10px;
 			font-size: 20px;
 		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+
+		.task-title {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		.input-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-content: center;
+			flex-wrap: wrap;
+			gap: 15px;
+		}
+
+		.form-line {
+			display: flex;
+			gap: 15px;
+			align-items: center;
+			border: 1px solid rgb(233, 233, 214);
+			padding: 15px;
+			border-radius: 10px;
+		}
+
+		.form-line label {
+			flex: 0 1 250px;
+		}
+
+		.form-line input {
+			flex: 0 1 400px;
+		}
 	</style>
 	<script>
+		class Label {
+			constructor({ title, label }) {
+				this.title = title
+				this.label = label
+			}
+			render() {
+				const el = document.createElement('label')
+				el.className = 'form-label'
+				el.setAttribute('for', this.label)
+				el.innerText = this.title
 
+				return el
+			}
+		}
+		class Input {
+			constructor(label) {
+				this.label = label
+			}
+			render() {
+				const el = document.createElement('input')
+				el.setAttribute('type', 'number')
+				el.setAttribute('name', this.label)
+				el.setAttribute('id', this.label)
+
+				return el
+			}
+		}
+		class Form {
+			constructor(formData) {
+				this.formData = formData
+			}
+			onClick(event) {
+				const target = event.target
+				if (target.tagName === 'INPUT')
+					target.setAttribute('value', '0')
+
+			}
+			render(containerSelector) {
+				const el = document.createElement('form')
+				el.className = 'form'
+				el.setAttribute('action', '#')
+				el.setAttribute('methid', 'post')
+
+				const inputWrapper = document.createElement('div')
+				inputWrapper.className = 'input-wrapper'
+				el.append(inputWrapper)
+
+				for (const data of this.formData) {
+					const formLine = document.createElement('div')
+					formLine.className = 'form-line'
+
+					const formLabel = new Label(data)
+					formLine.append(formLabel.render())
+
+					const formInput = new Input(data.label)
+					formLine.append(formInput.render())
+
+					inputWrapper.append(formLine)
+				}
+
+				el.addEventListener('click', this.onClick.bind(this))
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+		const formData = [
+			{ title: 'Вік', label: 'age' },
+			{ title: 'Зріст', label: 'height' },
+			{ title: 'Вага', label: 'weight' },
+			{ title: 'Заробітна плата', label: 'salaty' },
+			{ title: 'Стаж', label: 'experience' },
+			{ title: 'Номер відділу', label: 'department-number' },
+			{ title: 'Порядковий номер', label: 'sequence-number' },
+		]
+		window.onload = function () {
+			const form = new Form(formData)
+			form.render('.form-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
-		<div class="task-container"></div>
+		<h2 class="task-title">Задача 3. На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер
+			відділу, порядковий номер). Додати подію обробки події click на форму і якщо клік на внутрішньому input, то
+			автоматично замінювати значення його на 0. Використати делегування</h2>
+		<div class="form-container"></div>
 	</div>
 </body>
 </html>
