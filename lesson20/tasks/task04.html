@@ -25,14 +25,6 @@
 			font-size: inherit;
 		}
 
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
 		body,
 		html {
 			height: 100%;
@@ -47,14 +39,168 @@
 			padding-bottom: 10px;
 			font-size: 20px;
 		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+			height: 100%;
+			position: relative;
+		}
+
+		.task-title {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		.task-container {
+			position: relative;
+			height: 100%;
+		}
+
+		.task-title {
+			font-size: 32px;
+			font-weight: 700;
+			text-align: center;
+		}
+
+		.counter {
+			display: flex;
+			gap: 40px;
+		}
+
+		.btn {
+			position: absolute;
+			padding: 10px 20px;
+			top: 20%;
+			left: 10%;
+		}
+
+		.inp {
+			position: absolute;
+			padding: 5px;
+			top: 25%;
+			left: 15%;
+		}
 	</style>
 	<script>
+		class Element {
+			constructor(tagName) {
+				this.tagName = tagName
+			}
+			getRandomValue(min = 5, max = 95) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			setRandomPosition() {
+				this.el.style.top = this.getRandomValue() + '%'
+				this.el.style.left = this.getRandomValue() + '%'
+			}
+			render() {
+				const el = document.createElement(this.tagName)
 
+				if (el.tagName === 'BUTTON') {
+					el.innerText = 'BUTTON'
+					el.className = 'btn'
+					this.el = el
+					this.setRandomPosition()
+				}
+
+				if (el.tagName === 'INPUT') {
+					el.className = 'inp'
+					this.el = el
+					this.setRandomPosition()
+				}
+
+				return el
+			}
+		}
+		class ClickCounter {
+			constructor(elementsNumber) {
+				this.elementsNumber = this.getRandomValue()
+			}
+			onButtonClick(event) {
+				const target = event.target
+				if (target.tagName === 'BUTTON') {
+					const span = document.getElementById('btn-span')
+					if (!span.hasAttribute('click-count')) {
+						span.setAttribute('click-count', '1')
+						const clickNum = parseInt(span.getAttribute('click-count'))
+						span.innerText = clickNum
+					} else {
+						const clickNum = parseInt(span.getAttribute('click-count')) + 1
+						span.setAttribute('click-count', clickNum)
+						span.innerText = clickNum
+					}
+				}
+			}
+			onInputClick(event) {
+				const target = event.target
+				if (target.tagName === 'INPUT') {
+					const span = document.getElementById('inp-span')
+					if (!span.hasAttribute('click-count')) {
+						span.setAttribute('click-count', '1')
+						const clickNum = parseInt(span.getAttribute('click-count'))
+						span.innerText = clickNum
+					} else {
+						const clickNum = parseInt(span.getAttribute('click-count')) + 1
+						span.setAttribute('click-count', clickNum)
+						span.innerText = clickNum
+					}
+				}
+			}
+			getRandomValue(min = 1, max = 10) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			render(containerSelector) {
+				const el = document.createElement('div')
+				el.className = 'counter'
+
+				const btnCounter = document.createElement('div')
+				btnCounter.innerText = 'Кількість кліків по кнопках '
+				btnCounter.className = 'button-click'
+				const btnSpan = document.createElement('span')
+				btnSpan.setAttribute('id', 'btn-span')
+				btnCounter.append(btnSpan)
+				el.append(btnCounter)
+
+				const inpCouner = document.createElement('div')
+				inpCouner.innerText = 'Кількість кліків по інтутах '
+				inpCouner.className = 'input-click'
+				const inpSpan = document.createElement('span')
+				inpSpan.setAttribute('id', 'inp-span')
+				inpCouner.append(inpSpan)
+				el.append(inpCouner)
+
+				for (let i = 0; i < this.elementsNumber; i++) {
+					const btn = new Element('button')
+					el.append(btn.render())
+
+					const inp = new Element('input')
+					el.append(inp.render())
+				}
+
+				el.addEventListener('click', this.onButtonClick.bind(this))
+				el.addEventListener('click', this.onInputClick.bind(this))
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+
+		window.onload = function () {
+			const clickCounter = new ClickCounter()
+			clickCounter.render('.task-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h2 class="task-title">Задача 4. На сторінці міститься певна кількість кнопок і інпутів. Підраховувати загальну
+			кількість кліків окремо на кнопках і окремо на інпутах.</h2>
 		<div class="task-container"></div>
 	</div>
 </body>
