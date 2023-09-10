@@ -15,26 +15,8 @@
 			border: none;
 		}
 
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			font-weight: inherit;
-			font-size: inherit;
-		}
-
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
-		body,
-		html {
+		html,
+		body {
 			height: 100%;
 		}
 
@@ -47,14 +29,133 @@
 			padding-bottom: 10px;
 			font-size: 20px;
 		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+			height: 100%;
+		}
+
+		.task-title {
+			position: fixed;
+			width: 100%;
+			line-height: 1.2;
+			font-size: 32px;
+			font-weight: 600;
+			text-align: center;
+			top: 0;
+			left: 0;
+			opacity: 0.3;
+		}
+
+		.task-container {
+			height: 100%;
+		}
+
+		.stars-container {
+			position: relative;
+			height: 100%;
+		}
+
+		.star-img {
+			animation-name: scale-up-center;
+			animation-iteration-count: infinite;
+			animation-duration: 5000ms;
+			animation-timing-function: linear;
+			max-width: 100px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		@keyframes scale-up-center {
+			0% {
+				transform: scale(0);
+			}
+
+			100% {
+				transform: scale(1);
+			}
+		}
 	</style>
 	<script>
+		class Star {
+			constructor({ imgSrc }) {
+				this.imgSrc = imgSrc
+				this.interval = this.getRandomValue(3000, 5000)
+			}
+			getRandomValue(min = 5, max = 95) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			onResize() {
+				this.el.style.maxWidth = this.getRandomValue(50, 150) + 'px'
+				this.setRandomPosition()
+			}
+			setRandomPosition() {
+				this.el.style.top = this.getRandomValue() + '%'
+				this.el.style.left = this.getRandomValue() + '%'
+			}
+			render(containerSelector) {
+				const el = document.createElement('img')
+				this.el = el
+				this.el.className = 'star-img'
+				this.el.setAttribute('src', this.imgSrc)
+				this.el.style.maxWidth = this.getRandomValue(50, 150) + 'px'
+				this.el.style.animationDuration = this.interval + 'ms'
+				this.setRandomPosition()
 
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+
+				return el
+			}
+		}
+
+		class ShiningStars {
+			constructor(starsList) {
+				this.starsList = starsList
+			}
+			render(containerSelector) {
+				const el = document.createElement('div')
+				el.className = 'stars-container'
+
+				for (const star of this.starsList) {
+					const starObj = new Star(star)
+					el.append(starObj.render())
+
+					setInterval(() => {
+						starObj.onResize()
+					}, starObj.interval)
+
+				}
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+		const starsList = [
+			{ imgSrc: 'https://www.svgrepo.com/show/513354/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/501829/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/499792/star-mark.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/513511/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/475275/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/513354/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/440534/star.svg' },
+			{ imgSrc: 'https://www.svgrepo.com/show/401450/eight-spoked-asterisk.svg' },
+		]
+		window.onload = function () {
+			const ss_1 = new ShiningStars(starsList)
+			ss_1.render('.task-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
+		<h2 class="task-title">
+			Задача 1. Сяючі зорі. Вказана кількість зірочок повинна з’являтися у випадковійчастині екрана. Кожна зірка (це
+			екземпляр класу Star) з певним кроком і інтервалом збільшується від мінімального до максимального розміру. Як
+			тільки досягнути максимального розміру зірочка повинна з’являтися у іншій випадковій позиції.</h2>
 		<div class="task-container"></div>
 	</div>
 </body>
