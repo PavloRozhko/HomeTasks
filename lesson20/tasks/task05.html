@@ -25,14 +25,6 @@
 			font-size: inherit;
 		}
 
-		h1 {
-			font-size: 32px;
-			line-height: 1.2;
-			text-align: center;
-			font-weight: 600;
-			margin-bottom: 30px;
-		}
-
 		body,
 		html {
 			height: 100%;
@@ -47,15 +39,323 @@
 			padding-bottom: 10px;
 			font-size: 20px;
 		}
+
+		.task-title {
+			font-size: 32px;
+			line-height: 1.2;
+			text-align: center;
+			font-weight: 600;
+			margin-bottom: 30px;
+		}
+
+		.cart-container {
+			display: flex;
+			flex-direction: column;
+			row-gap: 15px;
+		}
+
+		.cart-item {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			place-items: center;
+			place-content: center;
+			border: 2px solid green;
+			border-radius: 5px;
+			padding: 5px;
+			text-align: center;
+		}
+
+		.remove-btn {
+			padding: 5px 10px;
+			border: 2px solid red;
+			color: red;
+			border-radius: 5px;
+			background-color: transparent;
+			cursor: pointer;
+		}
+
+		.item-image img {
+			max-width: 100px;
+		}
+
+		.item-quantity {
+			display: flex;
+			column-gap: 10px;
+			align-items: center;
+		}
+
+		.item-title {
+			font-weight: 700;
+			text-transform: capitalize;
+		}
+
+		.add-btn,
+		.subtract-btn {
+			padding: 5px 10px;
+			border-radius: 5px;
+			background-color: transparent;
+			cursor: pointer;
+			text-align: center;
+		}
+
+		.add-btn {
+			border: 2px solid green;
+		}
+
+		.subtract-btn {
+			border: 2px solid red;
+		}
 	</style>
 	<script>
+		class Product {
+			constructor({ imgSrc, title, quantity, price }) {
+				this.imgSrc = imgSrc
+				this.title = title
+				this.quantity = quantity
+				this.price = price
+			}
 
+			onAdd() {
+				const addProduct = new CustomEvent('addedProduct', {
+					detail: {
+						addProductSum: this.price,
+					},
+				})
+				this.el.dispatchEvent(addProduct)
+			}
+
+			onSubtract() {
+				const subtractProduct = new CustomEvent('subtractedProduct', {
+					detail: {
+						addProductSum: this.price,
+					},
+				})
+				this.el.dispatchEvent(subtractProduct)
+			}
+
+			onDelete() {
+				const deleteProduct = new CustomEvent('deletedProduct', {
+					detail: {
+						deletedProductSum: this.sum,
+					},
+				})
+				this.el.dispatchEvent(deleteProduct)
+				this.el.remove()
+			}
+
+			onItemAdd(event) {
+				const target = event.target
+				const addBtn = target.closest('.add-btn')
+				if (addBtn) {
+					let currentValue = parseInt(addBtn.previousElementSibling.getAttribute('qunatity'))
+					currentValue += 1
+					addBtn.previousElementSibling.setAttribute('qunatity', currentValue)
+					addBtn.previousElementSibling.innerText = currentValue
+
+					const parentEl = target.closest('.cart-item')
+					const sumEl = parentEl.querySelector('.item-sum')
+					this.sum += this.price
+					sumEl.innerText = this.sum
+				}
+			}
+
+			onItemSubtract(event) {
+				const target = event.target
+				const subtractBtn = target.closest('.subtract-btn')
+				if (subtractBtn) {
+					let currentValue = parseInt(subtractBtn.nextElementSibling.getAttribute('qunatity'))
+					if (currentValue === 1)
+						return
+
+					currentValue -= 1
+					subtractBtn.nextElementSibling.setAttribute('qunatity', currentValue)
+					subtractBtn.nextElementSibling.innerText = currentValue
+
+					const parentEl = target.closest('.cart-item')
+					const sumEl = parentEl.querySelector('.item-sum')
+					this.sum -= this.price
+					sumEl.innerText = this.sum
+				}
+			}
+
+			render(containerSelector) {
+				const el = document.createElement('div')
+				el.className = 'cart-item'
+				el.addEventListener('click', this.onItemAdd.bind(this))
+				el.addEventListener('click', this.onItemSubtract.bind(this))
+
+				const imgContainer = document.createElement('div')
+				imgContainer.className = 'item-image'
+				el.append(imgContainer)
+
+				const elImg = document.createElement('img')
+				elImg.setAttribute('src', this.imgSrc)
+				imgContainer.append(elImg)
+
+				const elTitle = document.createElement('div')
+				elTitle.className = 'item-title'
+				elTitle.innerText = this.title
+				el.append(elTitle)
+
+				const elQuantity = document.createElement('div')
+				elQuantity.className = 'item-quantity'
+
+				const subtractButton = document.createElement('button')
+				subtractButton.className = 'subtract-btn'
+				subtractButton.innerText = '-'
+				subtractButton.onclick = this.onSubtract.bind(this)
+				elQuantity.append(subtractButton)
+
+				const quantitySpan = document.createElement('span')
+				quantitySpan.className = 'quantity'
+				quantitySpan.setAttribute('qunatity', this.quantity)
+				quantitySpan.innerText = this.quantity
+				this.quantitySpan = quantitySpan
+				elQuantity.append(quantitySpan)
+
+				const addButton = document.createElement('button')
+				addButton.className = 'add-btn'
+				addButton.innerText = '+'
+				addButton.onclick = this.onAdd.bind(this)
+				elQuantity.append(addButton)
+				el.append(elQuantity)
+
+				const sumDiv = document.createElement('div')
+				sumDiv.innerText = 'До опалти: '
+
+				const sumSpan = document.createElement('span')
+				sumSpan.className = 'item-sum'
+				sumSpan.setAttribute('sum', this.price)
+				sumSpan.innerText = this.price
+				this.sum = this.price
+
+				sumDiv.append(sumSpan)
+				el.append(sumDiv)
+
+				const removeButton = document.createElement('button')
+				removeButton.className = 'remove-btn'
+				removeButton.innerText = 'X'
+				removeButton.onclick = this.onDelete.bind(this)
+				el.append(removeButton)
+
+				this.el = el
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+
+				return el
+			}
+		}
+		class ProductManager {
+			constructor(productsList) {
+				this.productsList = productsList
+			}
+
+			onProductAdd(event) {
+				const amountToAdd = event.detail.addProductSum
+				this.totalPrice += amountToAdd
+				this.priceSpan.innerText = this.totalPrice
+			}
+
+			onProductSubtract(event) {
+				const target = event.target
+				const curentQuantity = parseInt(target.querySelector('.quantity').getAttribute('qunatity'))
+				if (curentQuantity === 1)
+					return
+
+				const amountToAdd = event.detail.addProductSum
+				this.totalPrice -= amountToAdd
+				this.priceSpan.innerText = this.totalPrice
+			}
+
+			onProductDelete(event) {
+				const amountToDelete = event.detail.deletedProductSum
+				this.totalPrice -= amountToDelete
+				this.priceSpan.innerText = this.totalPrice
+			}
+
+			render(containerSelector) {
+				const el = document.createElement('div')
+				el.className = 'cart-container'
+
+				for (const product of this.productsList) {
+					const prodObj = new Product(product)
+					el.append(prodObj.render())
+
+					prodObj.el.addEventListener('deletedProduct',
+						this.onProductDelete.bind(this)
+					)
+					prodObj.el.addEventListener('addedProduct',
+						this.onProductAdd.bind(this)
+					)
+					prodObj.el.addEventListener('subtractedProduct',
+						this.onProductSubtract.bind(this)
+					)
+				}
+
+				const totalDiv = document.createElement('div')
+				totalDiv.className = 'total-value'
+				totalDiv.innerText = 'Всього до оплати: '
+
+				const totalSpan = document.createElement('span')
+				this.totalPrice = this.productsList.reduce(
+					(prevSum, product) => prevSum + product.price, 0)
+				totalSpan.innerText = this.totalPrice
+				this.priceSpan = totalSpan
+				totalDiv.append(totalSpan)
+
+				el.append(totalDiv)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+		const productList = [
+			{
+				imgSrc: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyKhcrrtLJFAhQG_iK7h2vI0nFjZHiJP4Jug&usqp=CAU',
+				title: 'Мишка Logitech M185',
+				quantity: 1,
+				price: 600
+			},
+			{
+				imgSrc: 'https://brain.com.ua/static/images/prod_img/9/1/U0429291_big.jpg',
+				title: 'Телевізор Samsung UE32T4500AUXUA',
+				quantity: 1,
+				price: 9999
+			},
+			{
+				imgSrc: 'https://skay.ua/172568-small_default/igrovaya-konsol-sony-playstation-5.jpg',
+				title: 'Ігрова консоль Sony PlayStation 5',
+				quantity: 1,
+				price: 19999
+			},
+			{
+				imgSrc: 'https://brain.com.ua/static/images/prod_img/8/9/U0699789_big.jpg',
+				title: 'Мобільни Телефон APPLE IPHONE 14 PRO 128GB DEEP PURPLE',
+				quantity: 1,
+				price: 49999
+			},
+			{
+				imgSrc: 'https://brain.com.ua/static/images/prod_img/3/4/U0655134_big.jpg',
+				title: 'Ігрова Консоль NINTENDO SWITCH LITE GREY',
+				quantity: 1,
+				price: 9250
+			},
+		]
+
+		window.onload = function () {
+			const cart = new ProductManager(productList)
+			cart.render('.task-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h1></h1>
-		<div class="task-container"></div>
+		<h2 class="task-title">Приклад. Дано перелік товарів у кошику. При зміні кількості одиниць товару збільшувати
+			загальну вартість. Створити клас Product, що призначений для маніпуляцій товаром та клас ProductManager
+			що оперує з усіма товарами (через подію передвати ідентифікатор товару та операцію, що зроблена).</h2>
+	</div>
+	<div class="task-container"></div>
 	</div>
 </body>
 </html>
