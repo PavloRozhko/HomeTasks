@@ -48,14 +48,101 @@
 		.task-container {
 			height: 100%;
 		}
+
+		.task-container img {
+			max-width: 100px;
+		}
 	</style>
 	<script>
+		// -----поля
+		// Координата Х
+		// Координата У
+		// шлях до зображення
+		// інтервал оновлення
+		// -----методи
+		// генерування елемента розмітки
+		// оновлення через вказаний інтервал
+		class Picture {
+			constructor(coordinateX, coordinateY, imgSrc, updateInterval) {
+				this.coordinateX = coordinateX
+				this.coordinateY = coordinateY
+				this.imgSrc = imgSrc
+				this.updateInterval = updateInterval
+			}
+			getRandomValue(min, max) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+			updatePicture(min = 1, max = 3) {
+				const scale = this.getRandomValue(min, max)
+				this.el.style.transform = `scale(${scale})`
+			}
+			render(containerSelector) {
+				const el = document.createElement('img')
+				el.setAttribute('src', this.imgSrc)
+				el.style.position = 'absolute'
+				el.style.top = this.coordinateY + 'px'
+				el.style.left = this.coordinateX + 'px'
+				this.el = el
 
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+
+				setInterval(() => {
+					this.updatePicture()
+				}, this.updateInterval)
+			}
+		}
+
+		class House extends Picture {
+			constructor(coordinateX, coordinateY, imgSrc, updateInterval) {
+				super(coordinateX, coordinateY, imgSrc, updateInterval)
+			}
+			render(containerSelector) {
+				super.render(containerSelector)
+			}
+		}
+
+		class Dog extends Picture {
+			constructor(coordinateX, coordinateY, imgSrc, updateInterval) {
+				super(coordinateX, coordinateY, imgSrc, updateInterval)
+			}
+			updatePicture(min = 1, max = 100) {
+				const left = super.getRandomValue(min, max)
+				this.el.style.left = left + '%'
+			}
+			render(containerSelector) {
+				super.render(containerSelector)
+			}
+		}
+
+		class Bird extends Picture {
+			constructor(coordinateX, coordinateY, imgSrc, updateInterval) {
+				super(coordinateX, coordinateY, imgSrc, updateInterval)
+			}
+			updatePicture(min = 1, max = 100) {
+				const top = super.getRandomValue(min, max)
+				const left = super.getRandomValue(min, max)
+				this.el.style.top = top + '%'
+				this.el.style.left = left + '%'
+			}
+			render(containerSelector) {
+				super.render(containerSelector)
+			}
+		}
+		window.onload = function () {
+			const house = new House(150, 150, 'https://www.svgrepo.com/show/513309/house.svg', 2000)
+			house.render('.task-container')
+			const dog = new Dog(350, 250, 'https://www.svgrepo.com/show/500086/dog.svg', 1500)
+			dog.render('.task-container')
+			const bird = new Bird(0, 0, 'https://www.svgrepo.com/show/417382/bird.svg', 2750)
+			bird.render('.task-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 3. Розробити Класи(House, Dog, Bird). Подумайте яким має бути спільний клас предок.
+		</h2>
 		<div class="task-container"></div>
 	</div>
 </body>
