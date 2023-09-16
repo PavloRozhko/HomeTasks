@@ -50,12 +50,219 @@
 		}
 	</style>
 	<script>
+		// Задача 4. Користувач задає місяць навчання учня(перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку(перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній місяць у семестрі). Обробку усіх помилок зробити з використанням відповідних класів.
+		// end of 1st semester - December (12)
+		// end of 2nd semester - May (5)
+		// holidays - June, July, August (6,7,8)
+		// bad grade - < 60 points
+		//-- IsNotInRangeError
+		class IsNotInRangeError extends Error {
+			constructor() {
+				super()
+				this.message = 'Значення знаходиться не у діапазоні.'
+				this.name = 'IsNotInRangeError'
+			}
+		}
+		//-- IsNotNumberError
+		class IsNotNumberError extends Error {
+			constructor() {
+				super()
+				this.message = 'Значення має бути числом.'
+				this.name = 'IsNotNumberError'
+			}
+		}
+		//-- IsNegativeNumberError
+		class IsNegativeNumberError extends Error {
+			constructor() {
+				super()
+				this.message = 'Значення не може бути від\'ємни.'
+				this.name = 'IsNegativeNumberError'
+			}
+		}
+		//-- IsHolidaysError
+		class IsHolidaysError extends Error {
+			constructor() {
+				super()
+				this.message = 'Введений місяць є канікулами.'
+				this.name = 'IsHolidaysError'
+			}
+		}
+		//-- IsBadGradeError
+		class IsBadGradeError extends Error {
+			constructor() {
+				super()
+				this.message = 'Оцінка незадовільна.'
+				this.name = 'IsBadGradeError'
+			}
+		}
+		//-- Range
+		class Range {
+			constructor(minValue, maxValue) {
+				this.minValue = minValue
+				this.maxValue = maxValue
+			}
+			inRange(value) {
+				return value >= this.minValue && value <= this.maxValue
+			}
+			toString() {
+				return `${this.minValue} ${this.maxValue}`
+			}
+		}
+		//-- MonthRange
+		class MonthRange extends Range {
+			constructor(minMonth = 1, maxMonth = 12) {
+				super(minMonth, maxMonth)
+			}
+			inRange(month) {
+				return super.inRange(month)
+			}
+			isHoliday(month) {
+				let result
+				switch (month) {
+					case 1: case 2: case 3: case 4: case 5:
+					case 9: case 10: case 11: case 12: result = false
+						break;
+					case 6: case 7: case 8: result = true
+						break;
+				}
+				return result
+			}
+			isEndOfTheSemester(month) {
+				const firstSemesterEnd = 12
+				const secondSemesterEnd = 5
+				if (month === firstSemesterEnd || month === secondSemesterEnd)
+					return true
+				else return false
+			}
+			render(containerSelector) {
+				const label = document.createElement('label')
+				label.innerText = 'Введіть місяць навчання учня'
 
+				this.input = document.createElement('input')
+				this.input.setAttribute('placeholder', 'місяць від 1 до 12')
+				this.input.setAttribute('type', 'number')
+				this.input.className = 'month-inp'
+				label.append(this.input)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(label)
+
+				return label
+			}
+		}
+		//-- GradesRange
+		class GradesRange extends Range {
+			constructor(minGrade = 1, maxGrade = 100) {
+				super(minGrade, maxGrade)
+			}
+			inRange(grade) {
+				return super.inRange(grade)
+			}
+			isBadGrade(grade) {
+				const badGrade = 59
+				return grade <= badGrade
+			}
+			render(containerSelector) {
+				const label = document.createElement('label')
+				label.innerText = 'Введіть оцінку учня'
+
+				this.input = document.createElement('input')
+				this.input.setAttribute('placeholder', 'бал від 1 до 100')
+				this.input.setAttribute('type', 'number')
+				this.input.className = 'grade-inp'
+				label.append(this.input)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(label)
+
+				return label
+			}
+		}
+		//-- StudentChecker
+		class StudentChecker {
+			constructor() {
+				this.monthRange = new MonthRange()
+				this.gradeRange = new GradesRange()
+			}
+			validate(event) {
+				const target = event.target
+				if (target.tagName === 'INPUT') {
+					this.exp = parseInt(target.value)
+					if (target.closest('.month-inp')) {
+						try {
+							if (!this.monthRange.inRange(this.exp)) throw new IsNotInRangeError()
+							if (this.monthRange.isHoliday(this.exp)) throw new IsHolidaysError()
+						}
+						catch (err) {
+							if (err instanceof IsNotInRangeError) {
+								alert(
+									`${err.message} Введіть значення від ${this.monthRange.minValue} до ${this.monthRange.maxValue}.`
+								)
+							}
+							if (err instanceof IsHolidaysError) {
+								alert(err.message)
+							}
+						}
+					}
+					if (target.closest('.grade-inp')) {
+						try {
+							if (!this.gradeRange.inRange(this.exp)) throw new IsNotInRangeError()
+							if (this.gradeRange.isBadGrade(this.exp)
+								&& this.monthRange.isEndOfTheSemester(parseInt(this.monthInput.value))) throw new IsBadGradeError()
+						}
+						catch (err) {
+							if (err instanceof IsNotInRangeError) {
+								alert(
+									`${err.message} Введіть значення від ${this.gradeRange.minValue} до ${this.gradeRange.maxValue}.`
+								)
+							}
+							if (err instanceof IsBadGradeError) {
+								alert(`${err.message} Виправити не можна, останній місяць у семестрі`)
+							}
+						}
+					}
+					try {
+						if (this.exp < 0) throw new IsNegativeNumberError()
+						if (isNaN(this.exp)) throw new IsNotNumberError()
+					} catch (err) {
+						if (err instanceof IsNegativeNumberError) {
+							alert(err.message)
+						}
+						if (err instanceof IsNotNumberError) {
+							alert(err.message)
+						}
+					}
+				}
+			}
+			render(containerSelector) {
+				const el = document.createElement('form')
+				this.el = el
+
+				const monthRangeEl = this.monthRange.render()
+				this.monthInput = monthRangeEl.lastChild
+				this.el.append(monthRangeEl)
+
+				const gradesRangeEl = this.gradeRange.render()
+				this.gradeInput = gradesRangeEl.lastChild
+				this.el.append(gradesRangeEl)
+
+				this.el.onchange = this.validate.bind(this)
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+
+		window.onload = function () {
+			const t = new StudentChecker()
+			t.render('.task-container')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 4. Користувач задає місяць навчання учня(перевіряти чи є числом, чи від 1 до 12, чи не
+			канікули) та оцінку(перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка
+			погана і це не останній місяць у семестрі). Обробку усіх помилок зробити з використанням відповідних класів.</h2>
 		<div class="task-container"></div>
 	</div>
 </body>
