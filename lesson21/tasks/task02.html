@@ -50,12 +50,123 @@
 		}
 	</style>
 	<script>
+		//Задача 2. Створити клас Bank, у якому зберігається масив клієнтів. Виконати такі операції
+		// Вивести усіх простих клієнтів;
+		// Вивести усіх клієнтів GoldenClient;
+		// Знати сумарну кількість грошей на рахунку;
+		class Client {
+			constructor({ title, id, firstName, lastName, moneyAmount }) {
+				this.title = title
+				this.id = id
+				this.firstName = firstName
+				this.lastName = lastName
+				this.moneyAmount = moneyAmount
+			}
+			addMoney(amountToAdd) {
+				return this.moneyAmount += amountToAdd
+			}
+			withdrawMoney(amountToWithdraw) {
+				return this.moneyAmount -= amountToWithdraw
+			}
+			toString() {
+				return `${this.firstName} ${this.lastName}`
+			}
+		}
 
+		class GoldenClient extends Client {
+			constructor({ title, id, firstName, lastName, moneyAmount, creditLimit, creditInterest }) {
+				super({ title, id, firstName, lastName, moneyAmount })
+				this.creditLimit = creditLimit
+				this.creditInterest = creditInterest
+			}
+			addMoney(amountToAdd) {
+				return super.addMoney()
+			}
+			withdrawMoney(amountToWithdraw) {
+				return super.withdrawMoney()
+			}
+			getPenaltyAmountForUsingCreditFunds(creditDays) {
+				return this.penaltyAmount = this.creditLimit * this.creditInterest / 100 * creditDays / 365
+			}
+			toString() {
+				return super.toString()
+			}
+		}
+
+		class Bank {
+			constructor(clients) {
+				this.clients = clients
+			}
+			getRegularClientsList() {
+				const regularClientsList = this.clients.filter((client) => client.title === 'regular')
+				return regularClientsList
+			}
+			getGoldenClientsList() {
+				const goldenClientsList = this.clients.filter((client) => client.title === 'golden')
+				return goldenClientsList
+			}
+			getTotalAmountOfMoney() {
+				return this.clients.reduce(
+					(prevSum, currentAmount) =>
+						prevSum + currentAmount.moneyAmount
+					, 0)
+			}
+		}
+
+		const clients = [
+			new Client(
+				{
+					title: 'regular',
+					id: '0001',
+					firstName: 'John',
+					lastName: 'Cena',
+					moneyAmount: 15000
+				}
+			),
+			new GoldenClient(
+				{
+					title: 'golden',
+					id: '10000',
+					firstName: 'Joseph',
+					lastName: 'Smith',
+					moneyAmount: 1000000,
+					creditLimit: 150000,
+					creditInterest: 20,
+				}
+			),
+			new GoldenClient(
+				{
+					title: 'golden',
+					id: '10001',
+					firstName: 'Sam',
+					lastName: 'Parry',
+					moneyAmount: 1000000,
+					creditLimit: 150000,
+					creditInterest: 20,
+				}
+			),
+			new Client(
+				{
+					title: 'regular',
+					id: '0002',
+					firstName: 'Homer',
+					lastName: 'Simpson',
+					moneyAmount: 15000
+				}
+			),
+		]
+
+		console.log(clients);
+		const bank = new Bank(clients)
+
+		console.log(bank.getRegularClientsList())
+		console.log(bank.getGoldenClientsList())
+		console.log(bank.getTotalAmountOfMoney())
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 2. Створити клас Bank, у якому зберігається масив клієнтів.</h2>
 		<div class="task-container"></div>
 	</div>
 </body>
