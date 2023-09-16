@@ -50,13 +50,77 @@
 		}
 	</style>
 	<script>
+		//Задача 1. Створити клас Client
+		//-- Властивості: ID, ПІБ, Кількість грошей на рахунку
+		//-- Методи: Додавання грошей, Зняття грошей, ToString
+		// На основі цього класу створити клас GoldenClient
+		//-- Властивості: ID, ПІБ, Кількість грошей на рахунку, Ліміт кредитних коштів, Відсоток за використання кредитних коштів
+		//-- Методи:Додавання грошей,Зняття грошей,Визначення пені за використання кредитних коштів,ToString
+		class Client {
+			constructor({ id, firstName, lastName, moneyAmount }) {
+				this.id = id
+				this.firstName = firstName
+				this.lastName = lastName
+				this.moneyAmount = moneyAmount
+			}
+			addMoney(amountToAdd) {
+				return this.moneyAmount += amountToAdd
+			}
+			withdrawMoney(amountToWithdraw) {
+				return this.moneyAmount -= amountToWithdraw
+			}
+			toString() {
+				return `Кількість грошей на рахунку = ${this.moneyAmount}`
+			}
+		}
 
+		class GoldenClient extends Client {
+			constructor({ id, firstName, lastName, moneyAmount, creditLimit, creditInterest }) {
+				super({ id, firstName, lastName, moneyAmount })
+				this.creditLimit = creditLimit
+				this.creditInterest = creditInterest
+			}
+			addMoney(amountToAdd) {
+				return super.addMoney()
+			}
+			withdrawMoney(amountToWithdraw) {
+				return super.withdrawMoney()
+			}
+			getPenaltyAmountForUsingCreditFunds(creditDays) {
+				return this.penaltyAmount = this.creditLimit * this.creditInterest / 100 * creditDays / 365
+			}
+			toString() {
+				return super.toString()
+			}
+		}
+		const client_1 = new Client(
+			{
+				id: '0001',
+				firstName: 'John',
+				lastName: 'Cena',
+				moneyAmount: 15000
+			}
+		)
+		const goldenC_1 = new GoldenClient(
+			{
+				id: '10000',
+				firstName: 'Joseph',
+				lastName: 'Smith',
+				moneyAmount: 1000000,
+				creditLimit: 150000,
+				creditInterest: 20,
+			}
+		)
+		console.log(goldenC_1.getPenaltyAmountForUsingCreditFunds(100))
+		window.onload = function () {
+			document.querySelector('.container').append(client_1)
+			document.querySelector('.container').append(goldenC_1)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
-		<div class="task-container"></div>
+		<h2 class="task-title">Задача 1. Створити клас Client. На основі цього класу створити клас GoldenClient</h2>
 	</div>
 </body>
 </html>
