@@ -50,11 +50,20 @@
 		}
 	</style>
 	<script>
+		let productionDate = Date.parse(prompt('дата виробництва йогурта (рік, місяць, день)'))
+		let daysOfValidity = parseInt(prompt('кількість днів придатності йогурта'))
+		let expirationDateEnd = productionDate + (daysOfValidity * 24 * 60 * 60 * 1000)
+		let currentDate = Date.now()
+		if (currentDate > expirationDateEnd)
+			alert('Термін придатності йогурта вийшов')
+		else
+			alert('Термін придатності йогурта не вийшов')
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 9. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів
+			придатності. Визначити чи є він придатним на даний момент.</h2>
 	</div>
 </body>
 </html>
