@@ -50,11 +50,29 @@
 		}
 	</style>
 	<script>
+		function getRandomValue(min = 1, max = 100) {
+			return min + Math.floor(Math.random() * max - min + 1)
+		}
+		function taskCreator() {
+			const firstNumber = getRandomValue()
+			const secondNumber = getRandomValue()
+			const result = firstNumber + secondNumber
+			let start = new Date()
+			prompt(`Скільки буде ${firstNumber} + ${secondNumber}`)
+			let end = new Date()
+			let msCounter = end - start
+			alert(`Для вирішення прикладу знадобилось ${msCounter / 1000} секунд.`)
+		}
+
+		window.onload = function () {
+			taskCreator()
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 8. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було
+			використано для розв’язання задачі.</h2>
 	</div>
 </body>
 </html>
