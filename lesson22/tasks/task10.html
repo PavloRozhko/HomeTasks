@@ -50,11 +50,73 @@
 		}
 	</style>
 	<script>
+		//генерація рандомного числа
+		function getRandomValue(min, max) {
+			return min + Math.floor(Math.random() * max - min + 1)
+		}
+		//генерація одновимірного масиву з рандомними числами
+		function generateRandomArray(arrLength, min, max) {
+			let arr = []
+			for (let i = 0; i < arrLength; i++) {
+				let randomNum = getRandomValue(min, max)
+				arr.push(randomNum)
+			}
+			return arr
+		}
+		//сортування бульбашкою
+		function bubbleSort(arr) {
+			let swapped;
+			do {
+				swapped = false
+				for (let i = 1; i < arr.length; i++) {
+					if (arr[i - 1] > arr[i]) {
+						let temp = arr[i]
+						arr[i] = arr[i - 1]
+						arr[i - 1] = temp
+						swapped = true
+					}
+				}
+			} while (swapped);
+			return arr
+		}
+		// сортування включенням
+		function insertSort(arr, counter) {
+			for (let j = 1; j < arr.length; j++) {
+				const currentElement = arr[j];
+				let i = j - 1
+				while (i >= 0 && arr[i] > currentElement) {
+					arr[i + 1] = arr[i]
+					i = i - 1
+				}
+				arr[i + 1] = currentElement
+			}
+			return arr
+		}
+		// визначення часу сортування
+		function sortBench(func) {
+			let arr = generateRandomArray(1000, 1, 800)
+
+			let start = Date.now()
+			func(arr)
+			return Date.now() - start
+		}
+
+		let bubbleTime = 0
+		let insertTime = 0
+
+		for (let i = 0; i < 10; i++) {
+			bubbleTime += sortBench(bubbleSort)
+			insertTime += sortBench(insertSort)
+		}
+
+		console.log(`Сортування бульбашкою склало ${bubbleTime} - ms`)
+		console.log(`Сортування включенням склало ${insertTime} - ms`)
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 10. Сформувати масив з 1000 елементів від 1 до 800.
+			Порівняти час сортування бульбашкою і вставкою.</h2>
 	</div>
 </body>
 </html>
