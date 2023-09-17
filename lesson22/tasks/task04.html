@@ -50,11 +50,36 @@
 		}
 	</style>
 	<script>
+		function getDayName(dayNumber) {
+			let result
+			switch (dayNumber) {
+				case 0: result = 'Неділя'
+					break
+				case 1: result = 'Понеділок'
+					break
+				case 2: result = 'Вівторок'
+					break
+				case 3: result = 'Середа'
+					break
+				case 4: result = 'Четвер'
+					break
+				case 5: result = 'П\'ятниця'
+					break
+				case 6: result = 'Субота'
+					break
+			}
+			return result
+		}
+		window.onload = function () {
+			const date = new Date()
+			const day = getDayName(date.getDay())
+			alert(day)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 4. Вивести назву дня.</h2>
 	</div>
 </body>
 </html>
