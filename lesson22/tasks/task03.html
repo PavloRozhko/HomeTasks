@@ -50,11 +50,30 @@
 		}
 	</style>
 	<script>
+		function getSeason(monthNumber) {
+			let result
+			switch (monthNumber) {
+				case 0: case 1: case 11: result = 'Зима'
+					break
+				case 2: case 3: case 4: result = 'Весна'
+					break
+				case 5: case 6: case 7: result = 'Літо'
+					break
+				case 8: case 9: case 10: result = 'Осінь'
+					break
+			}
+			return result
+		}
+		window.onload = function () {
+			const date = new Date()
+			const season = getSeason(date.getMonth())
+			alert(season)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 3. Визначити поточну пору року.</h2>
 	</div>
 </body>
 </html>
