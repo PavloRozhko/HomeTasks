@@ -50,11 +50,23 @@
 		}
 	</style>
 	<script>
+		window.onload = function () {
+			let date = new Date()
+			if (date.getHours() >= 4 && date.getHours() < 12)
+				alert('Доброго ранку!')
+			else if (date.getHours() >= 12 && date.getHours() < 18)
+				alert('Доброго дня!')
+			else if (date.getHours() >= 18 && date.getHours() < 22)
+				alert('Доброго вечора!')
+			else
+				alert('Доброї ночі!')
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 1. Визначити привітання у залежності від часу доби (Доброго дня, Доброго ранку,
+			Доброго вечора).</h2>
 	</div>
 </body>
 </html>
