@@ -50,11 +50,66 @@
 		}
 	</style>
 	<script>
+		// Задача 11. Користувач може змінювати колір фону, що вибирає користувач з використанням
+		// 		< input type = "color" >.
+		// Зберігати цей колір і відновлювати при наступному відкритті. Також зберігати і відображати кількість змін протягом одного сеансу.
+		function onLoad() {
+			let backgroundColor = localStorage.getItem('bgColor')
+			if (!backgroundColor) {
+				backgroundColor = '#23272a'
+				localStorage.setItem('bgColor', backgroundColor)
+			}
+			document.body.style.backgroundColor = backgroundColor
+			document.getElementById('colorSelector').value = backgroundColor
+
+			let changeColorNumber = 0
+			let changeColorCounter = sessionStorage.setItem('changeColorNumber', changeColorNumber)
+			document.getElementById('counter').innerText = changeColorNumber
+		}
+
+		function onColorChange() {
+			const backgroundColor = document.getElementById('colorSelector').value
+			localStorage.setItem('bgColor', backgroundColor)
+			window.dispatchEvent(
+				new StorageEvent('storage', {
+					key: 'bgColor',
+					newValue: backgroundColor,
+				})
+			)
+
+			let changeColorNumber = parseInt(sessionStorage.getItem('changeColorNumber')) + 1
+			sessionStorage.setItem('changeColorNumber', changeColorNumber)
+			window.dispatchEvent(
+				new StorageEvent('storage', {
+					key: 'changeColorNumber',
+					newValue: changeColorNumber,
+				})
+			)
+
+			changeBackgroundColor()
+			setColorChangeValue()
+		}
+		function setColorChangeValue() {
+			const changeColorNumber = parseInt(sessionStorage.getItem('changeColorNumber'))
+			document.getElementById('counter').innerText = changeColorNumber
+		}
+		function changeBackgroundColor() {
+			const backgroundColor = document.getElementById('colorSelector').value
+			document.body.style.backgroundColor = backgroundColor
+		}
+
+		window.onload = function () {
+			onLoad()
+			document.getElementById('colorSelector').onchange = changeBackgroundColor
+			document.getElementById('colorSelector').onchange = onColorChange
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 11. Користувач може змінювати колір фону, що вибирає користувач з використанням.</h2>
+		<div>Кількість змін фону: <span id="counter"></span></div>
+		<input type="color" id="colorSelector">
 	</div>
 </body>
 </html>
