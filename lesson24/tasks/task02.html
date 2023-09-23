@@ -50,11 +50,30 @@
 		}
 	</style>
 	<script>
+		// Задача 6.  Дано масив книг(назва, рік видання, автор).Підрахувати кількість книг для кожного автора.
+		const booksArr = [
+			{ title: 'Yellow Prince', year: 1963, author: 'Vasyl Barka' },
+			{ title: 'The Art of Loving', year: 1956, author: 'Erich Fromm' },
+			{ title: 'The Antichrist', year: 1888, author: 'Friedrich Nietzsche' },
+			{ title: 'One-Dimensional Man', year: 1964, author: 'Herbert Marcuse' },
+			{ title: 'The Road', year: 1996, author: 'Cormac McCarthy' },
+			{ title: 'Thus Spoke Zarathustra', year: 1883, author: 'Friedrich Nietzsche' },
+			{ title: 'To Have or to Be?', year: 1976, author: 'Erich Fromm' },
+		]
+		let authorsBooksNum = new Map()
+		for (const book of booksArr) {
+			authorsBooksNum.set(book.author, (authorsBooksNum.get(book.author) ?? 0) + 1)
+		}
+		authorsBooksNum.forEach((val, key) => {
+			console.log(`${key} - ${val}`)
+		})
+		console.log(authorsBooksNum)
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 6. Дано масив книг(назва, рік видання, автор).Підрахувати кількість книг для кожного
+			автора.</h2>
 	</div>
 </body>
 </html>
