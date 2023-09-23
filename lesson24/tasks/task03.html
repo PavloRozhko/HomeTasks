@@ -50,11 +50,21 @@
 		}
 	</style>
 	<script>
+		// Задача 7. Дано інформацію про відвідувачів деякого сайту(для кожного відвідувача зберігається логін).Підрахувати для кожного клієнта кількість відвідувань.
+		const users = ['John_01', 'AliceFromWonderland', 'Isaak', 'Alice_99', 'AliceFromWonderland', 'konan_the_barbarian', 'konan_the_barbarian', 'John_01', 'SaintJohn', 'James']
+		let userVisitCount = new Map()
+		for (const user of users) {
+			userVisitCount.set(user, (userVisitCount.get(user) ?? 0) + 1)
+		}
+
+		console.log(userVisitCount)
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 7. Дано інформацію про відвідувачів деякого сайту(для кожного відвідувача
+			зберігається логін).Підрахувати для
+			кожного клієнта кількість відвідувань.</h2>
 	</div>
 </body>
 </html>
