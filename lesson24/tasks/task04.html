@@ -50,11 +50,43 @@
 		}
 	</style>
 	<script>
+		// Задача 8. Дано масив студентів(піб, курс, факультет). Підрахувати кількість різних факультетів, та кількість студентів кожного з курсів.
+		const studentsList = [
+			{ name: 'Ronan Diaz', course: 1, faculty: 'Faculty of Information Technology' },
+			{ name: 'Libby Gentry', course: 5, faculty: 'Faculty of Philosophy' },
+			{ name: 'Lee Davenport', course: 4, faculty: 'Faculty of Information Technology' },
+			{ name: 'Salma Bruce', course: 3, faculty: 'Faculty of Mechanics and Mathematics' },
+			{ name: 'Carlos Soto', course: 2, faculty: 'Faculty of Sociology' },
+			{ name: 'Maisy Robinson', course: 2, faculty: 'Faculty of Information Technology' },
+			{ name: 'Keaton Ortega', course: 1, faculty: 'Faculty of Philosophy' },
+			{ name: 'Leona Mathis', course: 3, faculty: 'Faculty of Information Technology' },
+			{ name: 'Samuel Hicks', course: 4, faculty: 'Faculty of Mechanics and Mathematics' },
+			{ name: 'Beatrice Martin', course: 3, faculty: 'Faculty of Sociology' },
+			{ name: 'Zakaria Walton', course: 2, faculty: 'Faculty of Mechanics and Mathematics' },
+			{ name: 'Nannie Heath', course: 1, faculty: 'Faculty of Information Technology' },
+			{ name: 'Victor Herman', course: 3, faculty: 'Faculty of Mechanics and Mathematics' },
+			{ name: 'Aliya Barber', course: 5, faculty: 'Faculty of Philosophy' },
+			{ name: 'Sophie Cuevas', course: 4, faculty: 'Faculty of Sociology' },
+		]
+		let facultiesSet = new Set()
+		let courseMap = new Map()
+		for (const student of studentsList) {
+			facultiesSet.add(student.faculty)
+			courseMap.set(student.course, (courseMap.get(student.course) ?? 0) + 1)
+		}
+		console.log(`Кількість факультетів = ${facultiesSet.size}`)
+		courseMap.forEach((val, key) => {
+			console.log(`На ${key} курсі кількість студентів ${val}`)
+		})
+		console.log(facultiesSet.size)
+		console.log(courseMap)
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 8. Дано масив студентів(піб, курс, факультет). Підрахувати кількість різних
+			факультетів, та кількість
+			студентів кожного з курсів.</h2>
 	</div>
 </body>
 </html>
