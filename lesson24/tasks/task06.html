@@ -50,11 +50,42 @@
 		}
 	</style>
 	<script>
+		// Задача 10 Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії. Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики. Також підрахувати скільки всього студентів відвідують хоча б один гурток.
+		// mathClubList, historyClubList
+		const mathClubList = ['Ronan Diaz', 'Libby Gentry', 'Leona Mathis', 'Lee Davenport', 'Salma Bruce', 'Carlos Soto', 'Zakaria Walton', 'Maisy Robinson', 'Keaton Ortega']
+		const historyClubList = ['Keaton Ortega', 'Lee Davenport', 'Leona Mathis', 'Samuel Hicks', 'Beatrice Martin', 'Zakaria Walton', 'Nannie Heath', 'Victor Herman', 'Aliya Barber', 'Sophie Cuevas', 'Libby Gentry']
+		//------Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики
+		// historyClubStudentsWhoAttendMathClub
+		let historyClubStudentsMap = new Map()
+		for (const student of historyClubList) {
+			historyClubStudentsMap.set(student, (historyClubStudentsMap.get(student) ?? 0) + 1)
+		}
+
+		let historyClubStudentsWhoAttendMathClubMap = new Map()
+		for (const student of mathClubList) {
+			if (historyClubStudentsMap.has(student))
+				historyClubStudentsWhoAttendMathClubMap.set(student, 'also visit math club')
+		}
+		console.log(historyClubStudentsMap)
+		console.log(historyClubStudentsWhoAttendMathClubMap)
+		//------Підрахувати скільки всього студентів відвідують хоча б один гурток.
+		let studentsSet = new Set()
+		mathClubList.forEach(student => {
+			studentsSet.add(student)
+		})
+		historyClubList.forEach(student => {
+			studentsSet.add(student)
+		})
+		console.log(studentsSet.size)
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 10 Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії.
+			Підрахувати скільки
+			студентів з гуртка з історії також відвідують гурток з математики. Також підрахувати скільки всього студентів
+			відвідують
+			хоча б один гурток.</h2>
 	</div>
 </body>
 </html>
