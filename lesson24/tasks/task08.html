@@ -50,11 +50,60 @@
 		}
 	</style>
 	<script>
+		// Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage).Періодично випадковим чином вибирати якусь з справ і виводити користувачу(з використанням confirm).Якщо користувач натискає на «Ок», то видаляти цю задачу.
+		const tasksList = ['Do sport or exercise.', 'Make breakfast.', 'Take a shower', 'To clean teeth.', 'Do work.', 'To read book', 'To have a lunch.', 'Watch movie.', 'Make a dinner.', 'Go to bad.']
+		function onLoad(tasks) {
+			let tasksList = localStorage.getItem('tasksList')
+			if (!tasksList) {
+				tasksList = JSON.stringify(tasks)
+				localStorage.setItem('tasksList', tasksList)
+			}
+		}
+		function getRandomNumber(max, min = 0,) {
+			return min + Math.floor(Math.random() * (max - min + 1))
+		}
+		function getRandomTask() {
+			const tasksList = JSON.parse(localStorage.getItem('tasksList'))
+			const randomIndex = getRandomNumber(tasksList.length - 1)
+			const randomMessage = tasksList[randomIndex]
+			return { randomMessage, randomIndex }
+		}
+		function deleteTask(taskIndex) {
+			let tasksList = JSON.parse(localStorage.getItem('tasksList'))
+			tasksList.splice(taskIndex, 1)
+
+			let changedTaskList = JSON.stringify(tasksList)
+			localStorage.setItem('tasksList', changedTaskList)
+		}
+		function showTask() {
+			let { randomMessage, randomIndex } = getRandomTask()
+			if (confirm(randomMessage)) {
+				deleteTask(randomIndex)
+			}
+		}
+		function taskTimer() {
+			let tasksList = JSON.parse(localStorage.getItem('tasksList'))
+			setTimeout(() => {
+				if (tasksList.length !== 0) {
+					showTask()
+					taskTimer()
+				}
+			}, 3000)
+		}
+
+		window.onload = function () {
+			onLoad(tasksList)
+			taskTimer()
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у
+			localStorage).Періодично
+			випадковим чином вибирати якусь з справ і виводити користувачу(з використанням confirm).Якщо користувач натискає
+			на
+			«Ок», то видаляти цю задачу.</h2>
 	</div>
 </body>
 </html>
