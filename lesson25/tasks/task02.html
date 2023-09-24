@@ -50,12 +50,71 @@
 		}
 	</style>
 	<script>
+		// Задача 2. Дано Shop-- клас, що містить список товарів(масив об’єктів класу Product(назва, ціна, кількість одиниць).Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок «товар - загальна вартість»
+		class Product {
+			constructor(title, price, quantity) {
+				this.title = title
+				this.price = price
+				this.quantity = quantity
+			}
+			getTotalPrice() {
+				return this.price * this.quantity
+			}
+			[Symbol.toPrimitive](hint) {
+				let result
+				switch (hint) {
+					case 'string': result = this.title
+						break
+					case 'number': result = this.getTotalPrice()
+						break;
+				}
+				return result
+			}
+		}
+		class Shop {
+			constructor(shopList) {
+				this.shopList = shopList
+			}
+			[Symbol.iterator]() {
+				this.currentIndex = 0
+				return this
+			}
+			next() {
+				if (this.currentIndex < this.shopList.length) {
+					return { done: false, value: this.shopList[this.currentIndex++] }
+				}
+				else return { done: true }
+			}
+		}
 
+		const productsList = [
+			new Product('Coffee', 50, 10),
+			new Product('Sugar', 20, 25),
+			new Product('Bread', 15, 30),
+			new Product('Butter', 75, 50),
+			new Product('Ice cream', 18, 100),
+			new Product('Cake', 5, 500),
+		]
+
+		const shop = new Shop(productsList)
+		window.onload = function () {
+			for (const prod of shop) {
+				const container = document.querySelector('.task-container')
+				const el = document.createElement('div')
+				el.innerText = `${prod} - total price ${prod.getTotalPrice()}`
+				container.append(el)
+			}
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 2. Дано Shop-- клас, що містить список товарів(масив об’єктів класу Product(назва,
+			ціна, кількість
+			одиниць).Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок «товар
+			-
+			загальна вартість».</h2>
+		<div class="task-container"></div>
 	</div>
 </body>
 </html>
