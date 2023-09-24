@@ -50,12 +50,70 @@
 		}
 	</style>
 	<script>
-
+		class PhoneNumber {
+			constructor(phoneNumber) {
+				this.phoneNumber = phoneNumber
+			}
+			getCellOperatorCode() {
+				// let regEx = /\(0(5|6|7|9)([0-9])\)/g
+				let regEx = /\(\d{3}\)/g
+				let code = this.phoneNumber.match(regEx).join()
+				return code
+			}
+			[Symbol.toPrimitive](hint) {
+				const cellOperatorCode = this.getCellOperatorCode()
+				let result
+				switch (cellOperatorCode) {
+					case '(050)': case '(066)': case '(095)': case '(099)': result = 'Vodafone Україна'
+						break
+					case '(067)': case '(068)': case '(096)': case '(097)': case '(098)': result = 'Київстар'
+						break
+					case '(063)': case '(073)': case '(093)': result = 'Lifecell'
+						break
+					case '(091)': result = '3Mob'
+						break
+					case '(092)': result = 'PEOPLEnet'
+						break
+					case '(094)': result = 'Інтертелеком'
+						break
+					default: throw new Error(`Стільикового оператора з кодом ${cellOperatorCode} в Україні не існує.`)
+						break
+				}
+				return result
+			}
+		}
+		const phoneNumbersList = [
+			new PhoneNumber('+38(099)0441580'),
+			new PhoneNumber('+38(067)0441580'),
+			new PhoneNumber('+38(063)4282096'),
+			new PhoneNumber('+38(091)0506478'),
+			new PhoneNumber('+38(092)1114478'),
+			new PhoneNumber('+38(094)0148842'),
+			new PhoneNumber('+38(054)5152242'),
+			new PhoneNumber('+38(033)5152242'),
+		]
+		window.onload = function () {
+			for (const number of phoneNumbersList) {
+				const container = document.querySelector('.task-container')
+				const el = document.createElement('div')
+				try {
+					el.innerText = `${number.phoneNumber} ${number}.`
+				}
+				catch (err) {
+					el.innerText = `${err}`
+				} finally {
+					container.append(el)
+				}
+			}
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 1. Дано клас PhoneNumber.Створити функцію перетворення до string, при якому на основі
+			номера виводиться
+			оператор(050…. 🡪 MTC, 096… 🡪 Kyivstar, ….)</h2>
+		<div class="task-container"></div>
 	</div>
 </body>
 </html>
