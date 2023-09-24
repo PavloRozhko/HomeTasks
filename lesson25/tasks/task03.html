@@ -50,12 +50,34 @@
 		}
 	</style>
 	<script>
+		// Задача 3. Створити генератор, який би випадковим чином поступово генерував вказану кількість парних чисел.
+		function* getAnEvenNumber(evenNumbersQuantity) {
+			let counter = evenNumbersQuantity
+			while (counter > 0) {
+				const randomNumber = Math.floor(Math.random() * 100)
+				if (randomNumber % 2 !== 0)
+					continue
 
+				counter--
+				yield randomNumber
+			}
+		}
+		window.onload = function () {
+			const container = document.querySelector('.task-container')
+			const el = document.createElement('div')
+
+			for (const number of getAnEvenNumber(10)) {
+				el.innerText += `${number} `
+			}
+			container.append(el)
+		}
 	</script>
 </head>
 <body>
 	<div class="container">
-		<h2 class="task-title"></h2>
+		<h2 class="task-title">Задача 3. Створити генератор, який би випадковим чином поступово генерував вказану кількість
+			парних чисел.</h2>
+		<div class="task-container"></div>
 	</div>
 </body>
 </html>
