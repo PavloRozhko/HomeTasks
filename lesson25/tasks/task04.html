@@ -109,7 +109,6 @@
 		fetch('https://api.exchangerate.host/convert?from=USD&to=UAH')
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data)
 				new CurrencyRate(data.query.from, data.info.rate, data.date).render('.task-container')
 			})
 	</script>
