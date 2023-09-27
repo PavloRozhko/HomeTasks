@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>4th task (Lesson 25)</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1;
+			background-color: #23272a;
+			color: #fff;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 20px;
+		}
+
+		.container {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding-left: 15px;
+			padding-right: 15px;
+			height: 100%;
+		}
+
+		.task-title {
+			line-height: 1.2;
+			font-size: 32px;
+			font-weight: 600;
+			text-align: center;
+		}
+
+		.task-container {
+			position: relative;
+			height: 100%;
+		}
+
+		.currency-rate {
+			position: fixed;
+			top: 2%;
+			left: 2%;
+			border: 1px solid #cca8a8a1;
+			padding: 10px;
+			background-color: #ebe0e0a1;
+		}
+
+		.currency-rate *:not(:last-child) {
+			margin-bottom: 5px;
+		}
+
+		.currency-title,
+		.currency-selling {
+			border-bottom: 1px solid #a18383a1;
+			padding-bottom: 5px;
+		}
+	</style>
+	<script>
+		// Задача 4. Використовуючи один з АРІ та функцію fetch організувати завантаження та відображення даних
+		class CurrencyRate {
+			constructor(currencyCode, rate, date) {
+				this.currencyCode = currencyCode
+				this.rate = rate
+				this.date = date
+			}
+			render(containerSelector) {
+				const el = document.createElement('div')
+				el.className = 'currency-rate'
+
+				let div = document.createElement('div')
+				div.className = 'currency-title'
+				div.innerText = `Курс ${this.currencyCode} НБУ.`
+				el.append(div)
+
+				div = document.createElement('div')
+				div.className = 'currency-buying'
+				div.innerText = `Купівля ${this.rate.toFixed(4)}`
+				el.append(div)
+
+				div = document.createElement('div')
+				div.className = 'currency-selling'
+				div.innerText = `Продаж ${this.rate.toFixed(4)}`
+				el.append(div)
+
+				div = document.createElement('div')
+				div.className = 'currency-date'
+				div.innerText = `${this.date}`
+				el.append(div)
+
+				if (containerSelector)
+					document.querySelector(containerSelector).append(el)
+			}
+		}
+
+		fetch('https://api.exchangerate.host/convert?from=USD&to=UAH')
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data)
+				new CurrencyRate(data.query.from, data.info.rate, data.date).render('.task-container')
+			})
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h2 class="task-title">Задача 4. Використовуючи один з АРІ та функцію fetch організувати завантаження та
+			відображення даних.</h2>
+		<div class="task-container"></div>
+	</div>
+</body>
+</html>
